@@ -21,7 +21,8 @@
     "version": "npm run toc",
     "prepublishOnly": "npm run build",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,10 @@
     "leader-line": "^1.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@storybook/svelte": "^4.0.2",
     "ava": "^0.25.0",
+    "babel-loader": "^8.0.4",
     "cypress": "^3.1.0",
     "less": "^3.8.1",
     "node-sass": "^4.9.4",
@@ -62,6 +66,7 @@
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript": "^1.0.0",
     "svelte": "^2.15.0",
+    "svelte-loader": "^2.11.0",
     "tslib": "^1.9.3",
     "typescript": "^3.1.4",
     "uglify-es": "^3.3.9",
