@@ -1,0 +1,151 @@
+{
+  "name": "@onboardist/ui",
+  "version": "0.0.1",
+  "description": "Reusable user onboarding UI components",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "browser": "dist/index.js",
+  "module": "dist/onboardist-ui.esm.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "DEV=1 npm-run-all -l -p build:watch test:watch",
+    "clean": "rimraf dist/*",
+    "test:watch": "cypress open",
+    "test": "./cypress/test_ci.sh",
+    "test:record": "cypress run",
+    "test:ci": "./cypress/test_ci.sh",
+    "build:watch": "rollup -c -w",
+    "toc": "doctoc README.md --github",
+    "debug": "node --inspect node_modules/ava/profile.js",
+    "cover": "nyc ava && nyc report",
+    "version": "npm run toc",
+    "prepublishOnly": "npm run build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onboardist/ui.git"
+  },
+  "keywords": [
+    "UI",
+    "user",
+    "onboarding",
+    "onboardist",
+    "help"
+  ],
+  "author": "Brian Hann",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/onboardist/ui/issues"
+  },
+  "homepage": "https://github.com/onboardist/ui#readme",
+  "dependencies": {
+    "leader-line": "^1.0.4"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "cypress": "^3.1.0",
+    "less": "^3.8.1",
+    "node-sass": "^4.9.4",
+    "npm-run-all": "^4.1.3",
+    "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^5.0.1",
+    "rollup-plugin-legacy": "^1.0.0",
+    "rollup-plugin-livereload": "^0.6.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-sass": "^0.9.2",
+    "rollup-plugin-serve": "^0.6.0",
+    "rollup-plugin-string": "^2.0.2",
+    "rollup-plugin-svelte": "^4.3.2",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript": "^1.0.0",
+    "svelte": "^2.15.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.1.4",
+    "uglify-es": "^3.3.9",
+    "xo": "^0.23.0"
+  },
+  "xo": {
+    "space": true,
+    "extends": "xo-space/esnext",
+    "ignores": [
+      "*.scss",
+      "*.svg",
+      "*.html"
+    ],
+    "env": [
+      "browser"
+    ],
+    "rules": {
+      "capitalized-comments": "off",
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "import/extensions": "off",
+      "new-cap": "off",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ]
+    },
+    "overrides": [
+      {
+        "files": "test/**",
+        "rules": {
+          "import/default": "off"
+        }
+      },
+      {
+        "files": "cypress/**",
+        "globals": [
+          "before",
+          "beforeEach",
+          "cy ",
+          "Cypress",
+          "describe",
+          "ddescribe",
+          "it"
+        ],
+        "rules": {
+          "semi": "off",
+          "comma-dangle": "off",
+          "no-var": "off",
+          "no-undef": "off",
+          "space-before-function-paren": "off",
+          "space-before-blocks": "off",
+          "prefer-arrow-callback": "off",
+          "no-unused-expressions": "off",
+          "object-shorthand": "off",
+          "no-unused-vars": "off",
+          "padded-blocks": "off",
+          "object-curly-spacing": "off",
+          "max-nested-callbacks": "off",
+          "indent": "off",
+          "space-in-parens": "off",
+          "no-multiple-empty-lines": "off",
+          "camelcase": "off",
+          "spaced-comment": "off",
+          "unicorn/filename-case": "off",
+          "import/no-unassigned-import": "off"
+        }
+      }
+    ]
+  },
+  "ava": {
+    "babel": "inherit",
+    "source": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register",
+      "./test/helpers/setup-browser-env.js"
+    ]
+  }
+}
