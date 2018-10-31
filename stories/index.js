@@ -1,4 +1,4 @@
-// / Story about MyButton
+// / Story about Hotspot
 import { storiesOf } from '@storybook/svelte';
 
 import Hotspot from '../src/components/Hotspot.svelte';
@@ -16,4 +16,11 @@ storiesOf('Hotspot', module)
         console.log('clicked', event);
       }
     }
+  }))
+  .add('Custom Color', () => ({
+    Component: Hotspot,
+
+    data: {
+      color: 'red'
+    },
   }));
