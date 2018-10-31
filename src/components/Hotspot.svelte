@@ -16,6 +16,7 @@ export default {
   position: absolute;
   width: 20px;
   margin: 25px;
+  cursor: pointer;
 
   .dot {
     width: 20px;

@@ -71,6 +71,7 @@
     "tslib": "^1.9.3",
     "typescript": "^3.1.4",
     "uglify-es": "^3.3.9",
+    "vuepress": "^1.0.0-alpha.18",
     "xo": "^0.23.0"
   },
   "xo": {
