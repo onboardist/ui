@@ -4,10 +4,17 @@
 </div>
 
 <script>
+import Config from '../config';
+import { show, hide } from '../methods';
+
 export default {
   data: () => ({
-    color: '#62A8FC',
+    color: Config.colors.active,
   }),
+
+  methods: {
+    show, hide,
+  },
 };
 </script>
 
