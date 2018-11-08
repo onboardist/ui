@@ -4,10 +4,10 @@ module.exports = {
   title: 'Onboardist UI',
   description: 'Composable UI components for user onboarding',
 
+  // port: 10002,
   plugins: [
     require('./dist-static-plugin'),
   ],
-
   head: [
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
       ? ['script', { src: 'http://localhost:8080/dist/index.js'} ]

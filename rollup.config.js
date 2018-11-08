@@ -18,11 +18,11 @@ import { minify } from 'uglify-es';
 import pkg from './package.json';
 
 const config = {
-  input: 'src/index.ts',
+  input: 'src/index.js',
   output: {
     file: pkg.main,
     format: 'umd',
-    name: 'onboardist-ui',
+    name: 'OnboardistUI',
     sourcemap: true,
   },
   plugins: [
