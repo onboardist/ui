@@ -37,6 +37,7 @@ module.exports = {
           '/components/coachmark/',
           '/components/hotspot/',
           '/components/modal/',
+          '/components/tooltip/',
           '/components/tour/',
         ],
       },

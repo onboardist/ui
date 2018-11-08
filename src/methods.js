@@ -13,7 +13,6 @@ export function hide() {
 export function oncreate() {
   const createPopper = (attachEl) => {
     this.popper = new Popper(attachEl, this.refs.el, { ...this.options });
-    // console.log(this.popper);
   }
 
   // If the `attach` option is an element, use it right away. Otherwise wait (2.5s by default) for the attach element

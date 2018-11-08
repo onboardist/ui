@@ -32,24 +32,30 @@ A hotspot is a widget that draws attention to an area of the screen. Often they 
 
   export default {
     props: ['slot-key'],
+    data: () => ({
+      destroyables: [],
+    }),
     mounted() {
-      let h = new OnboardistUI.Hotspot({
+      this.destroyables.push(new OnboardistUI.Hotspot({
         attach: document.querySelector('#hotspot-button'),
         placement: 'top-end',
-      });
+      }));
 
-      h = new OnboardistUI.Hotspot({
+      this.destroyables.push(new OnboardistUI.Hotspot({
         attach: '#pulse',
         style: 'pulse',
         ...popperArgs,
-      });
+      }));
 
-      h = new OnboardistUI.Hotspot({
+      this.destroyables.push(new OnboardistUI.Hotspot({
         attach: '#teardrop',
         style: 'teardrop',
         ...popperArgs,
-      });
-    }
+      }));
+    },
+    destroyed() {
+      this.destroyables.forEach(x => x.destroy());
+    },
   }
 </script>
 <style lang="less">
