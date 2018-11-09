@@ -1,5 +1,6 @@
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
+export { default as Config } from './config';
 
 export class Hotspot {
   constructor(args) {

@@ -1,16 +1,18 @@
 const pkg = require('../../package.json');
 
+const port = 10002;
+
 module.exports = {
   title: 'Onboardist UI',
   description: 'Composable UI components for user onboarding',
 
-  // port: 10002,
+  port,
   plugins: [
     require('./dist-static-plugin'),
   ],
   head: [
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
-      ? ['script', { src: 'http://localhost:8080/dist/index.js'} ]
+      ? ['script', { src: `http://localhost:${port}/dist/index.js`} ]
       : ['script', { src: `https://cdn.rawgit.com/onboardist/coachmarks/${pkg.version}/dist/index.min.js`} ]
     ],
 

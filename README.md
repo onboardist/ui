@@ -17,3 +17,5 @@
 
 ## Notes
 
+* [ ] Make components generate a unique ID on creation that is used in the `id=""` attribute, so they can be linked together.
+  * [ ] Allow passing in OnboardistUI instances as `attach` arguments. Use the `id` value (`.get('id')`) as the element selector to attach to.
