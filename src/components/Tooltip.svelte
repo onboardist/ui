@@ -19,6 +19,7 @@ export default {
   },
   data: () => ({
     title: '',
+    content: '',
     color: OnboardistUI.Config.colors.active,
     textColor: OnboardistUI.Config.colors.lightText,
   }),

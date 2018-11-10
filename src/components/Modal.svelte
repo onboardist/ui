@@ -1,7 +1,7 @@
 <div class="container" ref:el>
   <div class="modal">
     {#if title}
-      <div class="header" style="background-color: { color }">{ title }</div>
+      <div class="header" style="background-color: { backgroundColor }; color: { headerTextColor }">{ title }</div>
     {/if}
     <div class="content">
       {@html content }
@@ -13,12 +13,12 @@
 import { oncreate, show, hide } from '../methods';
 export default {
   oncreate,
-  methods: {
-    show, hide,
-  },
+  methods: { show, hide },
   data: () => ({
     title: '',
-    // color: OnboardistUI.config.colors.active,
+    content: '',
+    backgroundColor: OnboardistUI.Config.colors.active,
+    headerTextColor:  OnboardistUI.Config.colors.lightText,
   }),
 };
 </script>
@@ -26,6 +26,7 @@ export default {
 <style lang="less">
 .container {
   margin: 5px;
+  display: inline-block;
 }
 
 .modal {
@@ -40,9 +41,7 @@ export default {
     font-size: 18px;
     font-weight: bold;
     padding: 12px 20px;
-    /* background-color: #62A8FC; */
     border-radius: 12px 12px 0 0;
-    color: white;
   }
 
   .content {
