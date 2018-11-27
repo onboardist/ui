@@ -13,7 +13,19 @@
 <script>
 import { oncreate, show, hide } from '../methods';
 export default {
-  oncreate,
+  oncreate() {
+    this.options.modifiers = this.options.modifiers || {};
+    this.options.modifiers.offset = {
+      fn: (data, options) => {
+        console.log('D', data, options);
+
+        return data;
+      }
+    };
+
+
+    return oncreate.call(this);
+  },
   methods: {
     show, hide,
   },
@@ -29,6 +41,22 @@ export default {
 <style lang="less">
 .container {
   margin: 5px;
+
+  :global(&[x-placement^="right"]) {
+    margin-left: 10px;
+  }
+
+  :global(&[x-placement^="left"]) {
+    margin-right: 10px;
+  }
+
+  :global(&[x-placement^="bottom"]) {
+    margin-top: 10px;
+  }
+
+  :global(&[x-placement^="top"]) {
+    margin-bottom: 10px;
+  }
 }
 
 .tooltip {
