@@ -3,21 +3,14 @@ import { merge } from 'lodash';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import getPreprocessor from 'svelte-preprocess';
-import glob from 'glob-all';
 import legacy from 'rollup-plugin-legacy';
 import livereload from 'rollup-plugin-livereload';
 import resolve from 'rollup-plugin-node-resolve';
-// import less from 'less';
-import path from 'path';
-// import postcss from 'postcss';
 import postcssLess from 'postcss-less';
 import postcssPlugin from 'rollup-plugin-postcss';
-// import purgecss from 'rollup-plugin-purgecss';
-import purgecss from './purgecssPlugin';
 import serve from 'rollup-plugin-serve';
 import string from 'rollup-plugin-string';
 import svelte from 'rollup-plugin-svelte';
-import tailwindcss from 'tailwindcss';
 import { terser } from 'rollup-plugin-terser';
 // import typescript from 'rollup-plugin-typescript';
 // import * as ts from 'typescript';
@@ -33,16 +26,6 @@ const preprocess = getPreprocessor({
     less: true,
   },
 });
-
-// Custom PurgeCSS extractor for Tailwind that allows special characters in
-// class names.
-//
-// https://github.com/FullHuman/purgecss#extractor
-class TailwindExtractor {
-  static extract(content) {
-    return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
-  }
-}
 
 const config = {
   input: 'src/index.js',
@@ -67,66 +50,8 @@ const config = {
       dev: !production,
       preprocess,
       emitCss: true,
-      // css: function (css) {
-      //   console.log(css.code); // the concatenated CSS
-      //   console.log('MAP!', css.map); // a sourcemap
-
-      //   // creates `main.css` and `main.css.map` — pass `false`
-      //   // as the second argument if you don't want the sourcemap
-      //   css.write('dist/main.css');
-      // }
-
-      // preprocess: {
-      //   style: ({ content, attributes }) => {
-      //     if (attributes.lang !== 'less') return;
-
-      //     return postcss([
-      //       // require('postcss-import'),
-      //       require('postcss-cssnext'),
-      //       tailwindcss('./tailwind.js'),
-      //     ])
-      //     .process(content, { syntax: postcssLess, from: 'src' })
-      //     .then(result => less.render(result.content))
-      //     .then(output => ({ code: output.css, map: output.map }));
-      //   },
-      //   script: ({ content, attributes }) => {
-      //     if (attributes.lang !== 'ts') return;
-
-      //     const output = ts.transpileModule(content, {})
-      //     console.log(JSON.stringify(output.outputText));
-          
-      //     return { code: output.outputText, map: output.sourceMapText };
-      //   },
-      // },
     }),
     string({ include: 'src/**/*.svg' }),
-    {
-      transform ( code, id ) {
-        console.log('id', id); // code.substring(0, 50));
-        // console.log( code );
-        // not returning anything, so doesn't affect bundle
-      }
-    },
-    // purgecss({
-    //   // include: '**/*.css',
-    //   content: [
-    //     // path.join(__dirname, "src/**/*.js"),
-    //     // path.join(__dirname, "src/**/*.svelte"),
-    //     'src/**/*.svelte',
-    //   ],
-    //   output: (css, styles) => {
-    //     console.log('HI THERE!', css, styles);
-    //   }
-    //   // extractors: [
-    //   //   {
-    //   //     extractor: TailwindExtractor,
-
-    //   //     // Specify the file extensions to include when scanning for
-    //   //     // class names.
-    //   //     extensions: ["js", "svelte"],
-    //   //   },
-    //   // ],
-    // }),
     // babel({
     //   exclude: 'node_modules/**',
     // }),
