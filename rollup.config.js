@@ -28,6 +28,7 @@ const preprocess = getPreprocessor({
 });
 
 const config = {
+  cache: false,
   input: 'src/index.js',
   output: {
     file: pkg.main,
@@ -42,9 +43,6 @@ const config = {
     legacy({
       'node_modules/leader-line/leader-line.min.js': 'LeaderLine',
     }),
-    // sass({
-    //   insert: true,
-    // }),
     postcssPlugin({ inject: false, extract: true, syntax: postcssLess }),
     svelte({
       dev: !production,

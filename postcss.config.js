@@ -4,7 +4,7 @@ module.exports = {
   plugins: [
     require('postcss-import'),
     // require('postcss-url'),
-    require('tailwindcss')('./tailwind.config.js'),
+    // require('tailwindcss')('./tailwind.config.js'),
     purgecss({
       content: ['./src/**/*.svelte'],
     }),

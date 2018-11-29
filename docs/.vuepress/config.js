@@ -10,11 +10,15 @@ module.exports = {
   plugins: [
     require('./dist-static-plugin'),
   ],
+  watch: ['../../dist/**'],
   head: [
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
       ? ['script', { src: `http://localhost:${port}/dist/index.js`} ]
-      : ['script', { src: `https://cdn.rawgit.com/onboardist/coachmarks/${pkg.version}/dist/index.min.js`} ]
-    ],
+      : ['script', { src: `https://cdn.rawgit.com/onboardist/coachmarks/${pkg.version}/dist/index.min.js`} ],
+    (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
+      ? ['link', { rel: 'stylesheet', href: `http://localhost:${port}/dist/index.css`} ]
+      : ['link', { rel: 'stylesheet', href: `https://cdn.rawgit.com/onboardist/coachmarks/${pkg.version}/dist/index.css`} ],
+  ],
 
   themeConfig: {
     repo: 'onboardist/ui',
