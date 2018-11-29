@@ -12,7 +12,8 @@ import path from 'path';
 // import postcss from 'postcss';
 // import postcssLess from 'postcss-less';
 import postcssPlugin from 'rollup-plugin-postcss';
-import purgecss from 'rollup-plugin-purgecss';
+// import purgecss from 'rollup-plugin-purgecss';
+import purgecss from './purgecssPlugin';
 import serve from 'rollup-plugin-serve';
 import string from 'rollup-plugin-string';
 import svelte from 'rollup-plugin-svelte';
@@ -63,7 +64,11 @@ const config = {
     // }),
     postcssPlugin(),
     svelte({
+      dev: !production,
       preprocess,
+      emitCss: true,
+      css: false,
+
       // preprocess: {
       //   style: ({ content, attributes }) => {
       //     if (attributes.lang !== 'less') return;
@@ -90,20 +95,20 @@ const config = {
     string({ include: 'src/**/*.svg' }),
     {
       transform ( code, id ) {
-        console.log('id', id );
+        console.log('id', id, code.substring(0, 50));
         // console.log( code );
         // not returning anything, so doesn't affect bundle
       }
     },
     purgecss({
-      include: '**/*.css',
+      // include: '**/*.css',
       content: [
         // path.join(__dirname, "src/**/*.js"),
         // path.join(__dirname, "src/**/*.svelte"),
         'src/**/*.svelte',
       ],
       output: (css, styles) => {
-        console.log(css, styles);
+        console.log('HI THERE!', css, styles);
       }
       // extractors: [
       //   {
