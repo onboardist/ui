@@ -10,7 +10,7 @@ import resolve from 'rollup-plugin-node-resolve';
 // import less from 'less';
 import path from 'path';
 // import postcss from 'postcss';
-// import postcssLess from 'postcss-less';
+import postcssLess from 'postcss-less';
 import postcssPlugin from 'rollup-plugin-postcss';
 // import purgecss from 'rollup-plugin-purgecss';
 import purgecss from './purgecssPlugin';
@@ -20,15 +20,15 @@ import svelte from 'rollup-plugin-svelte';
 import tailwindcss from 'tailwindcss';
 import { terser } from 'rollup-plugin-terser';
 // import typescript from 'rollup-plugin-typescript';
-import * as ts from 'typescript';
+// import * as ts from 'typescript';
 // import rollupAnalyzer from 'rollup-analyzer-plugin';
-import { minify } from 'uglify-es';
 import pkg from './package.json';
+
 
 const production = process.env.NODE_ENV === 'production';
 
 const preprocess = getPreprocessor({
-	transformers: {
+  transformers: {
     postcss: true,
     less: true,
   },
@@ -62,12 +62,19 @@ const config = {
     // sass({
     //   insert: true,
     // }),
-    postcssPlugin(),
+    postcssPlugin({ inject: false, extract: true, syntax: postcssLess }),
     svelte({
       dev: !production,
       preprocess,
       emitCss: true,
-      css: false,
+      // css: function (css) {
+      //   console.log(css.code); // the concatenated CSS
+      //   console.log('MAP!', css.map); // a sourcemap
+
+      //   // creates `main.css` and `main.css.map` — pass `false`
+      //   // as the second argument if you don't want the sourcemap
+      //   css.write('dist/main.css');
+      // }
 
       // preprocess: {
       //   style: ({ content, attributes }) => {
@@ -95,31 +102,31 @@ const config = {
     string({ include: 'src/**/*.svg' }),
     {
       transform ( code, id ) {
-        console.log('id', id, code.substring(0, 50));
+        console.log('id', id); // code.substring(0, 50));
         // console.log( code );
         // not returning anything, so doesn't affect bundle
       }
     },
-    purgecss({
-      // include: '**/*.css',
-      content: [
-        // path.join(__dirname, "src/**/*.js"),
-        // path.join(__dirname, "src/**/*.svelte"),
-        'src/**/*.svelte',
-      ],
-      output: (css, styles) => {
-        console.log('HI THERE!', css, styles);
-      }
-      // extractors: [
-      //   {
-      //     extractor: TailwindExtractor,
+    // purgecss({
+    //   // include: '**/*.css',
+    //   content: [
+    //     // path.join(__dirname, "src/**/*.js"),
+    //     // path.join(__dirname, "src/**/*.svelte"),
+    //     'src/**/*.svelte',
+    //   ],
+    //   output: (css, styles) => {
+    //     console.log('HI THERE!', css, styles);
+    //   }
+    //   // extractors: [
+    //   //   {
+    //   //     extractor: TailwindExtractor,
 
-      //     // Specify the file extensions to include when scanning for
-      //     // class names.
-      //     extensions: ["js", "svelte"],
-      //   },
-      // ],
-    }),
+    //   //     // Specify the file extensions to include when scanning for
+    //   //     // class names.
+    //   //     extensions: ["js", "svelte"],
+    //   //   },
+    //   // ],
+    // }),
     // babel({
     //   exclude: 'node_modules/**',
     // }),

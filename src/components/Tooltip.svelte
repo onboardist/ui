@@ -1,5 +1,5 @@
 <div class="container" ref:el>
-  <div class="tooltip" style="background-color: { color }">
+  <div class="tooltip rounded-lg" style="background-color: { color }">
     {#if title}
       <div class="header" style="color: { textColor }">{ title }</div>
     {/if}
@@ -60,7 +60,7 @@ export default {
 }
 
 .tooltip {
-  border-radius: 12px;
+  /* border-radius: 12px; */
   border: 1px solid #ececec;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   /* min-width: 100px;
