@@ -38,6 +38,10 @@ export default {
 </script>
 
 <style lang="less">
+/* .btn {
+   @apply bg-blue text-white font-bold py-2 px-4 rounded;
+} */
+
 @color: #62A8FC;
 
 .hotspot {
