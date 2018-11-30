@@ -14,7 +14,7 @@ module.exports = {
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
       ? ['script', { src: `http://localhost:${port}/dist/index.js`} ]
       : ['script', { src: `https://cdn.rawgit.com/onboardist/coachmarks/${pkg.version}/dist/index.min.js`} ]
-    ],
+  ],
 
   themeConfig: {
     repo: 'onboardist/ui',
