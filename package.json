@@ -1,6 +1,6 @@
 {
   "name": "@onboardist/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Reusable user onboarding UI components",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -16,10 +16,8 @@
     "test:ci": "./cypress/test_ci.sh",
     "build:watch": "rollup -c -w",
     "livereload": "node ./docs/.vuepress/live-reload.js",
-    "toc": "doctoc README.md --github",
     "debug": "node --inspect node_modules/ava/profile.js",
     "cover": "nyc ava && nyc report",
-    "version": "npm run toc",
     "prepublishOnly": "npm run build",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
