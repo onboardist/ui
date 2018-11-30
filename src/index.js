@@ -1,4 +1,3 @@
-// import './main.less';
 export { default as Config } from './config';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';

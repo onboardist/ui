@@ -17,8 +17,6 @@ export default {
     this.options.modifiers = this.options.modifiers || {};
     this.options.modifiers.offset = {
       fn: (data, options) => {
-        console.log('D', data, options);
-
         return data;
       }
     };

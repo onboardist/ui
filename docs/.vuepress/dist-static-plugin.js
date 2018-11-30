@@ -9,6 +9,7 @@ module.exports = (options, ctx) => {
         const mount = require('koa-mount')
         const serveStatic = require('koa-static')
         app.use(mount(path.join(ctx.base, 'dist'), serveStatic(distAssetsPath)))
+        app.use(require('koa-livereload')());
       },
 
       // // For production
