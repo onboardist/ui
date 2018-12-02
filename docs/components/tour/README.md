@@ -13,12 +13,12 @@ Example:
 # API
 
 ```js
-const tour = new OnboardistUI.Tour([
+const tour = new Onboardist.UI.Tour([
   {
     elements: [
-      { type: OnboardistUI.Hotspot, target: '#new-button' },
-      { type: OnboardistUI.Hotspot, target: '#profile-icon' },
-      { type: OnboardistUI.Tooltip, target: '.menu-bar', content: 'This is the menu bar', highlight: true },
+      { type: Onboardist.UI.Hotspot, target: '#new-button' },
+      { type: Onboardist.UI.Hotspot, target: '#profile-icon' },
+      { type: Onboardist.UI.Tooltip, target: '.menu-bar', content: 'This is the menu bar', highlight: true },
     ]
   },
   {

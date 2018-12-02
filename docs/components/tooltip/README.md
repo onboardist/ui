@@ -31,20 +31,20 @@
       destroyables: [],
     }),
     mounted() {
-      this.destroyables.push(new OnboardistUI.Tooltip({
+      this.destroyables.push(new Onboardist.UI.Tooltip({
         attach: document.querySelector('#tooltip-button'),
         title: 'Title',
         placement: 'right',
         content: 'This is the content'
       }));
 
-    //   this.destroyables.push(new OnboardistUI.Tooltip({
+    //   this.destroyables.push(new Onboardist.UI.Tooltip({
     //     attach: '#pulse',
     //     style: 'pulse',
     //     ...popperArgs,
     //   }));
 
-    //   this.destroyables.push(new OnboardistUI.Tooltip({
+    //   this.destroyables.push(new Onboardist.UI.Tooltip({
     //     attach: '#teardrop',
     //     style: 'teardrop',
     //     ...popperArgs,

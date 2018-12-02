@@ -36,18 +36,18 @@ A hotspot is a widget that draws attention to an area of the screen. Often they 
       destroyables: [],
     }),
     mounted() {
-      this.destroyables.push(new OnboardistUI.Hotspot({
+      this.destroyables.push(new Onboardist.UI.Hotspot({
         attach: document.querySelector('#hotspot-button'),
         placement: 'top-end',
       }));
 
-      this.destroyables.push(new OnboardistUI.Hotspot({
+      this.destroyables.push(new Onboardist.UI.Hotspot({
         attach: '#pulse',
         style: 'pulse',
         ...popperArgs,
       }));
 
-      this.destroyables.push(new OnboardistUI.Hotspot({
+      this.destroyables.push(new Onboardist.UI.Hotspot({
         attach: '#teardrop',
         style: 'teardrop',
         ...popperArgs,

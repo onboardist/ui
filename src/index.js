@@ -1,4 +1,4 @@
-export { default as Config } from './config';
+export { default as config } from './config';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';

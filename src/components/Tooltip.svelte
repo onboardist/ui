@@ -15,12 +15,6 @@ import { oncreate, show, hide } from '../methods';
 export default {
   oncreate() {
     this.options.modifiers = this.options.modifiers || {};
-    this.options.modifiers.offset = {
-      fn: (data, options) => {
-        return data;
-      }
-    };
-
 
     return oncreate.call(this);
   },
@@ -30,8 +24,8 @@ export default {
   data: () => ({
     title: '',
     content: '',
-    color: OnboardistUI.Config.colors.active,
-    textColor: OnboardistUI.Config.colors.lightText,
+    color: Onboardist.UI.config.colors.active,
+    textColor: Onboardist.UI.config.colors.lightText,
   }),
 };
 </script>

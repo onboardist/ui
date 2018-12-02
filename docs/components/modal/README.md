@@ -7,7 +7,7 @@
 # Usage
 
 ```js
-const modal = new OnboardistUI.Modal({
+const modal = new ..Modal({
   attach: '.my-element',
   title: 'Title',
   content: 'This is the content',
@@ -21,13 +21,13 @@ const modal = new OnboardistUI.Modal({
       destroyables: [],
     }),
     mounted() {
-      // this.destroyables.push(new OnboardistUI.Modal({
+      // this.destroyables.push(new Onboardist.UI.Modal({
       //   attach: document.querySelector('#example-target'),
       //   title: 'Title',
       //   placement: 'right',
       //   content: 'This is the content'
       // }));
-      const i = new OnboardistUI.ModalComponent({
+      const i = new Onboardist.UI.ModalComponent({
         target: document.querySelector('#example-target'),
         data: {
           title: 'Title',

@@ -15,6 +15,8 @@ export function oncreate() {
     this.popper = new Popper(attachEl, this.refs.el, { ...this.options });
   }
 
+  if (!this.options.attach) return;
+
   // If the `attach` option is an element, use it right away. Otherwise wait (2.5s by default) for the attach element
   //   to exist.
   if (isDom(this.options.attach)) {

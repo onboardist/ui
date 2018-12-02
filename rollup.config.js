@@ -19,7 +19,7 @@ const config = {
   output: {
     file: pkg.main,
     format: 'umd',
-    name: 'OnboardistUI',
+    name: 'Onboardist.UI',
     sourcemap: true,
   },
   plugins: [
