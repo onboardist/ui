@@ -1,10 +1,23 @@
-<button>
+<button on:click="handler()">
   <slot></slot>
 </button>
 
 <script>
 export default {
-
+  // oncreate() {
+  //   console.log(this.get('handler'))
+  // },
+  data() {
+    return {
+      handler: () => {},
+    };
+  },
+  methods: {
+    handler(...args) {
+      console.log('this.get()', this.get());
+      this.get().handler.call(this, ...args);
+    }
+  }
 }
 </script>
 
@@ -18,7 +31,7 @@ button {
   /* background-color: @color; */
   font-size: .8em;
   padding: .5em 1em;
-  margin: .5em
+  margin: .5em;
 
   &:hover {
     background-color: white;
