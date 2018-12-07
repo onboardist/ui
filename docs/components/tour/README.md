@@ -72,6 +72,7 @@ export default {
   },
   destroyed() {
     this.destroyables.forEach(x => x.destroy());
+    this.tour.clear();
   },
 }
 </script>

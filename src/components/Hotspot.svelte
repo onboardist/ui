@@ -38,14 +38,20 @@ export default {
 </script>
 
 <style lang="less">
-@color: #62A8FC;
+@import 'src/main';
+/* @color: #62A8FC; */
+ref:el {
+  z-index: @zindex;
+}
 
 .hotspot {
   position: absolute;
+  z-index: @zindex;
   cursor: pointer;
 
   .dot {
     position: absolute;
+    z-index: @zindex;
     top: 50%;
     left: 50%;
 
@@ -61,6 +67,7 @@ export default {
     .pulse {
       border-radius: 50%;
       position: absolute;
+      z-index: @zindex;
       top: 50%;
       left: 50%;
 

@@ -47,21 +47,22 @@ export default {
 
 .container {
   margin: 5px;
+  z-index: @zindex;
 
   :global(&[x-placement^="right"]) {
-    margin-left: 10px;
+    margin-left: 30px;
   }
 
   :global(&[x-placement^="left"]) {
-    margin-right: 10px;
+    margin-right: 30px;
   }
 
   :global(&[x-placement^="bottom"]) {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   :global(&[x-placement^="top"]) {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 }
 
