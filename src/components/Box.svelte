@@ -36,16 +36,19 @@ export default {
   min-width: 100px;
   min-height: 100px;
   background: white;
+  text-align: initial;
 
   .box-header {
     font-size: 18px;
     font-weight: bold;
     padding: 12px 20px;
     border-radius: 8px 8px 0 0;
+    text-align: center;
   }
 
   .box-content {
     padding: 20px;
+    text-align: left;
   }
 
   .box-buttons {

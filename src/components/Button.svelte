@@ -1,23 +1,10 @@
-<button on:click="handler()">
+<button type="button" on:click="fire('click', event)">
   <slot></slot>
 </button>
 
 <script>
 export default {
-  // oncreate() {
-  //   console.log(this.get('handler'))
-  // },
-  data() {
-    return {
-      handler: () => {},
-    };
-  },
-  methods: {
-    handler(...args) {
-      console.log('this.get()', this.get());
-      this.get().handler.call(this, ...args);
-    }
-  }
+  
 }
 </script>
 

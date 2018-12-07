@@ -22,6 +22,9 @@ const config = {
     name: 'Onboardist.UI',
     sourcemap: true,
   },
+  watch: {
+    include: 'src/**',
+  },
   plugins: [
     resolve({ browser: true }),
     commonjs(),
@@ -54,6 +57,7 @@ export default [
   config,
   // Minified version
   production ? merge({}, config, {
+    watch: false,
     output: {
       file: `dist/index.min.js`,
     },
@@ -63,6 +67,7 @@ export default [
   }) : undefined,
   // Module
   production ? merge({}, config, {
+    watch: false,
     // NOTE: this externalizes leader-line, which won't work because it exports a global variable that has to be loaded with a special loader
     // external: Object.keys(pkg.dependencies).concat(['path-svg/svg-path']),
     external: [
