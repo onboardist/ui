@@ -6,7 +6,7 @@ export { default as Tour } from './components/Tour';
 
 export { HotspotComponent, ModalComponent, TooltipComponent };
 
-const props = ['style', 'title', 'content'];
+const props = ['style', 'title', 'content', 'buttons'];
 
 function genericConstructor(component, args) {
   const data = {};

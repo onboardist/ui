@@ -15,15 +15,15 @@ Example:
 ```js
 tour = new Onboardist.UI.Tour(
   [
-    [
-      Onboadist.UI.Modal({
+    [[
+      Onboadist.UI.Modal, {
         title: 'Getting Started',
         content: 'Take a quick tour of the system',
       }),
-    ],
+    ]],
     [
-      Onboardist.UI.Hotspot({ attach: '.links a[href="/guide/"]', name: 'hot1' }),
-      Onboardist.UI.Tooltip({ attach: 'hot1', content: 'Try the guide' }),
+      [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
+      [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
     ],
   ],
   {
@@ -34,3 +34,44 @@ tour = new Onboardist.UI.Tour(
 
 tour.start();
 ```
+
+<script>
+export default {
+  props: ['slot-key'],
+  data: () => ({
+    destroyables: [],
+  }),
+  mounted() {
+    const tour = new Onboardist.UI.Tour(
+      // Scenario list
+      [
+        // Scenario #1
+        [[
+          // One element
+          Onboardist.UI.Modal, {
+            title: 'Getting Started',
+            content: 'Take a quick tour of the system',
+          },
+        ]],
+        // Scenario #2
+        [
+          // Elements
+          [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
+          [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
+        ],
+      ],
+      {
+        showNext: true,
+        showPrev: true,
+      },
+    );
+
+    this.destroyables.push(tour);
+
+    tour.start();
+  },
+  destroyed() {
+    this.destroyables.forEach(x => x.destroy());
+  },
+}
+</script>
