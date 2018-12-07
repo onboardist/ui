@@ -2,6 +2,7 @@ export { default as config } from './config';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
+export { default as Tour } from './components/Tour';
 
 export { HotspotComponent, ModalComponent, TooltipComponent };
 
@@ -36,4 +37,14 @@ export class Tooltip {
   constructor(args) {
     return genericConstructor(TooltipComponent, args);
   }
+}
+
+// Functions
+
+export function next() {
+  // Get current tour
+
+  // Get next step of tour
+
+  // Start next step
 }

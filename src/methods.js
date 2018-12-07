@@ -26,3 +26,24 @@ export function oncreate() {
       .then(attachEl => createPopper(attachEl));
   }
 }
+
+export function expandButtonArgs(buttons) {
+  if (!buttons) return buttons;
+
+  const b = buttons.map(button => {
+    if (typeof(button) !== 'string') return button;
+
+    switch (button.toLowerCase()) {
+      case ('next'):
+        return { text: 'Next', handler() { Onboardist.UI.next(); } };
+      case ('ok'):
+        return { text: 'OK', handler() { this.close(); } };
+      default:
+        return button;
+    }
+  });
+
+  console.log('b', b);
+
+  return b;
+}

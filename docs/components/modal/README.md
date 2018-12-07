@@ -52,7 +52,6 @@ const modal = new ..Modal({
         new Onboardist.UI.Modal({
           title: 'This is a modal',
           content: `I'm here in ur body.`,
-          position: 'center',
         });
       },
     }

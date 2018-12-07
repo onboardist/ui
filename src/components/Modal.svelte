@@ -13,32 +13,19 @@
 
 <script>
 import Box from './Box.svelte';
-import { show, hide } from '../methods';
+import { expandButtonArgs, hide, show } from '../methods';
 
 export default {
-  // oncreate,
   components: { Box },
   data() {
     return {
       title: '',
-      buttons: [{
-        text: 'OK',
-        handler() { this.close() },
-      }],
+      buttons: ['ok'],
       content: '',
     };
   },
   oncreate() {
-    // console.log(this.refs.box.el);
-
-    // const { el } = this.refs.box.refs;
-    // const h = this.height = el.offsetHeight;
-    // const w = this.width = el.offsetWidth;
-
-    // el.style.height = `${h}px`;
-    // el.style.width = `${w}px`;
-
-    // el.classList.add('positioned');
+    if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
   },
   methods: {
     show,
@@ -59,7 +46,7 @@ export default {
 .oboardist-modal {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: @zindex;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
@@ -72,6 +59,7 @@ export default {
 :global(.oboardist-modal .box) {
   border: none !important;
   z-index: @zindex+1;
+  box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.2) !important;
 
   .positioned {
     /* position: absolute;
