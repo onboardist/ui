@@ -33,8 +33,8 @@ export default {
   border-radius: 8px;
   border: 1px solid #ececec;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
-  min-width: 100px;
-  min-height: 100px;
+  /* min-width: 100px;
+  min-height: 100px; */
   background: white;
   text-align: initial;
 

@@ -35,7 +35,8 @@
         attach: document.querySelector('#tooltip-button'),
         title: 'Title',
         placement: 'right',
-        content: 'This is the content'
+        content: 'This is the content',
+        buttons: ['ok'],
       }));
 
     //   this.destroyables.push(new Onboardist.UI.Tooltip({

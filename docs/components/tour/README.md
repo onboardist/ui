@@ -13,13 +13,24 @@ Example:
 # API
 
 ```js
-Onboardist.UI.Tour(
+tour = new Onboardist.UI.Tour(
   [
-    Onboadist.UI.Modal({
-      data: {
-        buttons: ['next'],
-      }
-    })
+    [
+      Onboadist.UI.Modal({
+        title: 'Getting Started',
+        content: 'Take a quick tour of the system',
+      }),
+    ],
+    [
+      Onboardist.UI.Hotspot({ attach: '.links a[href="/guide/"]', name: 'hot1' }),
+      Onboardist.UI.Tooltip({ attach: 'hot1', content: 'Try the guide' }),
+    ],
   ],
-)
+  {
+    showNext: true,
+    showPrev: true,
+  },
+);
+
+tour.start();
 ```

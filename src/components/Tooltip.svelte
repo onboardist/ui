@@ -1,36 +1,50 @@
 <div class="container" ref:el>
-  <div class="tooltip" style="background-color: { color }">
-    {#if title}
-      <div class="header" style="color: { textColor }">{ title }</div>
-    {/if}
-    <div class="content" style="color: { textColor }">
-      {@html content }
-    </div>
-    <div class="tooltip-arrow" x-arrow style="background-color: { color }"></div>
-  </div>
+  <div class="tooltip">
+    <Box ref:box title={title}>
+      <div slot="content">{@html content}</div>
+      <div slot="buttons">
+        {#if buttons}
+          {#each buttons as button}
+            <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
+          {/each}
+        {/if}
+      </div>
+    </Box>
+    <div class="tooltip-arrow" x-arrow></div>
+  </div>  
 </div>
 
 <script>
-import { oncreate, show, hide } from '../methods';
+import Box from './Box.svelte';
+import { close, expandButtonArgs, hide, oncreate, show } from '../methods';
+
 export default {
+  components: { Box },
   oncreate() {
     this.options.modifiers = this.options.modifiers || {};
+    if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
 
     return oncreate.call(this);
   },
   methods: {
-    show, hide,
+    close,
+    show,
+    hide,
+    call(fn, ...args) {
+      fn.call(this, ...args);
+    },
   },
   data: () => ({
     title: '',
     content: '',
-    color: Onboardist.UI.config.colors.active,
-    textColor: Onboardist.UI.config.colors.lightText,
+    buttons: ['ok'],
   }),
 };
 </script>
 
 <style lang="less">
+@import 'src/main';
+
 .container {
   margin: 5px;
 
@@ -55,9 +69,35 @@ export default {
   border-radius: 12px;
   border: 1px solid #ececec;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
-  /* min-width: 100px;
-  min-height: 100px; */
   background: white;
+
+  :global(.box) {
+    margin: 0 !important;
+    color: white;
+    background-color: @color !important;
+  }
+
+  :global(.box > .box-content:first-child) {
+    padding-top: 10px !important;
+  }
+
+  :global(.box .box-header) {
+    padding: 10px !important;
+  }
+
+  :global(.box .box-content) {
+    padding: 5px 10px !important;
+  }
+
+  :global(.box .box-buttons) {
+    padding: 0;
+  }
+
+  :global(.box .box-buttons button) {
+    background-color: @color;
+    color: white;
+    border-color: white;
+  }
 
   .header {
     font-size: 18px;
@@ -71,7 +111,7 @@ export default {
   }
 
   .tooltip-arrow {
-    background: red;
+    background: @color;
     height: 10px;
     width: 10px;
     position: absolute;

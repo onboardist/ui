@@ -13,7 +13,7 @@
 
 <script>
 import Box from './Box.svelte';
-import { expandButtonArgs, hide, show } from '../methods';
+import { close, expandButtonArgs, hide, show } from '../methods';
 
 export default {
   components: { Box },
@@ -28,13 +28,11 @@ export default {
     if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
   },
   methods: {
+    close,
     show,
     hide,
     call(fn, ...args) {
       fn.call(this, ...args);
-    },
-    close() {
-      this.destroy();
     },
   }
 };

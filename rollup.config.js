@@ -32,6 +32,11 @@ const config = {
       'node_modules/leader-line/leader-line.min.js': 'LeaderLine',
     }),
     svelte({
+      // Opt into v3 behavior today
+      skipIntroByDefault: true,
+      nestedTransitions: true,
+      dev: !production,
+
       preprocess: {
         style: ({ content, attributes }) => {
           if (attributes.lang !== 'less') return;

@@ -2,6 +2,10 @@ import Popper from 'popper.js';
 import isDom from 'is-dom';
 import { waitForTheElement } from 'wait-for-the-element';
 
+export function close() {
+  this.destroy();
+}
+
 export function show() {
   this.show = true;
 }
@@ -30,7 +34,7 @@ export function oncreate() {
 export function expandButtonArgs(buttons) {
   if (!buttons) return buttons;
 
-  const b = buttons.map(button => {
+  return buttons.map(button => {
     if (typeof(button) !== 'string') return button;
 
     switch (button.toLowerCase()) {
@@ -42,8 +46,4 @@ export function expandButtonArgs(buttons) {
         return button;
     }
   });
-
-  console.log('b', b);
-
-  return b;
 }
