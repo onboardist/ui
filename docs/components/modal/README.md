@@ -9,7 +9,7 @@
 # Usage
 
 ```js
-const modal = new ..Modal({
+const modal = new Onboardist.UI.Modal({
   attach: '.my-element',
   title: 'Title',
   content: 'This is the content',

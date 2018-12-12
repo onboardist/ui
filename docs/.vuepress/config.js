@@ -29,7 +29,8 @@ module.exports = {
         collapsable: false,
         children: [
           '/guide/',
-          '/guide/api/'
+          '/guide/config/',
+          '/guide/api/',
         ],
       },
       {

@@ -10,22 +10,55 @@ Example:
 2. Clicking the next button opens a hotspot with a tooltip next to it. This also has a "Next" button
 3. Clicking THAT next button opens yet another hotspot with another tooltip, etc, etc.
 
-# API
+<div class="example">
+  <button id="tour-button" @click="startTour()">Start Tour</button>
+</div>
+
+## API
+
+The tour constructor takes an array of arrays... of arrays. Confusing, I know. But it breaks down like this:
 
 ```js
-tour = new Onboardist.UI.Tour(
+// Array of scenarios steps
+[
+  // Scenario 1
   [
+    // Element 1
+    [el, args], 
+    // Element 2
+    [el, args]
+  ],
+  // Scenario 2
+  [
+    // Element 3
+    [el, args]
+  ]
+]
+```
+
+The outer array is your "scenarios", or _steps_. Each scenario has a list of elements that are shown on screen. When the user navigates to the next scenario, the screen is cleared and the new scenario's components are shown. 
+
+Example code used for the tour on this page:
+
+```js
+const tour = new Onboardist.UI.Tour(
+  // Scenario list
+  [
+    // First scenario, with one element
     [[
       Onboadist.UI.Modal, {
         title: 'Getting Started',
         content: 'Take a quick tour of the system',
       }),
     ]],
+    // Second scenario
     [
+      // Two elements
       [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
       [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
     ],
   ],
+  // Additional options for tour
   {
     showNext: true,
     showPrev: true,
@@ -35,14 +68,33 @@ tour = new Onboardist.UI.Tour(
 tour.start();
 ```
 
+## Options
+
+### showPrev
+
+* Type: `boolean`
+* Default: true
+  
+Show a button to navigate to the previous page. Only affects components that show buttons (Modals, Tooltips). Doesn't show on first scenario.
+
+### showNext
+
+* Type: `boolean`
+* Default: true
+  
+Show a button to navigate to the next page. Only affects components that show buttons (Modals, Tooltips). On the last scenario it shows "End".
+
+
+
 <script>
 export default {
   props: ['slot-key'],
   data: () => ({
     destroyables: [],
+    tour: null,
   }),
   mounted() {
-    const tour = new Onboardist.UI.Tour(
+    this.tour = new Onboardist.UI.Tour(
       // Scenario list
       [
         // Scenario #1
@@ -66,13 +118,16 @@ export default {
       },
     );
 
-    this.destroyables.push(tour);
-
-    tour.start();
+    // this.destroyables.push(this.tour);
   },
   destroyed() {
-    this.destroyables.forEach(x => x.destroy());
     this.tour.clear();
+    // this.destroyables.forEach(x => x.destroy());
   },
-}
+  methods: {
+    startTour() {
+      this.tour.start();
+    },
+  },
+};
 </script>

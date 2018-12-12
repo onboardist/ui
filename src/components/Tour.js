@@ -1,8 +1,6 @@
 import { Store } from 'svelte/store';
 import { Coachmark, Hotspot, Modal, Tooltip } from './';
 
-console.log({ Coachmark, Hotspot, Modal, Tooltip });
-
 const uniqstr = () => Math.random().toString(36).substr(2);
 
 export const ComponentMap = {
@@ -23,9 +21,7 @@ export default class Tour {
   }
 
   start() {
-    const scenario = this.scenarios[0];
-
-    if (!scenario) {
+    if (!this.scenarios.length) {
       console.warn('No scenarios');
       return;
     }
@@ -46,14 +42,19 @@ export default class Tour {
     return scenario[scenario.indexOf(compArgs) + 1];
   }
 
+  // NOTE: right now the chain of elements has to be in order; i.e. if component 2 attaches to component 1, component 1
+  //   has to come prior to two in the list of components.
   renderChain(compArgs, scenario) {
-    const [comp, args] = compArgs;
+    let [comp, args] = compArgs;
+    args = { ...args };
 
     if (typeof(comp) === 'string') comp = ComponentMap[comp];
     if (!comp) throw new Error(`Component '${comp}' unrecognized`);
 
-    if (this.options.showNext) args.buttons = [...(args.buttons || []), { text: 'Next', handler: () => this.next() }];
+    const nextButton = this.isLastScenario(scenario) ? { text: 'End', handler: () => this.clear() } : { text: 'Next', handler: () => this.next() };
+
     if (this.options.showPrev && !this.isFirstScenario(scenario)) args.buttons = [ { text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
+    if (this.options.showNext) args.buttons = [...(args.buttons || []), nextButton];
     args.store = this.store;
     args.name = args.name || uniqstr();
 
@@ -70,11 +71,36 @@ export default class Tour {
   }
 
   next() {
-    const curIdx = this.scenarios.indexOf(this.scenario);
+    if (!this.scenario) this.scenario = this.scenarios[0];
+    else {
+      const curIdx = this.scenarios.indexOf(this.scenario);
 
-    if (curIdx === -1) return;
+      if (curIdx === -1) return;
 
-    this.scenario = this.scenarios[curIdx + 1];
+      this.scenario = this.scenarios[curIdx + 1];
+    }
+
+    if (!this.scenario) {
+      this.clear();
+      return;
+    }
+
+    this.render(this.scenario);
+  }
+
+  prev() {
+    if (!this.scenario) this.scenario = this.scenarios[0];
+    else {
+      const curIdx = this.scenarios.indexOf(this.scenario);
+
+      if (curIdx === -1) return;
+
+      this.scenario = this.scenarios[curIdx - 1];
+    }
+
+    if (!this.scenario) {
+      return;
+    }
 
     this.render(this.scenario);
   }
@@ -90,5 +116,9 @@ export default class Tour {
 
   isFirstScenario(scenario) {
     return this.scenarios.indexOf(scenario) === 0;
+  }
+
+  isLastScenario(scenario) {
+    return this.scenarios.indexOf(scenario) === this.scenarios.length - 1;
   }
 };

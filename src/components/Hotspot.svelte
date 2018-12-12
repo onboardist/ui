@@ -15,14 +15,6 @@
 import Config from '../config';
 import { oncreate, show, hide } from '../methods';
 
-/**
- * Hotspot
- * 
- * @param   {number} [size=20] The size of the hotspot in pixels
- * @param   {string} [style="pulse"] The style of hotspot. Valid values: 'pulse', 'teardrop'
- * 
- * @return  {Hotspot} Hotspot instance
- */
 export default {
   oncreate,
   data: () => ({
