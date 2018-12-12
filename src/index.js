@@ -1,43 +1,12 @@
 export { default as config } from './config';
+import { default as CoachmarkComponent } from './components/Coachmark.svelte';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
 export { default as Tour } from './components/Tour';
 
-export { HotspotComponent, ModalComponent, TooltipComponent };
-
-const props = ['style', 'title', 'content', 'buttons', 'name'];
-
-function genericConstructor(component, args) {
-  const data = {};
-  props.forEach(x => {
-    if (args[x]) data[x] = args[x];  
-  })
-
-  return new component({
-    ...args,
-    data,
-    target: document.querySelector('body'),
-  });
-}
-
-export class Hotspot {
-  constructor(args) {
-    return genericConstructor(HotspotComponent, args);
-  }
-}
-
-export class Modal {
-  constructor(args) {
-    return genericConstructor(ModalComponent, args);
-  }
-}
-
-export class Tooltip {
-  constructor(args) {
-    return genericConstructor(TooltipComponent, args);
-  }
-}
+export { Coachmark, Hotspot, Modal, Tooltip } from './components';
+export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
 // Functions
 
@@ -47,4 +16,12 @@ export function next() {
   // Get next step of tour
 
   // Start next step
+}
+
+export function prev() {
+
+}
+
+export function stop() {
+
 }

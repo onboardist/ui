@@ -1,6 +1,16 @@
 import { Store } from 'svelte/store';
+import { Coachmark, Hotspot, Modal, Tooltip } from './';
+
+console.log({ Coachmark, Hotspot, Modal, Tooltip });
 
 const uniqstr = () => Math.random().toString(36).substr(2);
+
+export const ComponentMap = {
+  'coachmark': Coachmark,
+  'hotspot': Hotspot,
+  'modal': Modal,
+  'tooltip': Tooltip,
+}
 
 export default class Tour {
   constructor(scenarios = [], options = {}) {
@@ -39,6 +49,9 @@ export default class Tour {
   renderChain(compArgs, scenario) {
     const [comp, args] = compArgs;
 
+    if (typeof(comp) === 'string') comp = ComponentMap[comp];
+    if (!comp) throw new Error(`Component '${comp}' unrecognized`);
+
     if (this.options.showNext) args.buttons = [...(args.buttons || []), { text: 'Next', handler: () => this.next() }];
     if (this.options.showPrev && !this.isFirstScenario(scenario)) args.buttons = [ { text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
     args.store = this.store;
@@ -58,6 +71,9 @@ export default class Tour {
 
   next() {
     const curIdx = this.scenarios.indexOf(this.scenario);
+
+    if (curIdx === -1) return;
+
     this.scenario = this.scenarios[curIdx + 1];
 
     this.render(this.scenario);
