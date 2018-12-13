@@ -10,7 +10,6 @@
 
 ```js
 const modal = new Onboardist.UI.Modal({
-  attach: '.my-element',
   title: 'This is a modal',
   content: 'This is the content',
 }));

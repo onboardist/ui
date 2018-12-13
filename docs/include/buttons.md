@@ -8,7 +8,10 @@ object with `text` and `handler` properties:
 
 ```js
 new Hotspot({ attach: '#foo', buttons: [
-  { text: 'Close', handler() { this.close() } },
+  {
+    text: 'Close',
+    handler() { this.close() }
+  },
 ]});
 ```
 
