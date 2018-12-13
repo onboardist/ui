@@ -9,10 +9,12 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "dev": "NODE_ENV=development npm-run-all -l -p build:watch test:watch docs:dev livereload",
+    "dev": "NODE_ENV=development npm-run-all -l -p build:watch test:ci:watch docs:dev livereload",
     "clean": "rimraf dist/*",
-    "test:watch": "cypress open",
-    "test": "echo 'No tests set up' && exit 0",
+    "test:ci:watch": "cypress open",
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "dev:test:watch": "npm run build:watch & npm run test:watch",
     "test:record": "cypress run",
     "test:ci": "./cypress/test_ci.sh",
     "livereload": "node ./docs/.vuepress/live-reload.js",
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "babel-register": "^6.26.0",
     "chokidar": "^2.0.4",
     "cypress": "^3.1.1",
     "koa-livereload": "^0.2.0",
@@ -138,16 +141,6 @@
           "import/no-unassigned-import": "off"
         }
       }
-    ]
-  },
-  "ava": {
-    "babel": "inherit",
-    "source": [
-      "src/**/*.js"
-    ],
-    "require": [
-      "babel-register",
-      "./test/helpers/setup-browser-env.js"
     ]
   }
 }

@@ -8,8 +8,9 @@ export { default as Tour } from './components/Tour';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
-// Functions
+export const listeners = {};
 
+// Functions
 export function next() {
   // Get current tour
 
@@ -24,4 +25,28 @@ export function prev() {
 
 export function stop() {
 
+}
+
+export function reset() {
+  listeners = {};
+}
+
+export function on(event, fn) {
+  const subs = listeners[event] = listeners[event] || [];
+  subs.push(fn);
+  
+  return function() {
+    const index = subs.indexOf(fn);
+    if (index !== -1) subs.splice(index, 1);
+
+    if (!subs.length) delete listeners[event];
+  }
+}
+
+export function fire(event, ...args) {
+  if (!event in listeners) return;
+
+  for (const fn of listeners[event]) {
+    fn.apply(null, args);
+  }
 }
