@@ -1,6 +1,6 @@
 # Tour
 
-A tour is a special component that combines multiple sub-components into a series of steps. Technically it is a
+A tour is a special meta-component that combines multiple sub-components into a series of steps. Technically it is a
 state machine. Each step in the tour is an independent state and each state defines multiple ways to transition to the
 next, previous, or an arbitrary state.
 
@@ -55,7 +55,7 @@ const tour = new Onboardist.UI.Tour(
     [
       // Two elements
       [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
-      [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
+      ['tooltip', { attach: 'hot1', content: 'Try the guide' }],
     ],
   ],
   // Additional options for tour
@@ -67,6 +67,11 @@ const tour = new Onboardist.UI.Tour(
 
 tour.start();
 ```
+
+::: tip
+You can either use the component name, or a simple string for the component, i.e. `'tooltip'` instead of `Onboardist.UI.Tooltip` as seen above. This makes
+tour configs JSON-compatible.
+:::
 
 ## Options
 

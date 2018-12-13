@@ -1,10 +1,11 @@
-#!#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # abort on errors
 set -e
 
 # build
-npm run docs:build
+NODE_ENV=production npm run build
+npm run docs
 
 # navigate into the build output directory
 cd docs/.vuepress/dist

@@ -11,7 +11,7 @@
     "dev": "NODE_ENV=development npm-run-all -l -p build:watch test:watch docs:dev livereload",
     "clean": "rimraf dist/*",
     "test:watch": "cypress open",
-    "test": "exit 0",
+    "test": "echo 'No tests set up' && exit 0",
     "test:record": "cypress run",
     "test:ci": "./cypress/test_ci.sh",
     "build:watch": "rollup -c -w",
@@ -19,8 +19,9 @@
     "debug": "node --inspect node_modules/ava/profile.js",
     "cover": "nyc ava && nyc report",
     "prepublishOnly": "npm run build",
+    "docs": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:deploy": "NODE_ENV=production ./docs/docs.sh"
   },
   "repository": {
     "type": "git",
@@ -64,7 +65,7 @@
     "rollup-plugin-terser": "^3.0.0",
     "svelte": "^2.15.0",
     "tiny-lr": "^1.1.1",
-    "vuepress": "^1.0.0-alpha.18",
+    "vuepress": "^1.0.0-alpha.28",
     "xo": "^0.23.0"
   },
   "xo": {
