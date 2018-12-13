@@ -5,7 +5,7 @@ set -e
 
 # build
 NODE_ENV=production npm run build
-npm run docs
+NODE_ENV=production npm run docs
 
 # navigate into the build output directory
 cd docs/.vuepress/dist

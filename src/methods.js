@@ -38,8 +38,8 @@ export function expandButtonArgs(buttons) {
     if (typeof(button) !== 'string') return button;
 
     switch (button.toLowerCase()) {
-      case ('next'):
-        return { text: 'Next', handler() { Onboardist.UI.next(); } };
+      // case ('next'):
+      //   return { text: 'Next', handler() { Onboardist.UI.next(); } };
       case ('ok'):
         return { text: 'OK', handler() { this.close(); } };
       default:

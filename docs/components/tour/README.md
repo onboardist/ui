@@ -54,7 +54,7 @@ const tour = new Onboardist.UI.Tour(
     // Second scenario
     [
       // Two elements
-      [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
+      [Onboardist.UI.Hotspot, { attach: '.links a[href*="/guide/"]', name: 'hot1' }],
       ['tooltip', { attach: 'hot1', content: 'Try the guide' }],
     ],
   ],
@@ -113,7 +113,7 @@ export default {
         // Scenario #2
         [
           // Elements
-          [Onboardist.UI.Hotspot, { attach: '.links a[href="/guide/"]', name: 'hot1' }],
+          [Onboardist.UI.Hotspot, { attach: '.links a[href*="/guide/"]', name: 'hot1' }],
           [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
         ],
       ],

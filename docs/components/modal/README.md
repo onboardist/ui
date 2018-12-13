@@ -6,15 +6,35 @@
   <button type="button" class="pull-left" @click="openModal()">Open Modal</button>
 </div>
 
-# Usage
+## Usage
 
 ```js
 const modal = new Onboardist.UI.Modal({
   attach: '.my-element',
-  title: 'Title',
+  title: 'This is a modal',
   content: 'This is the content',
 }));
 ```
+
+## Options
+
+!!!include(name.md)!!!
+
+!!!include(buttons.md)!!!
+
+### title
+
+* Type: `string`
+* Default: `undefined`
+
+Displays a title row across the top of the modal. If not set there will be no title row.
+
+### content
+
+* Type: `string`
+* Default: `undefined`
+
+Content to put in the body of the modal. You can use html.
 
 <script>
   export default {
@@ -51,7 +71,7 @@ const modal = new Onboardist.UI.Modal({
       openModal() {
         new Onboardist.UI.Modal({
           title: 'This is a modal',
-          content: `I'm here in ur body.`,
+          content: `This is the content`,
         });
       },
     }

@@ -6,7 +6,13 @@ A hotspot is a widget that draws attention to an area of the screen. Often they 
   <button id="hotspot-button">button</button>
 </div>
 
-# Styles
+## Usage
+
+```js
+const tooltip = new Onboardist.UI.Tooltip({ attach: '.my-element' }));
+```
+
+## Styles
 
 <div class="styles">
   <Card>
@@ -18,6 +24,27 @@ A hotspot is a widget that draws attention to an area of the screen. Often they 
     <div id="teardrop" class="style-demo"></div>
   </Card>
 </div>
+
+## Options
+
+!!!include(attach.md)!!!
+
+```js
+new Hotspot({ attach: 'input.my-input-class' });
+
+new Hotspot({ attach: document.querySelector('input.my-input-class') });
+```
+
+!!!include(name.md)!!!
+
+!!!include(placement.md)!!!
+
+### style
+
+* Type: `string`
+* Default: `'pulse'`
+
+Choose which style of hotspot to use.
 
 <script>
   const popperArgs = {

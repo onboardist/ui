@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ### attach
 
 * Type: `string|Node`
-* Default: `none`
+* Default: `undefined`
 
 Either a DOM selector or a DOM node. If a selector is given and the element is not present, Onboardist will wait up to 2 seconds to appear in the DOM.
 
@@ -29,15 +29,4 @@ Either a DOM selector or a DOM node. If a selector is given and the element is n
 new Hotspot({ attach: 'input.my-input-class' });
 
 new Hotspot({ attach: document.querySelector('input.my-input-class') });
-```
-
-### style
-
-* Type: `string`
-* Default: `''`
-
-Some components have different styles that you can assign. This is just a string specifying the style. See each component doc for specifics.
-
-```js
-new Hotspot({ attach: '#foo', style: 'pulse' })
 ```
