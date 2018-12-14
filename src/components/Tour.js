@@ -1,7 +1,6 @@
 import { Store } from 'svelte/store';
 import { Coachmark, Hotspot, Modal, Tooltip } from './';
-
-const uniqstr = () => Math.random().toString(36).substr(2);
+import { uniquestring } from '../methods';
 
 export const ComponentMap = {
   'coachmark': Coachmark,
@@ -18,6 +17,20 @@ export default class Tour {
     }, options);
     this.store = new Store({});
     this.elementMap = {};
+
+    this.registerComponents();
+  }
+
+  registerComponents() {
+    for (const scenario of this.scenarios) {
+      for (const [component, args = {}] of scenario) {
+        Onboardist.UI.register({
+          args,
+          component,
+          name: args.name,
+        });
+      }
+    }
   }
 
   start() {
@@ -56,15 +69,16 @@ export default class Tour {
     if (this.options.showPrev && !this.isFirstScenario(scenario)) args.buttons = [ { text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
     if (this.options.showNext) args.buttons = [...(args.buttons || []), nextButton];
     args.store = this.store;
-    args.name = args.name || uniqstr();
+    args.name = args.name || uniquestring();
 
     if (this.elementMap.hasOwnProperty(args.attach)) {
       args.attach = this.elementMap[args.attach].refs.el;
     }
 
     const el = new comp(args);
+    Onboardist.UI.registerInstance(el.get().name, el);
 
-    this.elementMap[args.name] = el;
+    this.elementMap[el.get().name] = el;
 
     const next = this.nextComponent(compArgs, scenario);
     if (next) setTimeout(() => this.renderChain(next, scenario));

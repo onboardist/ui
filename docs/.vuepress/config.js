@@ -41,6 +41,7 @@ module.exports = {
           '/guide/',
           '/guide/config/',
           '/guide/api/',
+          '/guide/events/',
         ],
       },
       {

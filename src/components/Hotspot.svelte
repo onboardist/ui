@@ -13,10 +13,11 @@
 
 <script>
 import Config from '../config';
-import { oncreate, show, hide } from '../methods';
+import { oncreate, ondestroy, show, hide } from '../methods';
 
 export default {
   oncreate,
+  ondestroy,
   data: () => ({
     color: Config.colors.active,
     style: 'pulse',

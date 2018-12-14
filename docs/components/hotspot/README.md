@@ -9,7 +9,10 @@ A hotspot is a widget that draws attention to an area of the screen. Often they 
 ## Usage
 
 ```js
-const tooltip = new Onboardist.UI.Tooltip({ attach: '.my-element' }));
+const tooltip = new Onboardist.UI.Tooltip({
+  attach: '#hotspot-button',
+  placement: 'top-end',
+}));
 ```
 
 ## Styles
@@ -37,7 +40,16 @@ new Hotspot({ attach: document.querySelector('input.my-input-class') });
 
 !!!include(name.md)!!!
 
+!!!include(events.md)!!!
+
 !!!include(placement.md)!!!
+
+### size
+
+* Type: `number`
+* Default: `20`
+
+Size of hotspot in pixels.
 
 ### style
 

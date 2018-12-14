@@ -13,7 +13,7 @@
 <script>
 import { oncreate, show, hide } from '../methods';
 export default {
-  oncreate,
+  // oncreate,
   methods: { show, hide },
   data: () => ({
     title: '',

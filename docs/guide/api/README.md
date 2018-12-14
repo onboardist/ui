@@ -18,15 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## Options
 
-### attach
+!!!include(attach.md)!!!
 
-* Type: `string|Node`
-* Default: `undefined`
-
-Either a DOM selector or a DOM node. If a selector is given and the element is not present, Onboardist will wait up to 2 seconds to appear in the DOM.
-
-```js
-new Hotspot({ attach: 'input.my-input-class' });
-
-new Hotspot({ attach: document.querySelector('input.my-input-class') });
-```
+!!!include(name.md)!!!

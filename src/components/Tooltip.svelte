@@ -16,7 +16,7 @@
 
 <script>
 import Box from './Box.svelte';
-import { close, expandButtonArgs, hide, oncreate, show } from '../methods';
+import { oncreate, ondestroy, close, expandButtonArgs, hide, show } from '../methods';
 
 export default {
   components: { Box },
@@ -26,6 +26,7 @@ export default {
 
     return oncreate.call(this);
   },
+  ondestroy,
   methods: {
     close,
     show,

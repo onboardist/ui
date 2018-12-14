@@ -13,9 +13,15 @@
 
 <script>
 import Box from './Box.svelte';
-import { close, expandButtonArgs, hide, show } from '../methods';
+import { close, oncreate, ondestroy, expandButtonArgs, hide, show } from '../methods';
 
 export default {
+  oncreate() {
+    if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
+
+    return oncreate.call(this);
+  },
+  ondestroy,
   components: { Box },
   data() {
     return {
@@ -23,9 +29,6 @@ export default {
       buttons: ['ok'],
       content: '',
     };
-  },
-  oncreate() {
-    if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
   },
   methods: {
     close,
