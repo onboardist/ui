@@ -11,6 +11,7 @@ export const ComponentMap = {
 
 export default class Tour {
   constructor(scenarios = [], options = {}) {
+    this.name = options.name || uniquestring();
     this.scenarios = scenarios;
     this.options = Object.assign({}, {
       showNext: true,
@@ -18,13 +19,15 @@ export default class Tour {
     this.store = new Store({});
     this.elementMap = {};
 
-    this.registerComponents();
+    this.register();
   }
 
-  registerComponents() {
+  register() {
+    Onboardist.UI.registerTour(this);
+
     for (const scenario of this.scenarios) {
       for (const [component, args = {}] of scenario) {
-        Onboardist.UI.register({
+        Onboardist.UI.registerComponent({
           args,
           component,
           name: args.name,
@@ -76,7 +79,7 @@ export default class Tour {
     }
 
     const el = new comp(args);
-    Onboardist.UI.registerInstance(el.get().name, el);
+    Onboardist.UI.registerInstance({ name: el.get().name, instance: el });
 
     this.elementMap[el.get().name] = el;
 

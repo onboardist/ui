@@ -11,6 +11,7 @@ export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent 
 
 export const components = {};
 export const listeners = {};
+export const tours = {};
 
 // Functions
 export function next() {
@@ -54,7 +55,7 @@ export function fire(event, ...args) {
   }
 }
 
-export function register({ name, component, args, instance }) {
+export function registerComponent({ name, component, args, instance }) {
   if (!name) name = uniquestring();
   args.name = name;
 
@@ -65,11 +66,16 @@ export function register({ name, component, args, instance }) {
   };
 }
 
-export function registerInstance(name, instance) {
+export function registerInstance({ name, instance }) {
   components[name] = components[name] || {};
   components[name].instance = instance;
 }
 
 export function deregisterInstance(name) {
   if (name in components) delete components[name].instance;
+}
+
+export function registerTour(tour) {
+  // if (!name) name = uniquestring();
+  Onboardist.UI.tours[tour.name] = tour;
 }

@@ -1,12 +1,18 @@
-### events
+## events
 
 * Type: `object`
 * Default: `{}`
 
-An object that can contain `{ event: [fn()] }` pairs, or `{ event: ['close'|'next'|component-name] }` pairs.
+An object that can contain either:
+
+* `{ event: [fn()] }` pairs,
+* `{ event: ['close'|'next'|scenarioName|componentName] }` pairs.
+* ...or a combination of the two.
 
 The `event` key can either be a DOM event that can be triggered on the element (i.e. `click`, `mouseover`), or a string
 representing an event that will be triggered using `Onboardist.UI.fire(event)` (basically global pub/sub).
+
+####
 
 ```js
 new Onboardist.UI.Hotspot({
@@ -17,11 +23,11 @@ new Onboardist.UI.Hotspot({
 })
 ```
 
-#### handler
+### handler
 
 If a handler function is given it will be called when the event named `event` is triggered.
 
-#### `'close'`
+### `'close'`
 
 If the string `'close'` is given, the element will be removed.
 
@@ -31,7 +37,7 @@ new Onboardist.UI.Hotspot({
 });
 ```
 
-#### `'next'`
+### `'next'`
 
 If the string `'next'` is given, the current [tour](/components/tour/) will move to the next scenario.
 
@@ -41,12 +47,12 @@ new Onboardist.UI.Hotspot({
 });
 ```
 
-### `scenario-name`
+### `scenarioName`
 
 If a string is given that matches a registered scenario, that scenario will be started (ending any currently-shown
 scenario);
 
-### `scenario-name`
+### `componentName`
 
 If a string is given that matches a registered scenario, that scenario will be started (ending any currently-shown
 scenario);
