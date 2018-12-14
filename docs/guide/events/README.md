@@ -2,13 +2,35 @@
 
 Events let components react to user input and also integrate with your applicaiton. Components can subscribe to two different kinds of events:
 
-* DOM events: (`click`, `mouseover`, etc.)
-* Onboardist events: pub/sub-style messaging.
+* **DOM events**: (`click`, `mouseover`, etc.)
+* **Onboardist events**: pub/sub-style messaging.
 
-DOM events are subscribed to using the `events` property when you define your component arguments.
+## DOM Events
+
+DOM-style events are subscribed to using the `events` property when you define your component arguments.
+
+```js
+new Hotspot({
+  attach: '#foo',
+  events: {
+    click: 'modal01', // instantiate component `modal01` on click
+    hover: 'tooltip5', // instatiate component `tooltip5` when hotspot is moused over; `tooltip5` will be removed when the user mouses out.
+  },
+})
+```
+
+## Onboardist Events
+
+Onboardist UI has its own simple pub/sub message bus. This is used by components to communicate with each other, and by *you*
+to communicate with Onboardist.
+
+Say you want to show a user how to remove an item from their cart when they first add one. You've made a tour named `cart-remove-item`.
+
 
 Onboardist events use the `subscribe` property. You can use `Onboardist.UI.fire('eventname')` to trigger events across
 Onboardist.
+
+
 
 ### events
 
@@ -18,7 +40,7 @@ Onboardist.
 An object that looks like this:
 
 ```js
-{ event: [fn()|'close'|'next'|componentName|tourName.ScenarioName] }
+{ event: [fn()|'close'|'next'|componentName|tourName<.scenarioName>] }
 ```
 
 The `event` key is a DOM event that the event will listen for. This can be `click`, `mouseover`, `contextmenu`, etc. The
@@ -28,7 +50,7 @@ value can be an array of any of these:
 * `'close'`: Remove the compnent on `event`
 * `'next'`: Move to next scenario in current tour
 * `componentName`: Activate component registered with name `componentName`
-* `tourName.scenarioName`: Activate scenario `scenarioName` in tour `tourName`.
+* `tourName<.scenarioName>`: Activate scenario `scenarioName` in tour `tourName`. If no scenario name is supplied the tour will start at the beginning.
 
 ```js
 new Onboardist.UI.Hotspot({
