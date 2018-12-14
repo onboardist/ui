@@ -1,4 +1,14 @@
-## events
+# Event Handling
+
+Components can subscribe to two different kinds of events:
+
+* DOM events: (`click`, `mouseover`, etc.)
+* Onboardist events: pub/sub-style messaging.
+
+DOM events are subscribed to using the `events` property when you define your component arguments. Onboardist events use
+the `subscribe` property.
+
+### events
 
 * Type: `object`
 * Default: `{}`
@@ -6,13 +16,11 @@
 An object that can contain either:
 
 * `{ event: [fn()] }` pairs,
-* `{ event: ['close'|'next'|scenarioName|componentName] }` pairs.
+* `{ event: ['close'|'next'|componentName|tourName.ScenarioName] }` pairs.
 * ...or a combination of the two.
 
 The `event` key can either be a DOM event that can be triggered on the element (i.e. `click`, `mouseover`), or a string
 representing an event that will be triggered using `Onboardist.UI.fire(event)` (basically global pub/sub).
-
-####
 
 ```js
 new Onboardist.UI.Hotspot({
@@ -23,11 +31,11 @@ new Onboardist.UI.Hotspot({
 })
 ```
 
-### handler
+#### handler()
 
 If a handler function is given it will be called when the event named `event` is triggered.
 
-### `'close'`
+#### `'close'`
 
 If the string `'close'` is given, the element will be removed.
 
@@ -37,7 +45,7 @@ new Onboardist.UI.Hotspot({
 });
 ```
 
-### `'next'`
+#### `'next'`
 
 If the string `'next'` is given, the current [tour](/components/tour/) will move to the next scenario.
 
@@ -47,12 +55,17 @@ new Onboardist.UI.Hotspot({
 });
 ```
 
-### `scenarioName`
+#### `tourName.ScenarioName`
+
+* Format: `'tourName.scenarioName`
+
+Examples: `'userpage.usertable`, `cart.additem`, `welcome.logging-out`
 
 If a string is given that matches a registered scenario, that scenario will be started (ending any currently-shown
 scenario);
 
-### `componentName`
+#### `componentName`
 
-If a string is given that matches a registered scenario, that scenario will be started (ending any currently-shown
-scenario);
+If a string is given that matches a registered component, that component will be instantiated and shown.
+
+### subscribe

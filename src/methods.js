@@ -34,12 +34,23 @@ function attachEl() {
   }
 }
 
+function registerForEvents() {
+  for (const event of this.options.events) {
+    
+  }
+}
+
 export function oncreate() {
+  // Set name to a random string if not already set
+  if (!this.get().name) this.set({ name: uniquestring() });
+
+  // Attach element to a DOM element if necessary
   if (this.options.attach) attachEl.call(this);
 
-  if (!this.get().name) this.set({ name: uniquestring() })
+  // Register for events
+  if (this.options.events) registerForEvents.call(this);
 
-  // Register instance
+  // Register instance globally
   Onboardist.UI.registerInstance(this.get().name, this);
 }
 

@@ -5,7 +5,7 @@ import { default as TooltipComponent } from './Tooltip.svelte';
 
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent };
 
-const props = ['style', 'title', 'content', 'buttons', 'name'];
+const props = ['content', 'buttons', 'events', 'name', 'style', 'title',];
 
 function genericConstructor(component, args) {
   const data = {};
