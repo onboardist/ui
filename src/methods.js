@@ -39,7 +39,7 @@ function attachEl() {
   }
 }
 
-function generateEventHandler(handler) {
+function generateEventHandler(handler, mappedComponent) {
   if (typeof (handler) === 'function') return handler;
 
   const [pair1 = '', pair2 = ''] = handler.split(/\./);
@@ -69,7 +69,10 @@ function generateEventHandler(handler) {
   } else if (handler === 'show') {
     // TODO: this one will need to work when generating handlers for components that don't exist in the DOM yet
     handler = () => {
-      throw new Error('TODO');
+      if (mappedComponent) {
+        const { component, args } = mappedComponent;
+        if (component) new component(args);
+      }
     };
   } else {
     throw new Error(`Unknown event handler ${handler}`);
@@ -78,12 +81,12 @@ function generateEventHandler(handler) {
   return handler;
 }
 
-function registerForEvents() {
-  for (const [events, handler] of Object.entries(this.options.events)) {
+export function registerForEvents(eventArg = {}, mappedComponent) {
+  for (const [events, handler] of Object.entries(eventArg)) {
     for (let event of [].concat(events)) {
       event = event.trim();
 
-      const h = generateEventHandler.call(this, handler);
+      const h = generateEventHandler(handler, mappedComponent);
 
       // Event key is a DOM event
       if (['click', 'mouseover', 'mouseout', 'contextmenu', 'dblclick'].includes(event)) {
@@ -92,7 +95,7 @@ function registerForEvents() {
       } else {
         // Treat event as an Onboardist event
         const dereg = Onboardist.UI.on(event, h);
-        this.on('destroy', dereg);
+        if (this) this.on('destroy', dereg);
       }
     }
   }
@@ -106,7 +109,7 @@ export function oncreate() {
   if (this.options.attach) attachEl.call(this);
 
   // Register for events
-  if (this.options.events) registerForEvents.call(this);
+  if (this.options.events) registerForEvents.call(this, this.options.events);
 
   // Register instance globally
   Onboardist.UI.registerInstance({ name: this.get().name, instance: this });

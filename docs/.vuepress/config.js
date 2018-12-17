@@ -59,7 +59,8 @@ module.exports = {
         title: 'Examples',
         collapsable: false,
         children: [
-          '/examples/events/',
+          '/examples/dom-events/',
+          '/examples/onboardist-events/',
         ],
       }
     ]

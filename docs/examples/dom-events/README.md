@@ -1,4 +1,4 @@
-# Events
+# DOM Events
 
 ## `click`
 

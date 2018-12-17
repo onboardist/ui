@@ -3,7 +3,7 @@ import { default as CoachmarkComponent } from './components/Coachmark.svelte';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
-import { uniquestring } from './methods';
+import { uniquestring, registerForEvents } from './methods';
 
 export { Tour };
 export { default as config } from './config';
@@ -103,9 +103,7 @@ export function registerComponent({ name, component, args, instance }) {
   };
 
   // TODO: register for events
-  // if ('events' in args) {
-
-  // }
+  registerForEvents(args.events, components[name]);
 }
 
 export function registerInstance({ name, instance }) {
