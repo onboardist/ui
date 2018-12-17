@@ -1,11 +1,12 @@
-export { default as config } from './config';
+import { default as Tour, ComponentMap } from './components/Tour';
 import { default as CoachmarkComponent } from './components/Coachmark.svelte';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
-export { default as Tour } from './components/Tour';
 import { uniquestring } from './methods';
 
+export { Tour };
+export { default as config } from './config';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
@@ -13,8 +14,22 @@ export const components = {};
 export const listeners = {};
 export const tours = {};
 
+export function component(name) {
+  return components[name];
+}
+
+export function configure(config) {
+  (config.tours || []).forEach(t => new Tour(t));
+  (config.components || []).forEach(([c, args]) => new ComponentMap[c](args));
+
+  for (const tour of config.tours) {
+    this.registerTour(tour);
+  }
+}
+
 // Functions
 export function next() {
+  // TODO: this
   // Get current tour
 
   // Get next step of tour
@@ -30,28 +45,30 @@ export function stop() {
 
 }
 
-// TODO: should this be resetListeners()? reset() is pretty generic
-export function reset() {
-  listeners = {};
-}
-
-export function on(event, fn) {
-  const subs = listeners[event] = listeners[event] || [];
-  subs.push(fn);
-  
-  return function() {
-    const index = subs.indexOf(fn);
-    if (index !== -1) subs.splice(index, 1);
-
-    if (!subs.length) delete listeners[event];
+export function resetListeners() {
+  for (const key of listeners) {
+    delete listeners[key];
   }
 }
 
-export function fire(event, ...args) {
-  if (!event in listeners) return;
+export function on(event, fn) {
+  listeners[event] = listeners[event] || [];
+  const subs = listeners[event];
+  subs.push(fn);
 
-  for (const fn of listeners[event]) {
-    fn.apply(null, args);
+  return function () {
+    const index = subs.indexOf(fn);
+    if (index !== -1) subs.splice(index, 1);
+
+    if (subs.length === 0) delete listeners[event];
+  };
+}
+
+export function fire(event, ...args) {
+  if (event in listeners) {
+    for (const fn of listeners[event]) {
+      fn(...args);
+    }
   }
 }
 
@@ -62,8 +79,13 @@ export function registerComponent({ name, component, args, instance }) {
   components[name] = {
     component,
     args,
-    instance
+    instance,
   };
+
+  // TODO: register for events
+  // if ('events' in args) {
+
+  // }
 }
 
 export function registerInstance({ name, instance }) {

@@ -16,7 +16,7 @@ Example:
 
 ## API
 
-The tour constructor takes an array of arrays... of arrays. Confusing, I know. But it breaks down like this:
+The tour's `scenarios` option takes an array of arrays... of arrays. Confusing, I know. But it breaks down like this:
 
 ```js
 // Array of scenarios steps
@@ -41,9 +41,9 @@ The outer array is your "scenarios", or _steps_. Each scenario has a list of ele
 Example code used for the tour on this page:
 
 ```js
-const tour = new Onboardist.UI.Tour(
+const tour = new Onboardist.UI.Tour({
   // Scenario list
-  [
+  scenarios: [
     // First scenario, with one element
     [[
       Onboadist.UI.Modal, {
@@ -59,11 +59,9 @@ const tour = new Onboardist.UI.Tour(
     ],
   ],
   // Additional options for tour
-  {
-    showNext: true,
-    showPrev: true,
-  },
-);
+  showNext: true,
+  showPrev: true,
+});
 
 tour.start();
 ```
@@ -74,6 +72,10 @@ tour configs JSON-compatible.
 :::
 
 ## Options
+
+### scenarios
+
+List of scenarios.
 
 ### showPrev
 
@@ -99,9 +101,9 @@ export default {
     tour: null,
   }),
   mounted() {
-    this.tour = new Onboardist.UI.Tour(
+    this.tour = new Onboardist.UI.Tour({
       // Scenario list
-      [
+      scenarios: [
         // Scenario #1
         [[
           // One element
@@ -117,16 +119,14 @@ export default {
           [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide' }],
         ],
       ],
-      {
-        showNext: true,
-        showPrev: true,
-      },
-    );
+      showNext: true,
+      showPrev: true,
+    });
 
     // this.destroyables.push(this.tour);
   },
   destroyed() {
-    this.tour.clear();
+    this.tour.stop();
     // this.destroyables.forEach(x => x.destroy());
   },
   methods: {

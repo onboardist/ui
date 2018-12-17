@@ -1,23 +1,26 @@
 import { Store } from 'svelte/store';
-import { Coachmark, Hotspot, Modal, Tooltip } from './';
 import { uniquestring } from '../methods';
+import { Coachmark, Hotspot, Modal, Tooltip } from '.';
 
 export const ComponentMap = {
-  'coachmark': Coachmark,
-  'hotspot': Hotspot,
-  'modal': Modal,
-  'tooltip': Tooltip,
-}
+  coachmark: Coachmark,
+  hotspot: Hotspot,
+  modal: Modal,
+  tooltip: Tooltip,
+};
 
 export default class Tour {
-  constructor(scenarios = [], options = {}) {
+  constructor(options = {}) {
     this.name = options.name || uniquestring();
-    this.scenarios = scenarios;
+    this.scenarios = options.scenarios || [];
     this.options = Object.assign({}, {
       showNext: true,
+      showPrev: true,
     }, options);
     this.store = new Store({});
     this.elementMap = {};
+
+    if (!this.scenarios) throw new Error(`Tour ${this.name} was not given any scenarios`);
 
     this.register();
   }
@@ -37,18 +40,18 @@ export default class Tour {
   }
 
   start() {
-    if (!this.scenarios.length) {
+    if (this.scenarios.length === 0) {
       console.warn('No scenarios');
       return;
     }
-    
+
+    this.scenario = null;
+
     this.next();
   }
 
   render(scenario) {
     this.clear();
-
-    const [comp, args = {}] = scenario[0];
 
     // Start the component render chain
     this.renderChain(scenario[0], scenario);
@@ -64,17 +67,25 @@ export default class Tour {
     let [comp, args] = compArgs;
     args = { ...args };
 
-    if (typeof(comp) === 'string') comp = ComponentMap[comp];
-    if (!comp) throw new Error(`Component '${comp}' unrecognized`);
+    if (typeof (comp) === 'string') {
+      comp = ComponentMap[comp];
+    }
+    if (!comp) {
+      throw new Error(`Component '${comp}' unrecognized`);
+    }
 
     const nextButton = this.isLastScenario(scenario) ? { text: 'End', handler: () => this.clear() } : { text: 'Next', handler: () => this.next() };
 
-    if (this.options.showPrev && !this.isFirstScenario(scenario)) args.buttons = [ { text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
-    if (this.options.showNext) args.buttons = [...(args.buttons || []), nextButton];
+    if (this.options.showPrev && !this.isFirstScenario(scenario)) {
+      args.buttons = [{ text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
+    }
+    if (this.options.showNext) {
+      args.buttons = [...(args.buttons || []), nextButton];
+    }
     args.store = this.store;
     args.name = args.name || uniquestring();
 
-    if (this.elementMap.hasOwnProperty(args.attach)) {
+    if (args.attach in this.elementMap) {
       args.attach = this.elementMap[args.attach].refs.el;
     }
 
@@ -84,39 +95,39 @@ export default class Tour {
     this.elementMap[el.get().name] = el;
 
     const next = this.nextComponent(compArgs, scenario);
-    if (next) setTimeout(() => this.renderChain(next, scenario));
+    if (next) {
+      setTimeout(() => this.renderChain(next, scenario));
+    }
   }
 
   next() {
-    if (!this.scenario) this.scenario = this.scenarios[0];
-    else {
+    if (this.scenario) {
       const curIdx = this.scenarios.indexOf(this.scenario);
 
-      if (curIdx === -1) return;
+      if (curIdx === -1) {
+        return;
+      }
 
       this.scenario = this.scenarios[curIdx + 1];
-    }
-
-    if (!this.scenario) {
+    } else {
+      this.scenario = this.scenarios[0];
       this.clear();
-      return;
     }
 
     this.render(this.scenario);
   }
 
   prev() {
-    if (!this.scenario) this.scenario = this.scenarios[0];
-    else {
+    if (this.scenario) {
       const curIdx = this.scenarios.indexOf(this.scenario);
 
-      if (curIdx === -1) return;
+      if (curIdx === -1) {
+        return;
+      }
 
       this.scenario = this.scenarios[curIdx - 1];
-    }
-
-    if (!this.scenario) {
-      return;
+    } else {
+      this.scenario = this.scenarios[0];
     }
 
     this.render(this.scenario);
@@ -138,4 +149,8 @@ export default class Tour {
   isLastScenario(scenario) {
     return this.scenarios.indexOf(scenario) === this.scenarios.length - 1;
   }
-};
+
+  stop() {
+    this.clear();
+  }
+}

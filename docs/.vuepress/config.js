@@ -55,6 +55,13 @@ module.exports = {
           '/components/tour/',
         ],
       },
+      {
+        title: 'Examples',
+        collapsable: false,
+        children: [
+          '/examples/events/',
+        ],
+      }
     ]
   }
 };

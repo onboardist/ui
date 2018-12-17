@@ -59,43 +59,43 @@ Size of hotspot in pixels.
 Choose which style of hotspot to use.
 
 <script>
-  const popperArgs = {
-    placement: 'left',
-    modifiers: {
-      offset: {
-        enabled: true,
-        offset: '0,-50%r',
-      },
+const popperArgs = {
+  placement: 'left',
+  modifiers: {
+    offset: {
+      enabled: true,
+      offset: '0,-50%r',
     },
-  };
+  },
+};
 
-  export default {
-    props: ['slot-key'],
-    data: () => ({
-      destroyables: [],
-    }),
-    mounted() {
-      this.destroyables.push(new Onboardist.UI.Hotspot({
-        attach: document.querySelector('#hotspot-button'),
-        placement: 'top-end',
-      }));
+export default {
+  props: ['slot-key'],
+  data: () => ({
+    destroyables: [],
+  }),
+  mounted() {
+    this.destroyables.push(new Onboardist.UI.Hotspot({
+      attach: document.querySelector('#hotspot-button'),
+      placement: 'top-end',
+    }));
 
-      this.destroyables.push(new Onboardist.UI.Hotspot({
-        attach: '#pulse',
-        style: 'pulse',
-        ...popperArgs,
-      }));
+    this.destroyables.push(new Onboardist.UI.Hotspot({
+      attach: '#pulse',
+      style: 'pulse',
+      ...popperArgs,
+    }));
 
-      this.destroyables.push(new Onboardist.UI.Hotspot({
-        attach: '#teardrop',
-        style: 'teardrop',
-        ...popperArgs,
-      }));
-    },
-    destroyed() {
-      this.destroyables.forEach(x => x.destroy());
-    },
-  }
+    this.destroyables.push(new Onboardist.UI.Hotspot({
+      attach: '#teardrop',
+      style: 'teardrop',
+      ...popperArgs,
+    }));
+  },
+  destroyed() {
+    this.destroyables.forEach(x => x.destroy());
+  },
+};
 </script>
 <style lang="less">
 .styles {

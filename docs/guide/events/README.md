@@ -1,34 +1,50 @@
 # Event Handling
 
-Events let components react to user input and also integrate with your applicaiton. Components can subscribe to two different kinds of events:
+Events let components react to user input and also integrate with your applicaiton. Components can subscribe to two
+different kinds of events:
 
 * **DOM events**: (`click`, `mouseover`, etc.)
 * **Onboardist events**: pub/sub-style messaging.
 
 ## DOM Events
 
-DOM-style events are subscribed to using the `events` property when you define your component arguments.
+All events are subscribed to using the `events` property when you define your component arguments.
 
 ```js
 new Hotspot({
   attach: '#foo',
   events: {
     click: 'modal01', // instantiate component `modal01` on click
-    hover: 'tooltip5', // instatiate component `tooltip5` when hotspot is moused over; `tooltip5` will be removed when the user mouses out.
+    hover: 'tooltip5', // instatiate component `tooltip5` when hotspot
+                       // is moused over; `tooltip5` will be removed when
+                       // the user mouses out.
   },
 })
 ```
 
 ## Onboardist Events
 
-Onboardist UI has its own simple pub/sub message bus. This is used by components to communicate with each other, and by *you*
-to communicate with Onboardist.
+Onboardist UI has its own simple pub/sub message bus. This is used by components to communicate with each other, and by
+*you* to communicate with Onboardist.
 
-Say you want to show a user how to remove an item from their cart when they first add one. You've made a tour named `cart-remove-item`.
+Say you want to show a user how to remove an item from their cart when they first add one. You've made a tour named
+`cart-remove-item` 
 
-
-Onboardist events use the `subscribe` property. You can use `Onboardist.UI.fire('eventname')` to trigger events across
+Onboardist events also use the `events` property. You can use `Onboardist.UI.fire('eventname')` to trigger events across
 Onboardist.
+
+```js
+new Hotspot({
+  attach: '#foo',
+  subscribe: {
+    'show-hotspot': 'show',
+  },
+});
+
+Onboardist.UI.fire('show-hotspot');
+```
+
+## The Events Argument
 
 
 
@@ -49,8 +65,10 @@ value can be an array of any of these:
 * `fn()`: A handler function
 * `'close'`: Remove the compnent on `event`
 * `'next'`: Move to next scenario in current tour
+* `'show'`: Show this component
 * `componentName`: Activate component registered with name `componentName`
-* `tourName<.scenarioName>`: Activate scenario `scenarioName` in tour `tourName`. If no scenario name is supplied the tour will start at the beginning.
+* `tourName<.scenarioName>`: Activate scenario `scenarioName` in tour `tourName`. If no scenario name is supplied the
+  tour will start at the beginning.
 
 ```js
 new Onboardist.UI.Hotspot({
@@ -99,7 +117,7 @@ scenario);
 If a string is given that matches a registered component, that component will be instantiated and shown.
 
 
-### subscribe
+<!-- ### subscribe
 
 * Type: `object`
 * Default: `{}`
@@ -110,4 +128,4 @@ An object that looks like this:
 { event: [fn()|'close'|'next'|componentName|tourName.ScenarioName] }
 ```
 
-The key is the string of the Onboardist event to subscribe to.
+The key is the string of the Onboardist event to subscribe to. -->
