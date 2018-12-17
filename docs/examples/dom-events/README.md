@@ -40,7 +40,7 @@ Onboardist.UI.registerComponent({
 this.destroyables.push(new Onboardist.UI.Hotspot({
   attach: '#mouseover',
   events: {
-    mouseover: 'tooltip01',
+    mouseover: 'tooltip01.show',
     mouseout: 'tooltip01.hide',
   },
 }));
