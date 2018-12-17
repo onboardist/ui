@@ -4,16 +4,46 @@
 
 <br>
 <div class="example">
-  <div id="pulse" class="style-demo"></div>
+  <div id="click-demo" class="style-demo"></div>
 </div>
 
 ```js
 const h = new Onboardist.UI.Hotspot({
-  attach: '#pulse',
+  attach: '#click-demo',
   events: {
-    click: () => { alert('Foo!'); },
+    click: () => {
+      // Don't do this lol
+      alert('Foo!');
+    },
   },
 });
+```
+
+## `mouseover` / `mouseout`
+
+<br>
+<div class="example">
+  <div id="mouseover" class="style-demo"></div>
+</div>
+
+```js
+Onboardist.UI.registerComponent({
+  name: 'tooltip01',
+  component: 'tooltip',
+  args: {
+    attach: 'hot1',
+    title: 'Tooltip Title',
+    content: 'Tooltip content',
+    buttons: false,
+  },
+});
+this.destroyables.push(new Onboardist.UI.Hotspot({
+  attach: '#mouseover',
+  events: {
+    mouseover: 'tooltip01',
+    mouseout: 'tooltip01.hide',
+  },
+}));
 ```
 
 <script>
@@ -34,15 +64,36 @@ export default {
   }),
   mounted() {
     this.destroyables.push(new Onboardist.UI.Hotspot({
-      attach: '#pulse',
+      attach: '#click-demo',
       events: {
         click: () => { alert('Foo!'); },
+      },
+      ...popperArgs,
+    }));
+
+    Onboardist.UI.registerComponent({
+      name: 'tooltip01',
+      component: 'tooltip',
+      args: {
+        attach: 'hot1',
+        title: 'Tooltip Title',
+        content: 'Tooltip content',
+        buttons: false,
+      },
+    });
+    this.destroyables.push(new Onboardist.UI.Hotspot({
+      name: 'hot1',
+      attach: '#mouseover',
+      events: {
+        mouseover: 'tooltip01.show',
+        mouseout: 'tooltip01.hide',
       },
       ...popperArgs,
     }));
   },
   destroyed() {
     this.destroyables.forEach(x => x.destroy());
+    Onboardist.UI.reset();
   },
 };
 </script>

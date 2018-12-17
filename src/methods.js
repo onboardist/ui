@@ -10,12 +10,13 @@ export function close() {
   this.destroy();
 }
 
+// TODO: this is not being used atm
 export function show() {
   this.show = true;
 }
 
 export function hide() {
-  this.show = false;
+  this.destroy();
 }
 
 function attachEl() {
@@ -23,13 +24,17 @@ function attachEl() {
     this.popper = new Popper(attachEl, this.refs.el, { ...this.options });
   };
 
+  let { attach } = this.options;
+  const comp = Onboardist.UI.component(attach);
+  if (comp && comp.instance) attach = comp.instance.refs.el;
+
   // TODO: handle `attach` that is a component in the registry
   // If the `attach` option is an element, use it right away. Otherwise wait (2.5s by default) for the attach element
   //   to exist.
-  if (isDom(this.options.attach)) {
-    createPopper(this.options.attach);
+  if (isDom(attach)) {
+    createPopper(attach);
   } else {
-    waitForTheElement(this.options.attach)
+    waitForTheElement(attach)
       .then(attachEl => createPopper(attachEl));
   }
 }
@@ -42,16 +47,16 @@ function generateEventHandler(handler) {
   const tour = Onboardist.UI.tour(pair1);
 
   if (comp) {
+    const { component, args } = comp;
+
     // Do something with a component
     if (!pair2 || pair2 === 'show') {
       handler = () => {
-        // TODO: create component pair1
-        
+        new component(args);
       };
     } else if (pair2 === 'hide') {
       handler = () => {
-        
-        if (comp && comp.instance) comp.instance.hide();
+        if (comp.instance) comp.instance.hide();
       };
     }
   } else if (tour) {
@@ -63,19 +68,25 @@ function generateEventHandler(handler) {
     handler = () => Onboardist.UI.next();
   } else if (handler === 'show') {
     // TODO: this one will need to work when generating handlers for components that don't exist in the DOM yet
-    return handler;
+    handler = () => {
+      throw new Error('TODO');
+    };
+  } else {
+    throw new Error(`Unknown event handler ${handler}`);
   }
+
+  return handler;
 }
 
 function registerForEvents() {
-  for (const [events, handler] of Object.keys.entries(this.options.events)) {
+  for (const [events, handler] of Object.entries(this.options.events)) {
     for (let event of [].concat(events)) {
       event = event.trim();
 
       const h = generateEventHandler.call(this, handler);
 
       // Event key is a DOM event
-      if (event in ['click', 'mouseover', 'mouseout', 'contextmenu', 'dblclick']) {
+      if (['click', 'mouseover', 'mouseout', 'contextmenu', 'dblclick'].includes(event)) {
         this.refs.el.addEventListener(event, h);
         this.on('destroy', () => this.refs.el.removeEventListener(event, h));
       } else {
@@ -98,7 +109,7 @@ export function oncreate() {
   if (this.options.events) registerForEvents.call(this);
 
   // Register instance globally
-  Onboardist.UI.registerInstance(this.get().name, this);
+  Onboardist.UI.registerInstance({ name: this.get().name, instance: this });
 }
 
 export function ondestroy() {
@@ -116,9 +127,12 @@ export function expandButtonArgs(buttons) {
       // case ('next'):
       //   return { text: 'Next', handler() { Onboardist.UI.next(); } };
       case ('ok'):
-        return { text: 'OK', handler() {
- this.close(); 
-} };
+        return {
+          text: 'OK',
+          handler() {
+            this.close();
+          },
+        };
       default:
         return button;
     }

@@ -127,7 +127,7 @@ export default {
   },
   destroyed() {
     this.tour.stop();
-    // this.destroyables.forEach(x => x.destroy());
+    Onboardist.UI.reset();
   },
   methods: {
     startTour() {

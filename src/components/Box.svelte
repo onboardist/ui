@@ -6,7 +6,7 @@
       <slot name="content"></slot>
     </div>
     <div class="box-buttons">
-      <slot name="buttons"></slot>
+      <slot name="buttons">&nbsp;</slot>
     </div>
 </div>
 
@@ -31,7 +31,6 @@ export default {
   margin: 5px;
   display: inline-block;
   border-radius: 8px;
-  border: 1px solid #ececec;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   /* min-width: 100px;
   min-height: 100px; */

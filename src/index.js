@@ -18,9 +18,14 @@ export function component(name) {
   return components[name];
 }
 
+export function tour(name) {
+  return tours[name];
+}
+
 export function configure(config) {
   (config.tours || []).forEach(t => new Tour(t));
-  (config.components || []).forEach(([c, args]) => new ComponentMap[c](args));
+  // TODO: make sure each component exists
+  (config.components || []).forEach(([c, args]) => component(c)(args));
 
   for (const tour of config.tours) {
     this.registerTour(tour);
@@ -46,8 +51,21 @@ export function stop() {
 }
 
 export function resetListeners() {
-  for (const key of listeners) {
-    delete listeners[key];
+  for (const key of Object.keys(this.listeners)) {
+    delete this.listeners[key];
+  }
+}
+
+export function reset() {
+  this.resetListeners();
+
+  for (const key of Object.keys(components)) {
+    if (components[key].instance) components[key].instance.destroy();
+    delete components[key];
+  }
+
+  for (const key of Object.keys(tours)) {
+    delete tours[key];
   }
 }
 
@@ -75,6 +93,8 @@ export function fire(event, ...args) {
 export function registerComponent({ name, component, args, instance }) {
   if (!name) name = uniquestring();
   args.name = name;
+
+  if (component in ComponentMap) component = ComponentMap[component];
 
   components[name] = {
     component,

@@ -67,11 +67,10 @@ export default class Tour {
     let [comp, args] = compArgs;
     args = { ...args };
 
-    if (typeof (comp) === 'string') {
-      comp = ComponentMap[comp];
-    }
     if (!comp) {
       throw new Error(`Component '${comp}' unrecognized`);
+    } else if (typeof (comp) === 'string') {
+      comp = ComponentMap[comp];
     }
 
     const nextButton = this.isLastScenario(scenario) ? { text: 'End', handler: () => this.clear() } : { text: 'Next', handler: () => this.next() };

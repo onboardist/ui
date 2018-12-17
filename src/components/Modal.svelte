@@ -6,6 +6,8 @@
         {#each buttons as button}
           <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
         {/each}
+      {:else}
+        &nbsp;
       {/if}
     </div>
   </Box>

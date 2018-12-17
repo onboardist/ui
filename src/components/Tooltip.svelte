@@ -7,6 +7,8 @@
           {#each buttons as button}
             <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
           {/each}
+        {:else}
+          &nbsp;
         {/if}
       </div>
     </Box>
@@ -69,7 +71,6 @@ export default {
 
 .tooltip {
   border-radius: 12px;
-  border: 1px solid #ececec;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
   background: white;
 

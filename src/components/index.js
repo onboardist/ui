@@ -5,13 +5,13 @@ import { default as TooltipComponent } from './Tooltip.svelte';
 
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent };
 
-const props = ['content', 'buttons', 'events', 'name', 'style', 'title',];
+const props = ['content', 'buttons', 'events', 'name', 'style', 'title'];
 
 function genericConstructor(component, args) {
   const data = {};
   props.forEach(x => {
-    if (args[x]) data[x] = args[x];  
-  })
+    if (x in args) data[x] = args[x];
+  });
 
   return new component({
     ...args,
