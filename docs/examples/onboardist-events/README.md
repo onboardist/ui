@@ -10,17 +10,19 @@ document.querySelector('#tooltip-button').addEventListener('click', () => {
   Onboardist.UI.fire('custom-event');
 });
 
-Onboardist.UI.registerComponent({
-  name: 'tooltip01',
-  component: 'tooltip',
-  args: {
-    attach: '#tooltip-button',
-    title: 'Hey, You Clicked!',
-    content: 'Cool click, bro.',
-    events: {
-      'custom-event': 'show',
+Onboardist.UI.configure({
+  components: [{
+    name: 'tooltip01',
+    component: 'tooltip',
+    args: {
+      attach: '#tooltip-button',
+      title: 'Hey, You Clicked!',
+      content: 'Cool click, bro.',
+      events: {
+        'custom-event': 'show',
+      },
     },
-  },
+  }],
 });
 ```
 
@@ -46,17 +48,19 @@ export default {
     },
   },
   mounted() {
-    Onboardist.UI.registerComponent({
-      name: 'tooltip01',
-      component: 'tooltip',
-      args: {
-        attach: '#tooltip-button',
-        title: 'Hey, You Clicked!',
-        content: 'Cool click, bro.',
-        events: {
-          'custom-event': 'show',
+    Onboardist.UI.configure({
+      components: [{
+        name: 'tooltip01',
+        component: 'tooltip',
+        args: {
+          attach: '#tooltip-button',
+          title: 'Hey, You Clicked!',
+          content: 'Cool click, bro.',
+          events: {
+            'custom-event': 'show',
+          },
         },
-      },
+      }],
     });
 
     // new Onboardist.UI.Hotspot({

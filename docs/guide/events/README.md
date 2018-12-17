@@ -1,6 +1,6 @@
 # Event Handling
 
-Events let components react to user input and also integrate with your applicaiton. Components can subscribe to two
+Events let components react to user input and also integrate with your application. Components can subscribe to two
 different kinds of events:
 
 * **DOM events**: (`click`, `mouseover`, etc.)

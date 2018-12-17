@@ -23,13 +23,9 @@ export function tour(name) {
 }
 
 export function configure(config) {
-  (config.tours || []).forEach(t => new Tour(t));
+  (config.tours || []).forEach(t => this.registerTour(t));
   // TODO: make sure each component exists
-  (config.components || []).forEach(([c, args]) => component(c)(args));
-
-  for (const tour of config.tours) {
-    this.registerTour(tour);
-  }
+  (config.components || []).forEach(c => this.registerComponent(c));
 }
 
 // Functions
