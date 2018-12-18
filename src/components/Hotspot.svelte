@@ -10,15 +10,19 @@
     {/if}
   </div>
 </div>
+{#if backdrop}<Backdrop></Backdrop>{/if}
 
 <script>
 import Config from '../config';
+import Backdrop from './Backdrop.svelte';
 import { oncreate, ondestroy, show, hide } from '../methods';
 
 export default {
   oncreate,
   ondestroy,
+  components: { Backdrop },
   data: () => ({
+    backdrop: false,
     color: Config.colors.active,
     style: 'pulse',
     size: 20,

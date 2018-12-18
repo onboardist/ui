@@ -19,6 +19,13 @@ const modal = new Onboardist.UI.Modal({
 
 !!!include(name.md)!!!
 
+### backdrop
+
+* Type: `boolean`
+* Default: `true`
+
+Put a backdrop over the screen beneath the component
+
 !!!include(buttons.md)!!!
 
 ### title
@@ -78,11 +85,11 @@ Content to put in the body of the modal. You can use html.
 </script>
 
 <style>
-.example .oboardist-modal {
+.example .oboardist-container {
   background: none !important;
 }
 
-.example .oboardist-modal, .example .oboardist-modal .box {
+.example .oboardist-container, .example .oboardist-container .box {
   position: relative !important;
 }
 </style>
