@@ -26,6 +26,8 @@ new Tooltip({ attach: 'input.my-input-class' });
 new Tooltip({ attach: document.querySelector('input.my-input-class') });
 ```
 
+!!!include(backdrop.md)!!!
+
 !!!include(buttons.md)!!!
 
 !!!include(name.md)!!!

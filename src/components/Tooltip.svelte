@@ -1,4 +1,4 @@
-<div class="container" ref:el>
+<div ref:el class="onboardist-container">
   <div class="tooltip">
     <Box ref:box title={title}>
       <div slot="content">{@html content}</div>
@@ -15,13 +15,15 @@
     <div class="tooltip-arrow" x-arrow></div>
   </div>  
 </div>
+{#if backdrop}<Backdrop></Backdrop>{/if}
 
 <script>
+import Backdrop from './Backdrop.svelte';
 import Box from './Box.svelte';
 import { oncreate, ondestroy, close, expandButtonArgs, hide, show } from '../methods';
 
 export default {
-  components: { Box },
+  components: { Backdrop, Box },
   oncreate() {
     this.options.modifiers = this.options.modifiers || {};
     if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
@@ -29,6 +31,12 @@ export default {
     return oncreate.call(this);
   },
   ondestroy,
+  data: () => ({
+    title: '',
+    content: '',
+    backdrop: false,
+    buttons: ['ok'],
+  }),
   methods: {
     close,
     show,
@@ -37,18 +45,13 @@ export default {
       fn.call(this, ...args);
     },
   },
-  data: () => ({
-    title: '',
-    content: '',
-    buttons: ['ok'],
-  }),
 };
 </script>
 
 <style lang="less">
 @import 'src/main';
 
-.container {
+.onboardist-container {
   margin: 5px;
   z-index: @zindex;
 

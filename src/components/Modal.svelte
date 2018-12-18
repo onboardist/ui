@@ -1,4 +1,4 @@
-<div ref:el class="oboardist-modal">
+<div ref:el class="oboardist-container" class:backdrop="backdrop">
   <Box ref:box title={title}>
     <div slot="content">{@html content}</div>
     <div slot="buttons">
@@ -30,6 +30,7 @@ export default {
       title: '',
       buttons: ['ok'],
       content: '',
+      backdrop: true,
     };
   },
   methods: {
@@ -46,8 +47,7 @@ export default {
 <style lang="less">
 @import 'src/main';
 
-.oboardist-modal {
-  background-color: rgba(0, 0, 0, 0.5);
+.oboardist-container {
   z-index: @zindex;
   position: fixed;
   left: 0;
@@ -59,7 +59,7 @@ export default {
   align-items: center;
 }
 
-:global(.oboardist-modal .box) {
+:global(.oboardist-container .box) {
   border: none !important;
   z-index: @zindex+1;
   box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.2) !important;
