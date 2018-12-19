@@ -11,12 +11,13 @@ export const ComponentMap = {
 
 export default class Tour {
   constructor(options = {}) {
-    this.name = options.name || uniquestring();
-    this.scenarios = options.scenarios || [];
     this.options = Object.assign({}, {
+      name: uniquestring(),
       showNext: true,
       showPrev: true,
+      scenarios: [],
     }, options);
+
     this.store = new Store({});
     this.elementMap = {};
 

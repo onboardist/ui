@@ -19,19 +19,21 @@ Example:
 The tour's `scenarios` option takes an array of arrays... of arrays. Confusing, I know. But it breaks down like this:
 
 ```js
-// Array of scenarios steps
-[
-  // Scenario 1
-  [
-    // Element 1
-    [el, args], 
-    // Element 2
-    [el, args]
-  ],
-  // Scenario 2
-  [
-    // Element 3
-    [el, args]
+{
+  // Array of scenarios steps
+  scenarions: [
+    // Scenario 1
+    [
+      // Element 1
+      [el, args], 
+      // Element 2
+      [el, args]
+    ],
+    // Scenario 2
+    [
+      // Element 3
+      [el, args]
+    ]
   ]
 ]
 ```
