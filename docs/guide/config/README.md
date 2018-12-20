@@ -20,16 +20,23 @@ Onboardist.UI.configure({
     {
       name: 'create-user',
       scenarios: [
-        [
-          ['modal', {
-            title: 'Create a New User',
-            content: 'Learn how to create a new user'
-          }],
-        ],
-        [
-          ['hotspot', { name: 'user-button', attach: 'button.create-user' }],
-          ['tooltip', { attach: 'user-button', content: 'Click to create open new user form' }],
-        ],
+        {
+          components: [
+            ['modal', { title: 'Create a New User', content: 'Learn how to create a new user' }],
+          ]
+        },
+        {
+          components: [
+            ['hotspot', { name: 'user-button', attach: 'button.create-user' }],
+            ['tooltip', { attach: 'user-button', content: 'Click to create open new user form' }],
+          ],
+        },
+        {
+          wait: '#create-user-form',
+          components: [
+            ['tooltip', { attach: 'input[name="email"]', content: 'An invite will be sent to the user at this address' }]
+          ]
+        }
       ]
     }
   ],

@@ -10,6 +10,7 @@ export { default as config } from './config';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
+export const activeTour = null;
 export const components = {};
 export const listeners = {};
 export const tours = {};
@@ -30,20 +31,15 @@ export function configure(config) {
 
 // Functions
 export function next() {
-  // TODO: this
-  // Get current tour
-
-  // Get next step of tour
-
-  // Start next step
+  if (this.activeTour) this.activeTour.next();
 }
 
 export function prev() {
-
+  if (this.activeTour) this.activeTour.prev();
 }
 
 export function stop() {
-
+  if (this.activeTour) this.activeTour.stop();
 }
 
 export function resetListeners() {
@@ -112,6 +108,8 @@ export function deregisterInstance(name) {
 }
 
 export function registerTour(tour) {
-  // if (!name) name = uniquestring();
-  Onboardist.UI.tours[tour.name] = tour;
+  let name = tour.name;
+  if (!name) name = uniquestring();
+
+  Onboardist.UI.tours[name] = tour;
 }

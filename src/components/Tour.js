@@ -18,6 +18,8 @@ export default class Tour {
       scenarios: [],
     }, options);
 
+    this.scenarios = this.options.scenarios;
+
     this.store = new Store({});
     this.elementMap = {};
 
@@ -46,6 +48,10 @@ export default class Tour {
       return;
     }
 
+    // We are now the active tour
+    Onboardist.UI.activeTour = this;
+
+    // Reset scenario in case //#endregionit was set
     this.scenario = null;
 
     this.next();
@@ -68,18 +74,22 @@ export default class Tour {
     let [comp, args] = compArgs;
     args = { ...args };
 
-    if (!comp) {
-      throw new Error(`Component '${comp}' unrecognized`);
-    } else if (typeof (comp) === 'string') {
+    if (typeof (comp) === 'string') {
       comp = ComponentMap[comp];
     }
 
-    const nextButton = this.isLastScenario(scenario) ? { text: 'End', handler: () => this.clear() } : { text: 'Next', handler: () => this.next() };
+    if (!comp) throw new Error(`Component '${comp}' unrecognized`);
 
-    if (this.options.showPrev && !this.isFirstScenario(scenario)) {
+    const nextButton = this.isLastScenario(scenario) ?
+      { text: 'End', handler: () => this.clear() } :
+      { text: 'Next', handler: () => this.next() };
+
+    // Clear out buttons 'cause we're overriding them
+    args.buttons = [];
+    if (this.options.showPrev && args.showPrev !== false && !this.isFirstScenario(scenario)) {
       args.buttons = [{ text: 'Prev', handler: () => this.prev() }, ...(args.buttons || [])];
     }
-    if (this.options.showNext) {
+    if (this.options.showNext && args.showNext !== false) {
       args.buttons = [...(args.buttons || []), nextButton];
     }
     args.store = this.store;

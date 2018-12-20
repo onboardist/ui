@@ -62,6 +62,7 @@ module.exports = {
         children: [
           '/examples/dom-events/',
           '/examples/onboardist-events/',
+          '/examples/tours/hide-next-button/',
         ],
       }
     ]

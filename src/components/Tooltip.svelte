@@ -3,7 +3,7 @@
     <Box ref:box title={title}>
       <div slot="content">{@html content}</div>
       <div slot="buttons">
-        {#if buttons}
+        {#if buttons && buttons.length > 0}
           {#each buttons as button}
             <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
           {/each}
