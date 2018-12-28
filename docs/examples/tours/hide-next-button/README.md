@@ -8,6 +8,11 @@ Sometimes you want to hide the "Next" button on a component in a tour, if the ne
 </div>
 
 ```js
+document.querySelector('#next-button')
+  .addEventListener('click', () => {
+    Onboardist.UI.next();
+  });
+
 this.tour = new Onboardist.UI.Tour({
   // Scenario list
   scenarios: [

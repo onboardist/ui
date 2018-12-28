@@ -7,8 +7,6 @@
           {#each buttons as button}
             <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
           {/each}
-        {:else}
-          &nbsp;
         {/if}
       </div>
     </Box>
@@ -75,7 +73,7 @@ export default {
 .tooltip {
   border-radius: 12px;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
-  background: white;
+  background: rgba(0, 0, 0, 0);
 
   :global(.box) {
     margin: 0 !important;
@@ -85,6 +83,10 @@ export default {
 
   :global(.box > .box-content:first-child) {
     padding-top: 10px !important;
+  }
+
+  :global(.box > div:last-child) {
+    padding-bottom: 5px !important;
   }
 
   :global(.box .box-header) {
