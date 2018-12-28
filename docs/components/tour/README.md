@@ -25,14 +25,14 @@ The tour's `scenarios` option takes an array of arrays... of arrays. Confusing, 
     // Scenario 1
     [
       // Element 1
-      [el, args], 
+      { component: el, ...args }, 
       // Element 2
-      [el, args]
+      { component: el, ...args }
     ],
     // Scenario 2
     [
       // Element 3
-      [el, args]
+      { component: el, ... args }
     ]
   ]
 ]
@@ -47,17 +47,15 @@ const tour = new Onboardist.UI.Tour({
   // Scenario list
   scenarios: [
     // First scenario, with one element
-    [[
-      Onboadist.UI.Modal, {
-        title: 'Getting Started',
-        content: 'Take a quick tour of the system',
-      }),
-    ]],
-    // Second scenario
+    [{
+      component: Onboardist.UI.Modal,
+      title: 'Getting Started',
+      content: 'Take a quick tour of the system',
+    }],
+    // Second scenario, two elements
     [
-      // Two elements
-      [Onboardist.UI.Hotspot, { attach: '.links a[href*="/guide/"]', name: 'hot1' }],
-      ['tooltip', { attach: 'hot1', content: 'Try the guide' }],
+      { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
+      { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
     ],
   ],
   // Additional options for tour
@@ -107,19 +105,17 @@ export default {
       // Scenario list
       scenarios: [
         // Scenario #1
-        [[
-          // One element
-          Onboardist.UI.Modal, {
-            title: 'Getting Started',
-            content: 'Take a quick tour of the system',
-            backdrop: true,
-          },
-        ]],
+        [{
+          component: Onboardist.UI.Modal,
+          title: 'Getting Started',
+          content: 'Take a quick tour of the system',
+          backdrop: true,
+        }],
         // Scenario #2
         [
           // Elements
-          [Onboardist.UI.Hotspot, { attach: '.links a[href*="/guide/"]', name: 'hot1', backdrop: true }],
-          [Onboardist.UI.Tooltip, { attach: 'hot1', content: 'Try the guide', backdrop: true }],
+          { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
+          { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
         ],
       ],
       showNext: true,

@@ -17,26 +17,21 @@ this.tour = new Onboardist.UI.Tour({
   // Scenario list
   scenarios: [
     // Scenario #1
-    [[
+    [{
       // One element
-      'modal', {
-        title: 'Getting Started',
-        content: 'Take a quick tour of the system',
-      },
-    ]],
+      component: 'modal',
+      title: 'Getting Started',
+      content: 'Take a quick tour of the system',
+    }],
     // Scenario #2
-    [
-      // Elements
-      ['tooltip', {
-        attach: '#next-button', 
-        content: 'Click this button',
-        showNext: false,
-        showPrev: false,
-      }],
-    ],
-    [
-      ['modal', { content: 'You did it!' }],
-    ],
+    [{
+      component: 'tooltip',
+      attach: '#next-button', 
+      content: 'Click this button',
+      showNext: false,
+      showPrev: false,
+    }],
+    [{ component: 'modal', content: 'You did it!' }],
   ],
   showNext: true,
   showPrev: true,
@@ -55,26 +50,21 @@ export default {
       // Scenario list
       scenarios: [
         // Scenario #1
-        [[
+        [{
           // One element
-          'modal', {
-            title: 'Getting Started',
-            content: 'Take a quick tour of the system',
-          },
-        ]],
+          component: 'modal',
+          title: 'Getting Started',
+          content: 'Take a quick tour of the system',
+        }],
         // Scenario #2
-        [
-          // Elements
-          [Onboardist.UI.Tooltip, {
-            attach: '#next-button', 
-            content: 'Click this button',
-            showNext: false,
-            showPrev: false,
-          }],
-        ],
-        [
-          ['modal', { content: 'You did it!' }],
-        ],
+        [{
+          component: 'tooltip',
+          attach: '#next-button', 
+          content: 'Click this button',
+          showNext: false,
+          showPrev: false,
+        }],
+        [{ component: 'modal', content: 'You did it!' }],
       ],
       showNext: true,
       showPrev: true,
