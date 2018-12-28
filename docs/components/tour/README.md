@@ -16,29 +16,8 @@ Example:
 
 ## API
 
-The tour's `scenarios` option takes an array of arrays... of arrays. Confusing, I know. But it breaks down like this:
-
-```js
-{
-  // Array of scenarios steps
-  scenarions: [
-    // Scenario 1
-    [
-      // Element 1
-      { component: el, ...args }, 
-      // Element 2
-      { component: el, ...args }
-    ],
-    // Scenario 2
-    [
-      // Element 3
-      { component: el, ... args }
-    ]
-  ]
-]
-```
-
-The outer array is your "scenarios", or _steps_. Each scenario has a list of elements that are shown on screen. When the user navigates to the next scenario, the screen is cleared and the new scenario's components are shown. 
+The tour's `scenarios` is an array where each element is a step along the tour. Each scenario has some options but
+the main one is `components` which is an array of the Onboardist components you want to display.
 
 Example code used for the tour on this page:
 
@@ -46,17 +25,22 @@ Example code used for the tour on this page:
 const tour = new Onboardist.UI.Tour({
   // Scenario list
   scenarios: [
-    // First scenario, with one element
-    [{
-      component: Onboardist.UI.Modal,
-      title: 'Getting Started',
-      content: 'Take a quick tour of the system',
-    }],
-    // Second scenario, two elements
-    [
-      { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
-      { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
-    ],
+    // Scenario #1
+    {
+      backdrop: true,
+      components: [{
+        component: Onboardist.UI.Modal,
+        title: 'Getting Started',
+        content: 'Take a quick tour of the system',
+      }],
+    },
+    // Scenario #2
+    {
+      components: [
+        { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
+        { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
+      ],
+    },
   ],
   // Additional options for tour
   showNext: true,
@@ -105,21 +89,23 @@ export default {
       // Scenario list
       scenarios: [
         // Scenario #1
-        [{
-          component: Onboardist.UI.Modal,
-          title: 'Getting Started',
-          content: 'Take a quick tour of the system',
+        {
           backdrop: true,
-        }],
+          components: [{
+            component: Onboardist.UI.Modal,
+            title: 'Getting Started',
+            content: 'Take a quick tour of the system',
+          }],
+        },
         // Scenario #2
-        [
+        {
           // Elements
-          { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
-          { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
-        ],
+          components: [
+            { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
+            { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
+          ],
+        },
       ],
-      showNext: true,
-      showPrev: true,
     });
 
     // this.destroyables.push(this.tour);
