@@ -1,4 +1,4 @@
-# Hide Next Button
+# Tour: Hide Next Button
 
 Sometimes you want to hide the "Next" button on a component in a tour, if the next stage is triggered by your app.
 
