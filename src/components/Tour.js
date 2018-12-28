@@ -32,10 +32,10 @@ export default class Tour {
     Onboardist.UI.registerTour(this);
 
     for (const scenario of this.scenarios) {
-      for (const [component, args = {}] of scenario) {
+      for (const args of scenario) {
         Onboardist.UI.registerComponent({
+          component: args.component,
           args,
-          component,
           name: args.name,
         });
       }
@@ -71,8 +71,8 @@ export default class Tour {
   // NOTE: right now the chain of elements has to be in order; i.e. if component 2 attaches to component 1, component 1
   //   has to come prior to two in the list of components.
   renderChain(compArgs, scenario) {
-    let [comp, args] = compArgs;
-    args = { ...args };
+    let comp = compArgs.component;
+    const args = { ...compArgs };
 
     if (typeof (comp) === 'string') {
       comp = ComponentMap[comp];
