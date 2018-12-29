@@ -18,6 +18,7 @@ export default class Tour {
       scenarios: [],
     }, options);
 
+    this.name = this.options.name;
     this.scenarios = this.options.scenarios;
 
     this.store = new Store({});
@@ -31,8 +32,13 @@ export default class Tour {
   register() {
     Onboardist.UI.registerTour(this);
 
-    for (const scenario of this.scenarios) {
-      for (const args of scenario) {
+    for (const i in this.scenarios) {
+      if (!{}.hasOwnProperty.call(this.scenarios, i)) continue;
+
+      const scenario = this.scenarios[i];
+      if (!scenario.components) throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
+
+      for (const args of scenario.components) {
         Onboardist.UI.registerComponent({
           component: args.component,
           args,
@@ -61,11 +67,11 @@ export default class Tour {
     this.clear();
 
     // Start the component render chain
-    this.renderChain(scenario[0], scenario);
+    this.renderChain(scenario.components[0], scenario);
   }
 
   nextComponent(compArgs, scenario) {
-    return scenario[scenario.indexOf(compArgs) + 1];
+    return scenario.components[scenario.components.indexOf(compArgs) + 1];
   }
 
   // NOTE: right now the chain of elements has to be in order; i.e. if component 2 attaches to component 1, component 1

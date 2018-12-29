@@ -17,21 +17,25 @@ this.tour = new Onboardist.UI.Tour({
   // Scenario list
   scenarios: [
     // Scenario #1
-    [{
-      // One element
-      component: 'modal',
-      title: 'Getting Started',
-      content: 'Take a quick tour of the system',
-    }],
+    {
+      components: [{
+        // One element
+        component: 'modal',
+        title: 'Getting Started',
+        content: 'Take a quick tour of the system',
+      }],
+    },
     // Scenario #2
-    [{
-      component: 'tooltip',
-      attach: '#next-button', 
-      content: 'Click this button',
-      showNext: false,
-      showPrev: false,
-    }],
-    [{ component: 'modal', content: 'You did it!' }],
+    {
+      components: [{
+        component: 'tooltip',
+        attach: '#next-button', 
+        content: 'Click this button',
+        showNext: false,
+        showPrev: false,
+      }],
+    },
+    { components: [{ component: 'modal', content: 'You did it!' }] },
   ],
   showNext: true,
   showPrev: true,
@@ -50,21 +54,25 @@ export default {
       // Scenario list
       scenarios: [
         // Scenario #1
-        [{
-          // One element
-          component: 'modal',
-          title: 'Getting Started',
-          content: 'Take a quick tour of the system',
-        }],
+        {
+          components: [{
+            // One element
+            component: 'modal',
+            title: 'Getting Started',
+            content: 'Take a quick tour of the system',
+          }],
+        },
         // Scenario #2
-        [{
-          component: 'tooltip',
-          attach: '#next-button', 
-          content: 'Click this button',
-          showNext: false,
-          showPrev: false,
-        }],
-        [{ component: 'modal', content: 'You did it!' }],
+        {
+          components: [{
+            component: 'tooltip',
+            attach: '#next-button', 
+            content: 'Click this button',
+            showNext: false,
+            showPrev: false,
+          }],
+        },
+        { components: [{ component: 'modal', content: 'You did it!' }] },
       ],
       showNext: true,
       showPrev: true,
