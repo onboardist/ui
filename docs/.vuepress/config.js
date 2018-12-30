@@ -63,6 +63,7 @@ module.exports = {
           '/examples/dom-events/',
           '/examples/onboardist-events/',
           '/examples/tours/hide-next-button/',
+          '/examples/tours/wait-for-element/',
         ],
       }
     ]
