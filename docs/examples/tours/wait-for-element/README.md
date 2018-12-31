@@ -1,6 +1,7 @@
 # Tour: Wait For Element
 
-Sometimes you need to wait for an element to appear on the page.
+Sometimes you need to wait for an element to appear on the page. This example waits for the element
+with selector `#foo` to be added to the page before the final scenario runs.
 
 <div class="example">
   <button id="tour-button" @click="startTour()">Start Tour</button>
@@ -102,9 +103,22 @@ export default {
 
       const div = document.createElement('div');
       div.setAttribute('id', 'foo');
-      div.innerText = 'Foo Var';
+      div.innerText = 'foo';
       document.querySelector('.example').appendChild(div);
     }
   },
 };
 </script>
+
+<style>
+#foo {
+  padding: 20px 40px;
+  text-transform: uppercase;
+  background-color: blue;
+  color: white;
+  border: 1px dashed gray;
+  margin: 20px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+</style>

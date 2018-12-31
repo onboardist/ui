@@ -61,6 +61,23 @@ tour configs JSON-compatible.
 
 List of scenarios.
 
+#### Secnario Options
+
+##### wait
+
+* Type: `number|selector`
+* Default: `undefined`
+
+Make Onboardist wait for either `number` ms or for the element matching `selector` to appear on the badge before triggering. This should be combined with hiding the next button on components to prevent the user from skipping to the
+next step on accident;
+
+##### components
+
+* Type: `Array`
+* Default: `[]`
+
+Array of Onboardist component arguments
+
 ### showPrev
 
 * Type: `boolean`
