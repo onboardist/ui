@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-// import babel from 'rollup-plugin-babel';
 import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
@@ -10,7 +9,7 @@ import less from 'less';
 import string from 'rollup-plugin-string';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-// import rollupAnalyzer from 'rollup-analyzer-plugin';
+// import vizualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 
 const production = process.env.NODE_ENV === 'production';
@@ -57,11 +56,8 @@ const config = {
       transforms: { dangerousForOf: true },
       objectAssign: true,
     }),
-    // babel({
-    //   exclude: 'node_modules/**',
-    // }),
     filesize(),
-    // rollupAnalyzer({ limit: 5 }),
+    // vizualizer(),
   ],
 };
 
