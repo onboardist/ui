@@ -37,14 +37,15 @@ const tour = new Onboardist.UI.Tour({
     // Scenario #2
     {
       components: [
-        { component: Onboardist.UI.Hotspot, attach: '.links a[href*="/guide/"]', name: 'hot1' },
+        {
+          component: Onboardist.UI.Hotspot,
+          attach: '.links a[href*="/guide/"]',
+          name: 'hot1',
+        },
         { component: 'tooltip', attach: 'hot1', content: 'Try the guide' },
       ],
     },
   ],
-  // Additional options for tour
-  showNext: true,
-  showPrev: true,
 });
 
 tour.start();
