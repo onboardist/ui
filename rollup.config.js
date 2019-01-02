@@ -1,7 +1,9 @@
 import { merge } from 'lodash';
 // import babel from 'rollup-plugin-babel';
+import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
+import json from 'rollup-plugin-json';
 import legacy from 'rollup-plugin-legacy';
 import resolve from 'rollup-plugin-node-resolve';
 import less from 'less';
@@ -10,7 +12,6 @@ import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 // import rollupAnalyzer from 'rollup-analyzer-plugin';
 import pkg from './package.json';
-
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -31,6 +32,9 @@ const config = {
     legacy({
       'node_modules/leader-line/leader-line.min.js': 'LeaderLine',
     }),
+    json({
+      preferConst: true,
+    }),
     svelte({
       // Opt into v3 behavior today
       skipIntroByDefault: true,
@@ -48,6 +52,10 @@ const config = {
     }),
     string({
       include: 'src/**/*.svg',
+    }),
+    buble({
+      transforms: { dangerousForOf: true },
+      objectAssign: true,
     }),
     // babel({
     //   exclude: 'node_modules/**',
