@@ -1,4 +1,3 @@
-import { version as VERSION } from '../package.json';
 import { default as Tour, ComponentMap } from './components/Tour';
 import { default as CoachmarkComponent } from './components/Coachmark.svelte';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
@@ -6,7 +5,7 @@ import { default as ModalComponent } from './components/Modal.svelte';
 import { default as TooltipComponent } from './components/Tooltip.svelte';
 import { uniquestring, registerForEvents } from './methods';
 
-export { VERSION };
+export { version } from '../package.json';
 export { Tour };
 export { default as config } from './config';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
@@ -86,6 +85,7 @@ export function fire(event, ...args) {
 
 export function registerComponent({ name, component, args, instance }) {
   if (!name) name = uniquestring();
+  args = args || {};
   args.name = name;
 
   if (component in ComponentMap) component = ComponentMap[component];
@@ -96,7 +96,6 @@ export function registerComponent({ name, component, args, instance }) {
     instance,
   };
 
-  // TODO: register for events
   registerForEvents(args.events, components[name]);
 }
 
@@ -110,8 +109,7 @@ export function deregisterInstance(name) {
 }
 
 export function registerTour(tour) {
-  let name = tour.name;
-  if (!name) name = uniquestring();
+  const name = tour.name || uniquestring();
 
   Onboardist.UI.tours[name] = tour;
 }
