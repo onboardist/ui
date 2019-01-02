@@ -10,9 +10,12 @@ with selector `#foo` to be added to the page before the final scenario runs.
 
 ```js
 document.querySelector('#next-button')
-  .addEventListener('click', () => {
-    Onboardist.UI.next();
-  });
+.addEventListener('click', () => {
+  const div = document.createElement('div');
+  div.setAttribute('id', 'foo');
+  div.innerText = 'foo';
+  document.querySelector('.example').appendChild(div);
+});
 
 this.tour = new Onboardist.UI.Tour({
   // Scenario list
@@ -26,17 +29,26 @@ this.tour = new Onboardist.UI.Tour({
         content: 'Take a quick tour of the system',
       }],
     },
+    // Scenario #2
+    {
+      components: [{
+        component: 'tooltip',
+        attach: '#next-button', 
+        content: 'Click this button to add the target element',
+        showNext: false,
+        showPrev: false,
+      }],
+    },
     {
       wait: '#foo',
       components: [{
         component: 'modal',
         title: 'Success',
         content: 'You did it!',
+        showPrev: false,
       }],
     },
   ],
-  showNext: true,
-  showPrev: true,
 });
 ```
 
@@ -65,7 +77,7 @@ export default {
           components: [{
             component: 'tooltip',
             attach: '#next-button', 
-            content: 'Click this button',
+            content: 'Click this button to add the target element',
             showNext: false,
             showPrev: false,
           }],
@@ -80,8 +92,6 @@ export default {
           }],
         },
       ],
-      showNext: true,
-      showPrev: true,
     });
   },
   destroyed() {
