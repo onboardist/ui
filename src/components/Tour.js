@@ -1,6 +1,7 @@
 import { Store } from 'svelte/store';
-import { uniquestring } from '../methods';
+import { waitForTheElement } from 'wait-for-the-element';
 import { Coachmark, Hotspot, Modal, Tooltip } from '.';
+import { uniquestring } from '../methods';
 
 export const ComponentMap = {
   coachmark: Coachmark,
@@ -116,37 +117,56 @@ export default class Tour {
     }
   }
 
-  next() {
-    if (this.scenario) {
-      const curIdx = this.scenarios.indexOf(this.scenario);
-
-      if (curIdx === -1) {
-        return;
+  waitScenario(scenario) {
+    // Handle wait
+    let p = scenario.wait;
+    if (p) {
+      // Number
+      const ms = parseInt(p, 10);
+      if (isNaN(ms)) {
+        p = waitForTheElement(p, {
+          timeout: 10000,
+        });
+      } else {
+        p = new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+          }, ms);
+        });
       }
-
-      this.scenario = this.scenarios[curIdx + 1];
-    } else {
-      this.scenario = this.scenarios[0];
-      this.clear();
     }
 
+    Promise.resolve(p)
+      .then(() => {
+        this.scenario = scenario;
+        this.render(scenario);
+      });
+  }
+
+  next() {
+    const scenario = this.nextScenario(this.scenario);
+
+    if (!scenario) return;
+
+    this.scenario = scenario;
+
     this.render(this.scenario);
+
+    const nextScenario = this.nextScenario(scenario);
+    if (nextScenario && nextScenario.wait) this.waitScenario(nextScenario);
   }
 
   prev() {
-    if (this.scenario) {
-      const curIdx = this.scenarios.indexOf(this.scenario);
+    const scenario = this.prevScenario(this.scenario);
 
-      if (curIdx === -1) {
-        return;
-      }
+    if (!scenario) return;
 
-      this.scenario = this.scenarios[curIdx - 1];
-    } else {
-      this.scenario = this.scenarios[0];
-    }
+    this.scenario = scenario;
 
     this.render(this.scenario);
+
+    const prevScenario = this.prevScenario(scenario);
+    if (prevScenario && prevScenario.wait) this.waitScenario(prevScenario);
   }
 
   clear() {
@@ -164,6 +184,36 @@ export default class Tour {
 
   isLastScenario(scenario) {
     return this.scenarios.indexOf(scenario) === this.scenarios.length - 1;
+  }
+
+  nextScenario(scenario) {
+    if (scenario) {
+      const curIdx = this.scenarios.indexOf(scenario);
+
+      if (curIdx === -1) {
+        return;
+      }
+
+      return this.scenarios[curIdx + 1];
+    }
+    
+    this.clear();
+    return this.scenarios[0];
+  }
+
+  prevScenario(scenario) {
+    if (scenario) {
+      const curIdx = this.scenarios.indexOf(scenario);
+
+      if (curIdx === -1) {
+        return;
+      }
+
+      return this.scenarios[curIdx - 1];
+    }
+
+    this.clear();
+    return this.scenarios[0];
   }
 
   stop() {
