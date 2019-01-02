@@ -102,7 +102,9 @@
     "overrides": [
       {
         "files": "src/**",
-        "globals": ["Onboardist"]
+        "globals": [
+          "Onboardist"
+        ]
       },
       {
         "files": "test/**",
