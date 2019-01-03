@@ -3,4 +3,4 @@ export default {
     active: '#62A8FC',
     lightText: '#fff',
   },
-}
+};

@@ -1,14 +1,6 @@
 import { Store } from 'svelte/store';
 import { waitForTheElement } from 'wait-for-the-element';
-import { Coachmark, Hotspot, Modal, Tooltip } from '.';
 import { uniquestring } from '../methods';
-
-export const ComponentMap = {
-  coachmark: Coachmark,
-  hotspot: Hotspot,
-  modal: Modal,
-  tooltip: Tooltip,
-};
 
 export default class Tour {
   constructor(options = {}) {

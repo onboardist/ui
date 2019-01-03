@@ -11,7 +11,7 @@ export { default as config } from './config';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
-export const activeTour = null;
+let _activeTour = null;
 export const components = {};
 export const listeners = {};
 export const tours = {};
@@ -22,6 +22,14 @@ export function component(name) {
 
 export function tour(name) {
   return tours[name];
+}
+
+export function setActiveTour(tour) {
+  _activeTour = tour;
+}
+
+export function activeTour() {
+  return _activeTour;
 }
 
 export function configure(config) {
@@ -111,5 +119,5 @@ export function deregisterInstance(name) {
 export function registerTour(tour) {
   const name = tour.name || uniquestring();
 
-  Onboardist.UI.tours[name] = tour;
+  this.tours[name] = tour;
 }

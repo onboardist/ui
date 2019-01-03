@@ -11,15 +11,17 @@
 </div>
 
 <script>
+import config from '../config';
 import { oncreate, show, hide } from '../methods';
+
 export default {
   // oncreate,
   methods: { show, hide },
   data: () => ({
     title: '',
     content: '',
-    backgroundColor: Onboardist.UI.config.colors.active,
-    headerTextColor: Onboardist.UI.config.colors.lightText,
+    backgroundColor: config.colors.active,
+    headerTextColor: config.colors.lightText,
   }),
 };
 </script>

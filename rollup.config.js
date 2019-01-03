@@ -68,7 +68,7 @@ export default [
   production ? merge({}, config, {
     watch: false,
     output: {
-      file: `dist/index.min.js`,
+      file: 'dist/index.min.js',
     },
     plugins: [
       terser({ sourcemap: true }),
@@ -88,4 +88,4 @@ export default [
       format: 'es',
     },
   }) : undefined,
-].filter(x => !!x);
+].filter(x => Boolean(x));
