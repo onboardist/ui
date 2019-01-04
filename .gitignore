@@ -65,3 +65,6 @@ cypress/screenshots/
 
 docs/.vuepress/dist/
 dist/
+
+.nyc_output
+coverage

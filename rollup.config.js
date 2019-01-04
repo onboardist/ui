@@ -26,6 +26,10 @@ const config = {
     include: 'src/**',
   },
   plugins: [
+    istanbul({
+      include: 'dist/**',
+      exclude: ['**/node_modules/**'],
+    }),
     resolve({ browser: true }),
     commonjs(),
     legacy({
@@ -68,7 +72,7 @@ export default [
   production ? merge({}, config, {
     watch: false,
     output: {
-      file: `dist/index.min.js`,
+      file: 'dist/index.min.js',
     },
     plugins: [
       terser({ sourcemap: true }),
