@@ -13,6 +13,7 @@
     "clean": "rimraf dist/*",
     "test:ci:watch": "cypress open",
     "test": "ava",
+    "test:cover": "nyc ava",
     "test:watch": "ava --watch",
     "dev:test:watch": "npm run build:watch & npm run test:watch",
     "test:record": "cypress run",
