@@ -168,12 +168,12 @@
     "testMatch": [
       "**/test/**/*.jest.js"
     ],
-    "transform": {
-      "\\.js$": "babel-jest",
-      "\\.(html|svelte)$": "./test/transform"
-    },
-    "transformIgnorePatterns": [
-      "/node_modules/(?!svelte).+\\.js$"
+    "collectCoverageFrom": [
+      "<rootDir>/dist/**/*.js",
+      "!<rootDir>/node_modules/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/"
     ],
     "moduleFileExtensions": [
       "js",

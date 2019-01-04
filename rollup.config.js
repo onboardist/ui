@@ -20,7 +20,7 @@ const config = {
     file: pkg.main,
     format: 'umd',
     name: 'Onboardist.UI',
-    sourcemap: true,
+    sourcemap: 'inline',
   },
   watch: {
     include: 'src/**',
@@ -69,6 +69,7 @@ export default [
     watch: false,
     output: {
       file: 'dist/index.min.js',
+      sourcemap: true,
     },
     plugins: [
       terser({ sourcemap: true }),
@@ -86,6 +87,7 @@ export default [
     output: {
       file: pkg.module,
       format: 'es',
+      sourcemap: true,
     },
   }) : undefined,
 ].filter(x => Boolean(x));

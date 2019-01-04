@@ -15,6 +15,6 @@ test('configure - can register components', t => {
   t.is(UI.components.foo.args.name, 'foo');
 });
 
-test('configure - can register tours', t => {
+// test('configure - can register tours', t => {
   
-});
+// });

@@ -1,5 +1,4 @@
-require('../src');
-const UI = require('../src');
+const UI = require('../dist');
 
 test('Can configure Onboardist', () => {
   UI.configure({

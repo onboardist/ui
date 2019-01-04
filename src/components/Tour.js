@@ -1,6 +1,7 @@
 import { Store } from 'svelte/store';
 import { waitForTheElement } from 'wait-for-the-element';
 import { uniquestring } from '../methods';
+import { ComponentMap } from '../registry';
 
 export default class Tour {
   constructor(options = {}) {

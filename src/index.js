@@ -1,4 +1,5 @@
-import { default as Tour, ComponentMap } from './components/Tour';
+import { ComponentMap } from './registry';
+import { default as Tour } from './components/Tour';
 import { default as CoachmarkComponent } from './components/Coachmark.svelte';
 import { default as HotspotComponent } from './components/Hotspot.svelte';
 import { default as ModalComponent } from './components/Modal.svelte';
