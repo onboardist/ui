@@ -26,10 +26,6 @@ const config = {
     include: 'src/**',
   },
   plugins: [
-    istanbul({
-      include: 'dist/**',
-      exclude: ['**/node_modules/**'],
-    }),
     resolve({ browser: true }),
     commonjs(),
     legacy({
