@@ -1,6 +1,8 @@
 import Popper from 'popper.js';
 import isDom from 'is-dom';
 import { waitForTheElement } from 'wait-for-the-element';
+import Registry from './registry';
+import PubSub from './events';
 
 export function uniquestring() {
   return Math.random().toString(36).substr(2);
@@ -25,7 +27,7 @@ function attachEl() {
   };
 
   let { attach } = this.options;
-  const comp = Onboardist.UI.component(attach);
+  const comp = Registry.component(attach);
   if (comp && comp.instance) attach = comp.instance.refs.el;
 
   // TODO: handle `attach` that is a component in the registry
@@ -43,8 +45,8 @@ function generateEventHandler(handler, mappedComponent) {
   if (typeof (handler) === 'function') return handler;
 
   const [pair1 = '', pair2 = ''] = handler.split(/\./);
-  const comp = Onboardist.UI.component(pair1);
-  const tour = Onboardist.UI.tour(pair1);
+  const comp = Registry.component(pair1);
+  const tour = Registry.tour(pair1);
 
   if (comp) {
     const { component, args } = comp;
@@ -52,7 +54,7 @@ function generateEventHandler(handler, mappedComponent) {
     // Do something with a component
     if (!pair2 || pair2 === 'show') {
       handler = () => {
-        new component(args);
+        new component(args); /* eslint-disable-line no-new */
       };
     } else if (pair2 === 'hide') {
       handler = () => {
@@ -65,13 +67,13 @@ function generateEventHandler(handler, mappedComponent) {
   } else if (handler === 'close') {
     handler = () => this.close();
   } else if (handler === 'next') {
-    handler = () => Onboardist.UI.next();
+    handler = () => Registry.activeTour().next(); // TODO: this will throw if there's no activeTour, add a guard?
   } else if (handler === 'show') {
     // TODO: this one will need to work when generating handlers for components that don't exist in the DOM yet
     handler = () => {
       if (mappedComponent) {
         const { component, args } = mappedComponent;
-        if (component) new component(args);
+        if (component) new component(args); /* eslint-disable-line no-new */
       }
     };
   } else {
@@ -94,7 +96,7 @@ export function registerForEvents(eventArg = {}, mappedComponent) {
         this.on('destroy', () => this.refs.el.removeEventListener(event, h));
       } else {
         // Treat event as an Onboardist event
-        const dereg = Onboardist.UI.on(event, h);
+        const dereg = PubSub.on(event, h);
         if (this) this.on('destroy', dereg);
       }
     }
@@ -112,11 +114,11 @@ export function oncreate() {
   if (this.options.events) registerForEvents.call(this, this.options.events);
 
   // Register instance globally
-  Onboardist.UI.registerInstance({ name: this.get().name, instance: this });
+  Registry.registerInstance({ name: this.get().name, instance: this });
 }
 
 export function ondestroy() {
-  Onboardist.UI.deregisterInstance(this.get().name);
+  Registry.deregisterInstance(this.get().name);
 }
 
 export function expandButtonArgs(buttons) {

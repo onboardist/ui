@@ -1,6 +1,7 @@
 import { uniquestring, registerForEvents } from './methods';
 import { Coachmark, Hotspot, Modal, Tooltip } from './components';
 
+// Singleton registry
 const _registry = {
   tours: {},
   components: {},
@@ -17,15 +18,25 @@ export const ComponentMap = {
   tooltip: Tooltip,
 };
 
-export function component(name) {
+function clear() {
+  for (const key of Object.keys(_registry.components)) {
+    delete _registry.components[key];
+  }
+
+  for (const key of Object.keys(_registry.tours)) {
+    delete _registry.tours[key];
+  }
+}
+
+function getComponent(name) {
   return _registry.components[name];
 }
 
-export function tour(name) {
+function getTour(name) {
   return _registry.tours[name];
 }
 
-export function activeTour(tour) {
+function activeTour(tour) {
   if (!tour) return _registry.activeTour;
 
   _registry.activeTour = tour;
@@ -33,7 +44,7 @@ export function activeTour(tour) {
   return tour;
 }
 
-export function registerComponent({ name, component, args, instance }) {
+function registerComponent({ name, component, args, instance }) {
   if (!name) name = uniquestring();
   args = args || {};
   args.name = name;
@@ -48,3 +59,41 @@ export function registerComponent({ name, component, args, instance }) {
 
   registerForEvents(args.events, _registry.components[name]);
 }
+
+function registerTour(tour) {
+  tour.name = tour.name || uniquestring();
+
+  _registry.tours[tour.name] = tour;
+}
+
+function setActiveTour(tour) {
+  _registry.activeTour = tour;
+}
+
+function registerInstance({ name, instance }) {
+  _registry.components[name] = _registry.components[name] || {};
+  _registry.components[name].instance = instance;
+}
+
+function deregisterInstance(name) {
+  if (name in _registry.components) delete _registry.components[name].instance;
+}
+
+function destroyInstances() {
+  for (const component of _registry.components) {
+    if (component.instance) component.instance.destroy();
+  }
+}
+
+export default {
+  activeTour,
+  clear,
+  deregisterInstance,
+  destroyInstances,
+  getComponent,
+  getTour,
+  registerComponent,
+  registerTour,
+  registerInstance,
+  setActiveTour,
+};

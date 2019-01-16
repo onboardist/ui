@@ -1,7 +1,7 @@
 import { Store } from 'svelte/store';
 import { waitForTheElement } from 'wait-for-the-element';
 import { uniquestring } from '../methods';
-import { ComponentMap } from '../registry';
+import Registry, { ComponentMap } from '../registry';
 
 export default class Tour {
   constructor(options = {}) {
@@ -24,7 +24,7 @@ export default class Tour {
   }
 
   register() {
-    Onboardist.UI.registerTour(this);
+    Registry.registerTour(this);
 
     for (const i in this.scenarios) {
       if (!{}.hasOwnProperty.call(this.scenarios, i)) continue;
@@ -33,7 +33,7 @@ export default class Tour {
       if (!scenario.components) throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
 
       for (const args of scenario.components) {
-        Onboardist.UI.registerComponent({
+        Registry.registerComponent({
           component: args.component,
           args,
           name: args.name,
@@ -49,7 +49,7 @@ export default class Tour {
     }
 
     // We are now the active tour
-    Onboardist.UI.activeTour = this;
+    Registry.setActiveTour(this);
 
     // Reset scenario in case //#endregionit was set
     this.scenario = null;
@@ -100,7 +100,7 @@ export default class Tour {
     }
 
     const el = new comp(args);
-    Onboardist.UI.registerInstance({ name: el.get().name, instance: el });
+    Registry.registerInstance({ name: el.get().name, instance: el });
 
     this.elementMap[el.get().name] = el;
 
@@ -189,7 +189,7 @@ export default class Tour {
 
       return this.scenarios[curIdx + 1];
     }
-    
+
     this.clear();
     return this.scenarios[0];
   }

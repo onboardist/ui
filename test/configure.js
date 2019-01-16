@@ -1,9 +1,9 @@
 import test from 'ava';
 
-const UI = require('../dist');
+const Onboardist = require('../dist/onboardist-ui.cjs');
 
 test('configure - can register components', t => {
-  UI.configure({
+  Onboardist.configure({
     components: [{
       name: 'foo',
       component: 'modal',
@@ -11,10 +11,7 @@ test('configure - can register components', t => {
     }],
   });
 
-  t.truthy(UI.components.foo);
-  t.is(UI.components.foo.args.name, 'foo');
+  t.truthy(Onboardist.components.foo);
+  t.is(Onboardist.components.foo.args.name, 'foo');
 });
 
-// test('configure - can register tours', t => {
-  
-// });

@@ -16,8 +16,8 @@ module.exports = {
   ],
   head: [
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
-      ? ['script', { src: `http://localhost:${port}/dist/index.js`} ]
-      : ['script', { src: `https://unpkg.com/@onboardist/ui@${pkg.version}/dist/index.min.js`} ]
+      ? ['script', { src: `http://localhost:${port}/dist/onboardist-ui.umd.js`} ]
+      : ['script', { src: `https://unpkg.com/@onboardist/ui@${pkg.version}/dist/onboardist-ui.min.js`} ]
   ],
 
   markdown: {
