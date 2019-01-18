@@ -1,6 +1,7 @@
 import { uniquestring, registerForEvents } from './methods';
 import { Coachmark, Hotspot, Modal, Tooltip } from './components';
 
+// TODO: rewrite with Map()
 // Singleton registry
 const _registry = {
   tours: {},

@@ -31,3 +31,22 @@ test('Tours require scenarios', t => {
     const tour = new Onboardist.Tour({ scenarios: [] });
   });
 });
+
+// test('Can start a tour', t => {
+//   Onboardist.configure({
+//     tours: [
+//       {
+//         name: 'new-user',
+//       },
+//       {
+//         name: 'new-company',
+//       },
+//     ],
+//   });
+
+//   const tour = Onboardist.Registry.tour('new-user');
+//   console.log(tour.start);
+//   tour.start();
+
+//   t.is(tour, Onboardist.Registry.activeTour());
+// });

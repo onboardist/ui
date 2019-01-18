@@ -11,7 +11,7 @@ test('configure - can register components', t => {
     }],
   });
 
-  t.truthy(Onboardist.components.foo);
-  t.is(Onboardist.components.foo.args.name, 'foo');
+  t.truthy(Onboardist.Registry.getComponent('foo'));
+  t.is(Onboardist.Registry.getComponent('foo').args.name, 'foo');
 });
 

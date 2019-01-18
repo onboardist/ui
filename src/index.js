@@ -1,16 +1,23 @@
 import Registry from './registry';
 import PubSub from './events';
-import { default as Tour } from './components/Tour';
+import { default as Tour } from './components/tour';
 import { default as CoachmarkComponent } from './components/Coachmark.svelte'; /* eslint-disable-line no-unused-vars */
 import { default as HotspotComponent } from './components/Hotspot.svelte'; /* eslint-disable-line no-unused-vars */
 import { default as ModalComponent } from './components/Modal.svelte'; /* eslint-disable-line no-unused-vars */
 import { default as TooltipComponent } from './components/Tooltip.svelte'; /* eslint-disable-line no-unused-vars */
 
 export { version } from '../package.json';
-export { Tour };
+export { Registry, Tour };
 export { default as config } from './config';
 export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
+
+const { on, fire } = PubSub;
+export { on, fire };
+
+// const component = Registry.getComponent;
+// const tour = Registry.getTour;
+// export { component, tour };
 
 // export function activeTour() {
 //   return _activeTour;
@@ -41,5 +48,3 @@ export function reset() {
   Registry.destroyInstances();
   Registry.clear();
 }
-
-export const { on, fire } = PubSub;

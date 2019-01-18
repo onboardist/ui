@@ -18,7 +18,7 @@ export default class Tour {
     this.store = new Store({});
     this.elementMap = {};
 
-    if (!this.scenarios) throw new Error(`Tour ${this.name} was not given any scenarios`);
+    if (!this.scenarios || this.scenarios.length === 0) throw new Error(`Tour ${this.name} was not given any scenarios`);
 
     this.register();
   }
@@ -30,7 +30,9 @@ export default class Tour {
       if (!{}.hasOwnProperty.call(this.scenarios, i)) continue;
 
       const scenario = this.scenarios[i];
-      if (!scenario.components) throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
+      if (!scenario.components) {
+        throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
+      }
 
       for (const args of scenario.components) {
         Registry.registerComponent({

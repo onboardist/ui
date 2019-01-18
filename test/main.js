@@ -11,7 +11,7 @@ test('Can retrieve a component from the registry by name', t => {
     }],
   });
 
-  t.truthy(Onboardist.component('new-user-modal'));
+  t.truthy(Onboardist.Registry.getComponent('new-user-modal'));
 });
 
 test('Can retrieve a tour from the registry by name', t => {
@@ -21,24 +21,5 @@ test('Can retrieve a tour from the registry by name', t => {
     }],
   });
 
-  t.truthy(Onboardist.tour('new-user'));
-});
-
-test('Can set/get active tour', t => {
-  Onboardist.configure({
-    tours: [
-      {
-        name: 'new-user',
-      },
-      {
-        name: 'new-company',
-      },
-    ],
-  });
-
-  const tour = Onboardist.tours['new-user'];
-
-  Onboardist.setActiveTour(tour);
-
-  t.is(tour, Onboardist.activeTour());
+  t.truthy(Onboardist.Registry.getTour('new-user'));
 });

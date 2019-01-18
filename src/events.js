@@ -24,7 +24,8 @@ function fire(event, ...args) {
 
 function reset() {
   for (const key of Object.keys(_listeners)) {
-    delete this.listeners[key];
+    _listeners[key].forEach(d => d());
+    delete _listeners[key];
   }
 }
 

@@ -6,23 +6,19 @@ test.beforeEach('Reset UI listeners', () => {
   Onboardist.reset();
 });
 
-test('Registering for events adds listener', t => {
-  const foo = () => {};
-  Onboardist.on('foo', foo);
-
-  t.is(Onboardist.listeners.foo[0], foo);
-});
-
 test('on() returns working dereg function', t => {
-  const foo = () => {};
+  let toggle = false;
+  const foo = () => toggle = true;
   const dereg = Onboardist.on('foo', foo);
 
   t.is(typeof dereg, 'function');
 
   dereg();
 
+  Onboardist.fire('foo');
+
   // Listeners is cleared out if no elements are left in array
-  t.falsy(Onboardist.listeners.foo);
+  t.is(false, toggle);
 });
 
 test('fire() triggers handlers', t => {
@@ -37,4 +33,15 @@ test('fire() triggers handlers', t => {
 
   t.is(bar, 'buzz');
   t.is(bar2, 'buzz');
+});
+
+test('fire() passes arguments', t => {
+  let shown = false;
+  Onboardist.on('show-user', val => {
+    shown = val;
+  });
+
+  Onboardist.fire('show-user', 'ok');
+
+  t.is('ok', shown);
 });
