@@ -3,10 +3,7 @@ import isDom from 'is-dom';
 import { waitForTheElement } from 'wait-for-the-element';
 import Registry from './registry';
 import PubSub from './events';
-
-export function uniquestring() {
-  return Math.random().toString(36).substr(2);
-}
+import { uniquestring } from './util';
 
 export function close() {
   this.destroy();

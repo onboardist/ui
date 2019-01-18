@@ -1,7 +1,8 @@
 import { Store } from 'svelte/store';
 import { waitForTheElement } from 'wait-for-the-element';
-import { uniquestring } from '../methods';
 import Registry, { ComponentMap } from '../registry';
+import { registerForEvents } from '../methods';
+import { uniquestring } from '../util';
 
 export default class Tour {
   constructor(options = {}) {
@@ -35,11 +36,13 @@ export default class Tour {
       }
 
       for (const args of scenario.components) {
-        Registry.registerComponent({
+        const comp = Registry.component({
           component: args.component,
           args,
           name: args.name,
         });
+
+        registerForEvents(args.events, comp);
       }
     }
   }

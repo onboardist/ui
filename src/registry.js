@@ -1,12 +1,11 @@
-import { uniquestring, registerForEvents } from './methods';
 import { Coachmark, Hotspot, Modal, Tooltip } from './components';
+import { uniquestring } from './util';
 
 // TODO: rewrite with Map()
 // Singleton registry
 const _registry = {
   tours: {},
   components: {},
-  instances: {},
   listeners: [],
 
   activeTour: null,
@@ -20,6 +19,8 @@ export const ComponentMap = {
 };
 
 function clear() {
+  destroyInstances();
+
   for (const key of Object.keys(_registry.components)) {
     delete _registry.components[key];
   }
@@ -29,20 +30,12 @@ function clear() {
   }
 }
 
-function getComponent(name) {
+function component(name) {
   return _registry.components[name];
 }
 
-function getTour(name) {
+function tour(name) {
   return _registry.tours[name];
-}
-
-function activeTour(tour) {
-  if (!tour) return _registry.activeTour;
-
-  _registry.activeTour = tour;
-
-  return tour;
 }
 
 function registerComponent({ name, component, args, instance }) {
@@ -58,43 +51,67 @@ function registerComponent({ name, component, args, instance }) {
     instance,
   };
 
-  registerForEvents(args.events, _registry.components[name]);
+  // TODO: this doesn't belong here. Causing circular dependency
+  // registerForEvents(args.events, _registry.components[name]);
+
+  return _registry.components[name];
 }
 
 function registerTour(tour) {
   tour.name = tour.name || uniquestring();
 
   _registry.tours[tour.name] = tour;
+
+  return tour;
+}
+
+function activeTour() {
+  return _registry.activeTour;
 }
 
 function setActiveTour(tour) {
+  if (typeof tour === 'string') tour = _registry.tours[tour];
+  if (!tour) throw new Error('No tour specified');
+  if (typeof tour !== 'object');
+
   _registry.activeTour = tour;
 }
 
 function registerInstance({ name, instance }) {
+  if (!name) throw new Error('No component name provided');
+  if (!instance) throw new Error('No component instance provided');
+
   _registry.components[name] = _registry.components[name] || {};
   _registry.components[name].instance = instance;
 }
 
 function deregisterInstance(name) {
-  if (name in _registry.components) delete _registry.components[name].instance;
+  if (name in _registry.components) {
+    if (_registry.components[name].instance) _registry.components[name].instance.destroy();
+    delete _registry.components[name].instance;
+  }
 }
 
 function destroyInstances() {
-  for (const component of _registry.components) {
-    if (component.instance) component.instance.destroy();
+  for (const component of Object.values(_registry.components)) {
+    if (component.instance) {
+      component.instance.destroy();
+      delete component.instance;
+    }
   }
 }
 
 export default {
+  _registry,
+
   activeTour,
   clear,
+  component,
   deregisterInstance,
   destroyInstances,
-  getComponent,
-  getTour,
   registerComponent,
   registerTour,
   registerInstance,
   setActiveTour,
+  tour,
 };

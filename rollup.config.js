@@ -75,7 +75,6 @@ export default [
       'leader-line',
       'popper.js',
       'wait-for-the-element',
-      'svelte',
     ],
     output: [
       { file: pkg.main, format: 'cjs', sourcemap: true },

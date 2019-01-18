@@ -3,6 +3,10 @@ import test from 'ava';
 
 const Onboardist = require('../dist/onboardist-ui.cjs');
 
+test.beforeEach(() => {
+  Onboardist.reset();
+});
+
 test('Can retrieve a component from the registry by name', t => {
   Onboardist.configure({
     components: [{
@@ -11,7 +15,7 @@ test('Can retrieve a component from the registry by name', t => {
     }],
   });
 
-  t.truthy(Onboardist.Registry.getComponent('new-user-modal'));
+  t.truthy(Onboardist.Registry.component('new-user-modal'));
 });
 
 test('Can retrieve a tour from the registry by name', t => {
@@ -21,5 +25,5 @@ test('Can retrieve a tour from the registry by name', t => {
     }],
   });
 
-  t.truthy(Onboardist.Registry.getTour('new-user'));
+  t.truthy(Onboardist.Registry.tour('new-user'));
 });

@@ -5,6 +5,7 @@ import { default as CoachmarkComponent } from './components/Coachmark.svelte'; /
 import { default as HotspotComponent } from './components/Hotspot.svelte'; /* eslint-disable-line no-unused-vars */
 import { default as ModalComponent } from './components/Modal.svelte'; /* eslint-disable-line no-unused-vars */
 import { default as TooltipComponent } from './components/Tooltip.svelte'; /* eslint-disable-line no-unused-vars */
+import { registerForEvents } from './methods';
 
 export { version } from '../package.json';
 export { Registry, Tour };
@@ -13,20 +14,16 @@ export { Coachmark, Hotspot, Modal, Tooltip } from './components';
 export { CoachmarkComponent, HotspotComponent, ModalComponent, TooltipComponent } from './components';
 
 const { on, fire } = PubSub;
-export { on, fire };
-
-// const component = Registry.getComponent;
-// const tour = Registry.getTour;
-// export { component, tour };
-
-// export function activeTour() {
-//   return _activeTour;
-// }
+const { registerComponent, registerTour } = Registry;
+export { on, fire, registerComponent, registerTour };
 
 export function configure(config) {
   (config.tours || []).forEach(t => Registry.registerTour(t));
   // TODO: make sure each component exists
-  (config.components || []).forEach(c => Registry.registerComponent(c));
+  (config.components || []).forEach(c => {
+    const comp = Registry.registerComponent(c);
+    registerForEvents(c.args, comp);
+  });
 }
 
 // Functions
