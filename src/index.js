@@ -22,7 +22,7 @@ export function configure(config) {
   // TODO: make sure each component exists
   (config.components || []).forEach(c => {
     const comp = Registry.registerComponent(c);
-    registerForEvents(c.args, comp);
+    registerForEvents(c.args.events, comp);
   });
 }
 
