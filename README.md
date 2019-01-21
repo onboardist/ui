@@ -1,5 +1,7 @@
 > Reusable user onboarding UI components
 
+![https://travis-ci.com/onboardist/ui/branches/master](https://travis-ci.com/onboardist/ui.svg?branch=master)
+
 # Components
 
 * Coachmark

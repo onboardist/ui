@@ -15,10 +15,27 @@
 <script>
 import Config from '../config';
 import Backdrop from './Backdrop.svelte';
-import { oncreate, ondestroy, show, hide } from '../methods';
+import { oncreate, ondestroy } from '../methods';
 
 export default {
-  oncreate,
+  oncreate() {
+    // NOTE: this was an attempt to make the popper overlap the element slightly. Turns out just making it
+    //   0w x 0h is easier
+    // this.options = {
+    //   ...this.options,
+    //   modifiers: {
+    //     offset: {
+    //       enabled: true,
+    //       offset: `-50%p,-50%p`, // -${this.get().size / 2}px
+    //     },
+    //     flip: {
+    //       enabled: false,
+    //     }
+    //   },
+    // };
+
+    return oncreate.call(this);
+  },
   ondestroy,
   components: { Backdrop },
   data: () => ({
@@ -27,10 +44,6 @@ export default {
     style: 'pulse',
     size: 20,
   }),
-
-  methods: {
-    show, hide,
-  },
 };
 </script>
 

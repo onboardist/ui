@@ -50,7 +50,9 @@ Onboardist.UI.configure({
         {
           wait: '#create-user-form',
           components: [{
-            component: 'tooltip', attach: 'input[name="email"]', content: 'An invite will be sent to the user at this address'
+            component: 'tooltip',
+            attach: 'input[name="email"]',
+            content: 'An invite will be sent to the user at this address',
           }],
         },
       ],

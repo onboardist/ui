@@ -1,28 +1,24 @@
 import test from 'ava';
 
-const UI = require('../dist');
+const Onboardist = require('../dist/onboardist-ui.cjs');
 
 test.beforeEach('Reset UI listeners', () => {
-  UI.resetListeners();
-});
-
-test('Registering for events adds listener', t => {
-  const foo = () => {};
-  UI.on('foo', foo);
-
-  t.is(UI.listeners.foo[0], foo);
+  Onboardist.reset();
 });
 
 test('on() returns working dereg function', t => {
-  const foo = () => {};
-  const dereg = UI.on('foo', foo);
+  let toggle = false;
+  const foo = () => toggle = true;
+  const dereg = Onboardist.on('foo', foo);
 
   t.is(typeof dereg, 'function');
 
   dereg();
 
+  Onboardist.fire('foo');
+
   // Listeners is cleared out if no elements are left in array
-  t.falsy(UI.listeners.foo);
+  t.is(false, toggle);
 });
 
 test('fire() triggers handlers', t => {
@@ -30,11 +26,22 @@ test('fire() triggers handlers', t => {
   let bar2 = 'baz';
   const foo = () => bar = 'buzz';
   const foo2 = () => bar2 = 'buzz';
-  UI.on('foo', foo);
-  UI.on('foo', foo2);
+  Onboardist.on('foo', foo);
+  Onboardist.on('foo', foo2);
 
-  UI.fire('foo');
+  Onboardist.fire('foo');
 
   t.is(bar, 'buzz');
   t.is(bar2, 'buzz');
+});
+
+test('fire() passes arguments', t => {
+  let shown = false;
+  Onboardist.on('show-user', val => {
+    shown = val;
+  });
+
+  Onboardist.fire('show-user', 'ok');
+
+  t.is('ok', shown);
 });

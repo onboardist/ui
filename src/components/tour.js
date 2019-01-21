@@ -1,14 +1,8 @@
 import { Store } from 'svelte/store';
 import { waitForTheElement } from 'wait-for-the-element';
-import { Coachmark, Hotspot, Modal, Tooltip } from '.';
-import { uniquestring } from '../methods';
-
-export const ComponentMap = {
-  coachmark: Coachmark,
-  hotspot: Hotspot,
-  modal: Modal,
-  tooltip: Tooltip,
-};
+import Registry, { ComponentMap } from '../registry';
+import { registerForEvents } from '../methods';
+import { uniquestring } from '../util';
 
 export default class Tour {
   constructor(options = {}) {
@@ -25,26 +19,30 @@ export default class Tour {
     this.store = new Store({});
     this.elementMap = {};
 
-    if (!this.scenarios) throw new Error(`Tour ${this.name} was not given any scenarios`);
+    if (!this.scenarios || this.scenarios.length === 0) throw new Error(`Tour ${this.name} was not given any scenarios`);
 
     this.register();
   }
 
   register() {
-    Onboardist.UI.registerTour(this);
+    Registry.registerTour(this);
 
     for (const i in this.scenarios) {
       if (!{}.hasOwnProperty.call(this.scenarios, i)) continue;
 
       const scenario = this.scenarios[i];
-      if (!scenario.components) throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
+      if (!scenario.components) {
+        throw new Error(`Tour '${this.name}' scenario #${parseInt(i, 10) + 1} has no components property. Should be an array`);
+      }
 
       for (const args of scenario.components) {
-        Onboardist.UI.registerComponent({
+        const comp = Registry.component({
           component: args.component,
           args,
           name: args.name,
         });
+
+        registerForEvents(args.events, comp);
       }
     }
   }
@@ -56,7 +54,7 @@ export default class Tour {
     }
 
     // We are now the active tour
-    Onboardist.UI.activeTour = this;
+    Registry.setActiveTour(this);
 
     // Reset scenario in case //#endregionit was set
     this.scenario = null;
@@ -107,7 +105,7 @@ export default class Tour {
     }
 
     const el = new comp(args);
-    Onboardist.UI.registerInstance({ name: el.get().name, instance: el });
+    Registry.registerInstance({ name: el.get().name, instance: el });
 
     this.elementMap[el.get().name] = el;
 
@@ -196,7 +194,7 @@ export default class Tour {
 
       return this.scenarios[curIdx + 1];
     }
-    
+
     this.clear();
     return this.scenarios[0];
   }

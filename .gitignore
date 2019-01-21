@@ -65,3 +65,4 @@ cypress/screenshots/
 
 docs/.vuepress/dist/
 dist/
+stats.html
