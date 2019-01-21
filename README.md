@@ -1,6 +1,6 @@
 > Reusable user onboarding UI components
 
-![https://travis-ci.com/onboardist/ui/branches/master](https://travis-ci.com/onboardist/ui.svg?branch=master)
+[![Build Status](https://travis-ci.com/onboardist/ui.svg?branch=master)](https://travis-ci.com/onboardist/ui)
 
 # Components
 
