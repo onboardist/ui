@@ -49,7 +49,7 @@ function generateEventHandler(handler, mappedComponent) {
       };
     } else if (pair2 === 'hide') {
       handler = () => {
-        if (comp.instance) comp.instance.hide();
+        if (comp.instance) comp.instance.close();
       };
     }
   } else if (tour) {

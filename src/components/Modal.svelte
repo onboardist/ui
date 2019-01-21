@@ -1,4 +1,4 @@
-<div ref:el class="oboardist-container" class:backdrop="backdrop">
+<div ref:el class="oboardist-container modal" class:backdrop="backdrop">
   <Box ref:box title={title}>
     <div slot="content">{@html content}</div>
     <div slot="buttons">
