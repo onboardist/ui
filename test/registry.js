@@ -118,5 +118,5 @@ test('destroyInstances() destroys all component instances', t => {
     t.falsy(Onboardist.Registry.component(`comp-${i}`).instance);
   }
 
-  t.is(0, document.body.children.length);
+  t.falsy(document.body.querySelector('.tooltip'));
 });

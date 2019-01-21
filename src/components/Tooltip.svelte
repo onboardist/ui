@@ -18,7 +18,7 @@
 <script>
 import Backdrop from './Backdrop.svelte';
 import Box from './Box.svelte';
-import { oncreate, ondestroy, close, expandButtonArgs, hide, show } from '../methods';
+import { oncreate, ondestroy, close, expandButtonArgs } from '../methods';
 
 export default {
   components: { Backdrop, Box },
@@ -37,8 +37,6 @@ export default {
   }),
   methods: {
     close,
-    show,
-    hide,
     call(fn, ...args) {
       fn.call(this, ...args);
     },

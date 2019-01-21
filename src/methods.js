@@ -9,18 +9,12 @@ export function close() {
   this.destroy();
 }
 
-// TODO: this is not being used atm
-export function show() {
-  this.show = true;
-}
-
-export function hide() {
-  this.destroy();
-}
-
 function attachEl() {
   const createPopper = attachEl => {
     this.popper = new Popper(attachEl, this.refs.el, { ...this.options });
+    this.on('destroy', () => {
+      this.popper.destroy();
+    });
   };
 
   let { attach } = this.options;

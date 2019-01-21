@@ -15,7 +15,7 @@
 
 <script>
 import Box from './Box.svelte';
-import { close, oncreate, ondestroy, expandButtonArgs, hide, show } from '../methods';
+import { close, oncreate, ondestroy, expandButtonArgs } from '../methods';
 
 export default {
   oncreate() {
@@ -35,8 +35,6 @@ export default {
   },
   methods: {
     close,
-    show,
-    hide,
     call(fn, ...args) {
       fn.call(this, ...args);
     },

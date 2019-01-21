@@ -12,11 +12,8 @@
 
 <script>
 import config from '../config';
-import { oncreate, show, hide } from '../methods';
 
 export default {
-  // oncreate,
-  methods: { show, hide },
   data: () => ({
     title: '',
     content: '',

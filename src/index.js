@@ -22,7 +22,8 @@ export function configure(config) {
   // TODO: make sure each component exists
   (config.components || []).forEach(c => {
     const comp = Registry.registerComponent(c);
-    registerForEvents(c.args.events, comp);
+    const args = comp.args || {};
+    registerForEvents(args.events, comp);
   });
 }
 
@@ -42,6 +43,5 @@ export function stop() {
 export function reset() {
   PubSub.reset();
 
-  Registry.destroyInstances();
   Registry.clear();
 }

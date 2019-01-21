@@ -15,7 +15,7 @@
 <script>
 import Config from '../config';
 import Backdrop from './Backdrop.svelte';
-import { oncreate, ondestroy, show, hide } from '../methods';
+import { oncreate, ondestroy } from '../methods';
 
 export default {
   oncreate,
@@ -27,10 +27,6 @@ export default {
     style: 'pulse',
     size: 20,
   }),
-
-  methods: {
-    show, hide,
-  },
 };
 </script>
 
