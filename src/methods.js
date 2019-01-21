@@ -56,7 +56,9 @@ function generateEventHandler(handler, mappedComponent) {
     // TODO: Do something with a tour
     // tour.
   } else if (handler === 'close') {
-    handler = () => this.close();
+    handler = () => {
+      if (mappedComponent.instance) mappedComponent.instance.close();
+    };
   } else if (handler === 'next') {
     handler = () => Registry.activeTour().next(); // TODO: this will throw if there's no activeTour, add a guard?
   } else if (handler === 'show') {
@@ -79,7 +81,7 @@ export function registerForEvents(eventArg = {}, mappedComponent) {
     for (let event of [].concat(events)) {
       event = event.trim();
 
-      const h = generateEventHandler(handler, mappedComponent);
+      const h = generateEventHandler.call(this, handler, mappedComponent);
 
       // Event key is a DOM event
       if (['click', 'mouseover', 'mouseout', 'contextmenu', 'dblclick'].includes(event)) {

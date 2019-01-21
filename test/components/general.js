@@ -97,7 +97,7 @@ test.serial('can register component for global events', t => {
   t.is('bar', foo);
 });
 
-test.serial("can bind component 'show' event", t => {
+test.serial("can bind component 'show' and 'close' events", t => {
   Onboardist.configure({
     components: [{
       name: 'tooltip1',
@@ -107,15 +107,35 @@ test.serial("can bind component 'show' event", t => {
         title: 'Create New User',
         content: 'Click to create new user',
         events: {
-          'main.event': 'show',
+          'event.show': 'show',
+          'event.close': 'close',
         },
       },
     }],
   });
 
-  t.falsy(document.body.querySelector('.tooltip'));
-
-  Onboardist.fire('main.event');
-
+  Onboardist.fire('event.show');
   t.truthy(document.body.querySelector('.tooltip'));
+
+  Onboardist.fire('event.close');
+  t.falsy(document.body.querySelector('.tooltip'));
+});
+
+test.serial('Unknown handler throws', t => {
+  t.throws(() => {
+    Onboardist.configure({
+      components: [{
+        name: 'tooltip1',
+        component: 'tooltip',
+        args: {
+          attach: document.body,
+          title: 'Create New User',
+          content: 'Click to create new user',
+          events: {
+            'event.show': 'foobar',
+          },
+        },
+      }],
+    });
+  });
 });
