@@ -32,6 +32,32 @@ test('Tours require scenarios', t => {
   });
 });
 
+test('If tour has no components it throws', t => {
+  t.throws(() => {
+    const tour = new Onboardist.Tour({
+      scenarios: [
+        {},
+      ],
+    });
+  });
+});
+
+test('Tour components get registered', t => {
+  const tour = new Onboardist.Tour({
+    scenarios: [
+      {
+        components: [
+          { name: 'tip1', component: 'tooltip' },
+          { name: 'tip2', component: 'tooltip' },
+        ],
+      },
+    ],
+  });
+
+  t.truthy(Onboardist.Registry.component('tip1'));
+  t.truthy(Onboardist.Registry.component('tip2'));
+});
+
 // test('Can start a tour', t => {
 //   Onboardist.configure({
 //     tours: [

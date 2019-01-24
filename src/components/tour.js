@@ -36,7 +36,7 @@ export default class Tour {
       }
 
       for (const args of scenario.components) {
-        const comp = Registry.component({
+        const comp = Registry.registerComponent({
           component: args.component,
           args,
           name: args.name,
@@ -48,11 +48,6 @@ export default class Tour {
   }
 
   start() {
-    if (this.scenarios.length === 0) {
-      console.warn('No scenarios');
-      return;
-    }
-
     // We are now the active tour
     Registry.setActiveTour(this);
 
