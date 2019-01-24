@@ -58,21 +58,21 @@ test('Tour components get registered', t => {
   t.truthy(Onboardist.Registry.component('tip2'));
 });
 
-// test('Can start a tour', t => {
-//   Onboardist.configure({
-//     tours: [
-//       {
-//         name: 'new-user',
-//       },
-//       {
-//         name: 'new-company',
-//       },
-//     ],
-//   });
+test('Can start a tour', t => {
+  Onboardist.configure({
+    tours: [
+      {
+        name: 'new-user',
+        scenarios: [{ components: [{ component: 'tooltip' }] }],
+      },
+      {
+        name: 'new-company',
+        scenarios: [{ components: [{ component: 'tooltip' }] }],
+      },
+    ],
+  });
 
-//   const tour = Onboardist.Registry.tour('new-user');
-//   console.log(tour.start);
-//   tour.start();
+  Onboardist.start('new-user');
 
-//   t.is(tour, Onboardist.Registry.activeTour());
-// });
+  t.is('new-user', Onboardist.Registry.activeTour().name);
+});

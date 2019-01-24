@@ -27,6 +27,13 @@ export function configure(config) {
   });
 }
 
+export function start(tourName) {
+  const tourArgs = Registry.tour(tourName);
+  const tour = new Tour(tourArgs);
+  Registry.setActiveTour(tour);
+  tour.start();
+}
+
 // Functions
 export function next() {
   if (Registry.activeTour()) Registry.activeTour().next();
