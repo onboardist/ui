@@ -1,6 +1,6 @@
 {
   "name": "@onboardist/ui",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Reusable user onboarding UI components",
   "source": "src/index.ts",
   "main": "dist/onboardist-ui.cjs.js",
