@@ -63,7 +63,6 @@
     "cypress": "^3.1.5",
     "deasync": "^0.1.14",
     "esm": "^3.0.84",
-    "jest": "^23.6.0",
     "koa-livereload": "^0.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
@@ -88,9 +87,8 @@
     "rollup-plugin-visualizer": "^0.9.2",
     "standard-changelog": "^2.0.7",
     "svelte": "^2.15.0",
-    "svelte-jest": "^0.2.0",
     "tiny-lr": "^1.1.1",
-    "vuepress": "^1.0.0-alpha.28",
+    "vuepress": "^1.0.0-alpha.42",
     "xo": "^0.23.0"
   },
   "xo": {
