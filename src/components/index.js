@@ -22,24 +22,28 @@ function genericConstructor(component, args) {
 
 export class Coachmark {
   constructor(args) {
+    args.component = 'coachmark';
     return genericConstructor(CoachmarkComponent, args);
   }
 }
 
 export class Hotspot {
   constructor(args) {
+    args.component = 'hotspot';
     return genericConstructor(HotspotComponent, args);
   }
 }
 
 export class Modal {
   constructor(args) {
+    args.component = 'modal';
     return genericConstructor(ModalComponent, args);
   }
 }
 
 export class Tooltip {
   constructor(args) {
+    args.component = 'tooltip';
     return genericConstructor(TooltipComponent, args);
   }
 }

@@ -108,24 +108,13 @@ export function oncreate() {
   // Attach element to a DOM element if necessary
   if (this.options.attach) attachEl.call(this);
 
-  // Register for events if not already registered
-  // if (!Registry.component(this.get().name)) {
-  //   const mappedComponent = {
-  //     component: this._debugName.replace(/\W/g, '').toLowerCase(),
-  //     name: this.get().name,
-  //     args: this.options,
-  //   };
-
-  //   if (this.options.events) registerForEvents.call(this, this.options.events, mappedComponent);
-  // }
-
   const { name } = this.get();
   const args = Object.assign({}, this.options);
   delete args.data;
 
   if (!Registry.component(name)) {
     const mappedComponent = {
-      component: this._debugName.replace(/\W/g, '').toLowerCase(),
+      component: args.component,
       name,
       args,
       instance: this,
