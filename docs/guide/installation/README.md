@@ -1,6 +1,6 @@
 # Installation
 
-```shell
+```
 $ npm install --save @onboardist/ui
 ```
 

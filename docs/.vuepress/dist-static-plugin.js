@@ -1,21 +1,18 @@
-const path = require('path')
+const { fs, path } = require('@vuepress/shared-utils')
+const express = require('express')
 
-module.exports = (options, ctx) => {
-  const distAssetsPath = path.resolve(ctx.sourceDir, '../dist')
+module.exports = (options, context) => {
+  const distAssetsPath = path.resolve(context.sourceDir, '../dist')
 
   return {
-      // For development
-      enhanceDevServer (app) {
-        const mount = require('koa-mount')
-        const serveStatic = require('koa-static')
-        app.use(mount(path.join(ctx.base, 'dist'), serveStatic(distAssetsPath)))
-        app.use(require('koa-livereload')());
-      },
+    // For development
+    beforeDevServer (app) {
+      app.use('/dist', express.static(distAssetsPath))
+    },
 
-      // // For production
-      // async generated () {
-      //   const { fs } = require('@vuepress/shared-utils')
-      //   await fs.copy(imagesAssetsPath, path.resolve(ctx.outDir, 'images'))
-      // }
+    // For production
+    async generated () {
+      await fs.copy(distAssetsPath, path.resolve(context.outDir, 'dist'))
+    }
   }
-}
+};
