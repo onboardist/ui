@@ -24,7 +24,9 @@
     "prepublishOnly": "npm run build",
     "docs": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "docs:deploy": "./docs/docs.sh"
+    "docs:deploy": "./docs/docs.sh",
+    "changelog": "npx standard-changelog",
+    "beforeStage": "npx standard-changelog"
   },
   "repository": {
     "type": "git",
@@ -58,7 +60,7 @@
     "babel-register": "^6.26.0",
     "browser-env": "^3.2.5",
     "chokidar": "^2.0.4",
-    "cypress": "^3.1.1",
+    "cypress": "^3.1.5",
     "deasync": "^0.1.14",
     "esm": "^3.0.84",
     "jest": "^23.6.0",
@@ -70,8 +72,9 @@
     "mock-require": "^3.0.3",
     "mutationobserver-shim": "^0.3.3",
     "npm-run-all": "^4.1.5",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "onchange": "^5.2.0",
+    "release-it": "^10.2.0",
     "rollup": "^0.66.6",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -83,6 +86,7 @@
     "rollup-plugin-svelte": "^4.3.2",
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-visualizer": "^0.9.2",
+    "standard-changelog": "^2.0.7",
     "svelte": "^2.15.0",
     "svelte-jest": "^0.2.0",
     "tiny-lr": "^1.1.1",
