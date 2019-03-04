@@ -45,6 +45,8 @@ function generateEventHandler(handler, mappedComponent) {
     // Do something with a component
     if (!pair2 || pair2 === 'show') {
       handler = () => {
+        // Show if not already instanced
+        if (Registry.component(args.name).instance) return;
         new component(args); /* eslint-disable-line no-new */
       };
     } else if (pair2 === 'hide') {
@@ -66,6 +68,7 @@ function generateEventHandler(handler, mappedComponent) {
     handler = () => {
       if (mappedComponent) {
         const { component, args } = mappedComponent;
+        if (Registry.component(args.name).instance) return;
         if (component) new component(args); /* eslint-disable-line no-new */
       }
     };
@@ -103,8 +106,13 @@ export function oncreate() {
   // Attach element to a DOM element if necessary
   if (this.options.attach) attachEl.call(this);
 
-  // Register for events
-  if (this.options.events) registerForEvents.call(this, this.options.events);
+  // Register for events (which may already have happened)
+  // const mappedComponent = {
+  //   component: this._debugName.replace(/\W/g, '').toLowerCase(),
+  //   name: this.get().name,
+  //   args: this.options,
+  // };
+  // if (this.options.events) registerForEvents.call(this, this.options.events, mappedComponent);
 
   // Register instance globally
   Registry.registerInstance({ name: this.get().name, instance: this });

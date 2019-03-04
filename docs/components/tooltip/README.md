@@ -1,7 +1,7 @@
 # Tooltip
 
 <div class="example">
-  <button id="tooltip-button">button</button>
+  <button id="tooltip-button" @click="showTip()">button</button>
 </div>
 
 ## Usage
@@ -57,28 +57,32 @@ new Tooltip({ attach: document.querySelector('input.my-input-class') });
       destroyables: [],
     }),
     mounted() {
-      this.destroyables.push(new Onboardist.UI.Tooltip({
-        attach: document.querySelector('#tooltip-button'),
-        title: 'Title',
-        placement: 'right',
-        content: 'This is the content',
-        buttons: ['ok'],
-      }));
-
-    //   this.destroyables.push(new Onboardist.UI.Tooltip({
-    //     attach: '#pulse',
-    //     style: 'pulse',
-    //     ...popperArgs,
-    //   }));
-
-    //   this.destroyables.push(new Onboardist.UI.Tooltip({
-    //     attach: '#teardrop',
-    //     style: 'teardrop',
-    //     ...popperArgs,
-    //   }));
+      Onboardist.UI.configure({
+        components: [
+          {
+            component: 'tooltip',
+            name: 'demo-tip',
+            args: {
+              attach: '#tooltip-button',
+              placement: 'right',
+              content: 'This is the content',
+              buttons: ['ok'],
+              events: {
+                'show-tip': 'show',
+              },
+            },
+          },
+        ],
+      });
+      Onboardist.UI.fire('show-tip');
+    },
+    methods: {
+      showTip() {
+        Onboardist.UI.fire('show-tip');
+      }
     },
     destroyed() {
-      this.destroyables.forEach(x => x.destroy());
+      Onboardist.UI.reset()
     },
   }
 </script>

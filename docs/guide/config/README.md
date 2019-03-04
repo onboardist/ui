@@ -7,6 +7,7 @@ Onboardist.UI.configure({
   // TODO: pre-register components for use else-where
   components: [
     {
+      component: 'tooltip',
       name: 'user-tip',
       attach: '#create-user-button',
       content: 'Click here to create a user',

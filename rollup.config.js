@@ -1,14 +1,15 @@
+import path from 'path';
 import { merge } from 'lodash';
+import { terser } from 'rollup-plugin-terser';
 import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import json from 'rollup-plugin-json';
 import legacy from 'rollup-plugin-legacy';
-import resolve from 'rollup-plugin-node-resolve';
 import less from 'less';
+import resolve from 'rollup-plugin-node-resolve';
 import string from 'rollup-plugin-string';
 import svelte from 'rollup-plugin-svelte';
-import { terser } from 'rollup-plugin-terser';
 import vizualizer from 'rollup-plugin-visualizer';
 import pkg from './package.json';
 
@@ -48,6 +49,15 @@ const plugins = [
   filesize(),
 ];
 
+const onwarn = warning => {
+  // Silence circular dependency warning for moment package
+  if (warning.code === 'CIRCULAR_DEPENDENCY' && warning.importer.indexOf(path.normalize('node_modules')) === -1) {
+    return;
+  }
+
+  console.warn(`(!) ${warning.message}`);
+};
+
 const config = {
   input: 'src/index.js',
   output: {
@@ -63,6 +73,7 @@ const config = {
     ...plugins,
     vizualizer(),
   ],
+  onwarn,
 };
 
 export default [

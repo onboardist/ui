@@ -36,7 +36,7 @@ Onboardist.
 ```js
 new Hotspot({
   attach: '#foo',
-  subscribe: {
+  events: {
     'show-hotspot': 'show',
   },
 });

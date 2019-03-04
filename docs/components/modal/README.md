@@ -67,6 +67,7 @@ Content to put in the body of the modal. You can use html.
             By default, they have an 'OK' button that will close the modal.
           `,
           buttons: null,
+          backdrop: false,
         },
       })
     },

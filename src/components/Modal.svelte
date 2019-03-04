@@ -1,4 +1,4 @@
-<div ref:el class="oboardist-container modal" class:backdrop="backdrop">
+<div ref:el class="oboardist-container modal">
   <Box ref:box title={title}>
     <div slot="content">{@html content}</div>
     <div slot="buttons">
@@ -12,6 +12,9 @@
     </div>
   </Box>
 </div>
+{#if backdrop}
+  <div class:backdrop="backdrop"></div>
+{/if}
 
 <script>
 import Box from './Box.svelte';
@@ -45,16 +48,28 @@ export default {
 <style lang="less">
 @import 'src/main';
 
-.oboardist-container {
-  z-index: @zindex;
+.fullscreen() {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
+}
+
+.oboardist-container {
+  .fullscreen();
+
+  z-index: @zindex;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.backdrop {
+  .fullscreen();
+  z-index: @zindex - 1;
+  background: black;
+  opacity: 0.3;
 }
 
 :global(.oboardist-container .box) {
