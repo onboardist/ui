@@ -88,6 +88,8 @@ export function registerForEvents(eventArg = {}, mappedComponent) {
 
       // Event key is a DOM event
       if (['click', 'mouseover', 'mouseout', 'contextmenu', 'dblclick'].includes(event)) {
+        // This is not an instanced component, so no interactive events can be attached yet
+        if (!this || !this.refs) return;
         this.refs.el.addEventListener(event, h);
         this.on('destroy', () => this.refs.el.removeEventListener(event, h));
       } else {
@@ -106,13 +108,31 @@ export function oncreate() {
   // Attach element to a DOM element if necessary
   if (this.options.attach) attachEl.call(this);
 
-  // Register for events (which may already have happened)
-  // const mappedComponent = {
-  //   component: this._debugName.replace(/\W/g, '').toLowerCase(),
-  //   name: this.get().name,
-  //   args: this.options,
-  // };
-  // if (this.options.events) registerForEvents.call(this, this.options.events, mappedComponent);
+  // Register for events if not already registered
+  // if (!Registry.component(this.get().name)) {
+  //   const mappedComponent = {
+  //     component: this._debugName.replace(/\W/g, '').toLowerCase(),
+  //     name: this.get().name,
+  //     args: this.options,
+  //   };
+
+  //   if (this.options.events) registerForEvents.call(this, this.options.events, mappedComponent);
+  // }
+
+  const { name } = this.get();
+  const args = Object.assign({}, this.options);
+  delete args.data;
+
+  if (!Registry.component(name)) {
+    const mappedComponent = {
+      component: this._debugName.replace(/\W/g, '').toLowerCase(),
+      name,
+      args,
+      instance: this,
+    };
+    Registry.registerComponent(mappedComponent);
+    if (this.options.events) registerForEvents.call(this, this.options.events, mappedComponent);
+  }
 
   // Register instance globally
   Registry.registerInstance({ name: this.get().name, instance: this });

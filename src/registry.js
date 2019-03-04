@@ -1,5 +1,6 @@
 import { Coachmark, Hotspot, Modal, Tooltip } from './components';
 import { uniquestring } from './util';
+import { registerForEvents } from './methods';
 
 // TODO: rewrite with Map()
 // Singleton registry
@@ -52,7 +53,7 @@ function registerComponent({ name, component, args, instance }) {
   };
 
   // TODO: this doesn't belong here. Causing circular dependency
-  // registerForEvents(args.events, _registry.components[name]);
+  // registerForEvents.call(this, args.events, _registry.components[name]);
 
   return _registry.components[name];
 }
