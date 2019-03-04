@@ -7,6 +7,7 @@
   "module": "dist/onboardist-ui.esm.js",
   "browser": "dist/onboardist-ui.umd.js",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
     "dev": "NODE_ENV=development npm-run-all -l -p build:watch test:ci:watch docs:dev livereload",

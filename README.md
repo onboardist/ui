@@ -19,7 +19,7 @@
 
 # Releases
 
-    npx release-it
+    npx np
 
 ## Notes
 
