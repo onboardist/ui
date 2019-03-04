@@ -48,7 +48,6 @@
   "homepage": "https://github.com/onboardist/ui#readme",
   "dependencies": {
     "is-dom": "^1.0.9",
-    "koa-static": "^5.0.0",
     "leader-line": "^1.0.4",
     "popper.js": "^1.14.5",
     "wait-for-the-element": "^2.0.0"
@@ -64,8 +63,6 @@
     "cypress": "^3.1.5",
     "deasync": "^0.1.14",
     "esm": "^3.0.84",
-    "koa-livereload": "^0.2.0",
-    "koa-mount": "^4.0.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.11",
