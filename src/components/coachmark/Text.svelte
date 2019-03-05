@@ -3,6 +3,8 @@
 </div>
 
 <style lang="less">
+@import url(https://fonts.googleapis.com/css?family=Short+Stack); 
+
 .text-container {
   position: fixed;
   display: flex;
@@ -44,7 +46,6 @@ export default {
       return this.refs.text;
     },
     position() {
-      console.log('positioning');
       const box = chooseRenderBox(this.get().target);
 
       this.refs.container.style.top = box.top + 'px';
@@ -61,9 +62,6 @@ function chooseRenderBox(elm) {
   // See if the element is in box1 or box2;
   let elmMiddle = middleOfNode(elm);
   elmMiddle = { x: Math.floor(elmMiddle[0]), y: Math.floor(elmMiddle[1]) };
-
-  console.log('boxes', box1, box2);
-  console.log('elmMiddle', elmMiddle);
 
   if (rectContains(elmMiddle, box1)) return box2;
   else return box1;
