@@ -1,3 +1,4 @@
+<svelte:window on:resize="redraw()"></svelte:window>
 <div ref:top class="top { shown ? 'shown' : '' }"></div>
 <div ref:right class="right { shown ? 'shown' : '' }"></div>
 <div ref:bottom class="bottom { shown ? 'shown' : '' }"></div>
@@ -21,8 +22,6 @@ export default {
         this.set({ shown: false });
         return;
       }
-
-      console.log('element', element);
 
       // TODO: refactor use to elementRect() function which is in Text.svelte
       const rect = element.getBoundingClientRect();

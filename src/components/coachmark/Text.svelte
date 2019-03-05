@@ -1,10 +1,9 @@
+<svelte:window on:resize="position()"></svelte:window>
 <div ref:container class="text-container">
   <div ref:text class="text">{ text }</div>
 </div>
 
 <style lang="less">
-@import url(https://fonts.googleapis.com/css?family=Short+Stack); 
-
 .text-container {
   position: fixed;
   display: flex;
@@ -22,6 +21,8 @@
   color: #fefefe;
   text-shadow: 2px 2px #333;
   /* z-index: 2; */
+  word-break: break-word;
+  hyphens: auto;
 }
 </style>
 
