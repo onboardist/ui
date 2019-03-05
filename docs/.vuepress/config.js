@@ -17,7 +17,11 @@ module.exports = {
   head: [
     (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
       ? ['script', { src: `http://localhost:${port}/dist/onboardist-ui.umd.js`} ]
-      : ['script', { src: `https://unpkg.com/@onboardist/ui@${pkg.version}/dist/onboardist-ui.min.js`} ]
+      : ['script', { src: `https://unpkg.com/@onboardist/ui@${pkg.version}/dist/onboardist-ui.min.js`} ],
+
+    (process.env.NODE_ENV && ~process.env.NODE_ENV.indexOf('dev'))
+      ? ['script', { src: `http://localhost:35729/livereload.js`} ]
+      : [],
   ],
 
   markdown: {

@@ -41,7 +41,7 @@ export default {
     call(fn, ...args) {
       fn.call(this, ...args);
     },
-  }
+  },
 };
 </script>
 

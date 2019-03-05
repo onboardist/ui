@@ -11,6 +11,7 @@ export function close() {
 
 function attachEl() {
   const createPopper = attachEl => {
+    if (!this.refs || !this.refs.el) return;
     this.popper = new Popper(attachEl, this.refs.el, { ...this.options });
     this.on('destroy', () => {
       this.popper.destroy();
@@ -25,10 +26,14 @@ function attachEl() {
   // If the `attach` option is an element, use it right away. Otherwise wait (2.5s by default) for the attach element
   //   to exist.
   if (isDom(attach)) {
+    this.set({ attach });
     createPopper(attach);
   } else {
     waitForTheElement(attach)
-      .then(attachEl => createPopper(attachEl));
+      .then(attachEl => {
+        this.set({ attach: attachEl });
+        createPopper(attachEl);
+      });
   }
 }
 

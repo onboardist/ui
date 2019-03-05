@@ -5,3 +5,19 @@ Coachmarks are hand-sketched-looking drawings that overlay on top of your UI to 
 :::tip Coming Soon
 The coachmark component will be coming soon.
 :::
+
+<div class="example">
+  <button id="coachmark-demo">button</button>
+</div>
+
+<script>
+export default {
+  props: ['slot-key'],
+  mounted() {
+    new Onboardist.UI.Coachmark({
+      attach: '#coachmark-demo',
+      content: 'Testing coachmarks',
+    });
+  },
+};
+</script>

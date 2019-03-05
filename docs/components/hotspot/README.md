@@ -71,32 +71,30 @@ const popperArgs = {
 
 export default {
   props: ['slot-key'],
-  data: () => ({
-    destroyables: [],
-  }),
   mounted() {
-    this.destroyables.push(new Onboardist.UI.Hotspot({
+    new Onboardist.UI.Hotspot({
       attach: document.querySelector('#hotspot-button'),
       placement: 'top-end',
-    }));
+    });
 
-    this.destroyables.push(new Onboardist.UI.Hotspot({
+    new Onboardist.UI.Hotspot({
       attach: '#pulse',
       style: 'pulse',
       ...popperArgs,
-    }));
+    });
 
-    this.destroyables.push(new Onboardist.UI.Hotspot({
+    new Onboardist.UI.Hotspot({
       attach: '#teardrop',
       style: 'teardrop',
       ...popperArgs,
-    }));
+    });
   },
   destroyed() {
-    this.destroyables.forEach(x => x.destroy());
+    Onboardist.UI.reset();
   },
 };
 </script>
+
 <style lang="less">
 .styles {
   display: flex;

@@ -10,6 +10,7 @@ export default {
     backdrop: false,
   }),
   oncreate() {
+    // Singleton
     if (!document.querySelector('.onboardist-backdrop')) {
       this.set({ backdrop: true });
     } else {
