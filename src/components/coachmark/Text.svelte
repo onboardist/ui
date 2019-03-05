@@ -4,6 +4,8 @@
 </div>
 
 <style lang="less">
+@import 'src/main';
+
 .text-container {
   position: fixed;
   display: flex;
@@ -11,7 +13,7 @@
   justify-content: center;
   align-items: center;
   padding: 5vmin;
-  z-index: 10002;
+  z-index: @zindex + 2;
 }
 
 .text {

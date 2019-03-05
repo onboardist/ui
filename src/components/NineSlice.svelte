@@ -66,6 +66,8 @@ export default {
 </script>
 
 <style lang="less">
+@import 'src/main';
+
   .overlay {
     display: none;
 
@@ -83,7 +85,7 @@ export default {
     opacity: 0.66;
     margin: 0;
     padding: 0;
-    z-index:10000;
+    z-index: @zindex + 1;
   }
 
   .top {
@@ -110,6 +112,6 @@ export default {
 
   .glow {
     position: absolute;
-    z-index:10000;
+    z-index: @zindex + 1;
   }
 </style>
