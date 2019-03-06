@@ -7,17 +7,27 @@ The coachmark component will be coming soon.
 :::
 
 <div class="example">
-  <button id="coachmark-demo">button</button>
+  <button id="coachmark-demo" @click="showCoachmark()">button</button>
 </div>
 
 <script>
 export default {
   props: ['slot-key'],
+  data: () => ({
+    mark: null,
+  }),
   mounted() {
-    new Onboardist.UI.Coachmark({
-      attach: '#coachmark-demo',
-      content: 'Testing coachmarks',
-    });
+  },
+  methods: {
+    showCoachmark() {
+      this.mark = new Onboardist.UI.Coachmark({
+        attach: '#coachmark-demo',
+        content: 'This is a coachmark',
+      });
+    },
+  },
+  destroyed() {
+    Onboardist.UI.clear();
   },
 };
 </script>

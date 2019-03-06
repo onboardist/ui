@@ -1,4 +1,4 @@
-<div class="action-btn" on:click="handleClick()">
+<div class="action-btn" on:click>
   {#if type == 'next' }
     <svg xmlns="http://www.w3.org/2000/svg" class="next-button">
       <g transform="scale(0.065), translate(140, 170)">
@@ -11,14 +11,16 @@
 </div>
 
 <style lang="less">
+@import 'src/main';
+
 @color: #fff;
 @buttonSize: 56px;
 @buttonBorderSize: 3px;
 
 .action-btn {
-  z-index: 10003;
+  z-index: @zindex + 3;
   border-radius: 50%;
-  border: @buttonBorderSize solid $color;
+  border: @buttonBorderSize solid @color;
   height: 56px;
   width: 56px;
   position: fixed;
@@ -45,42 +47,36 @@
 export default {
   data() {
     return {
+      // type: 'close',
       icon: 'X',
-      coachmark: null,
-      flow: null,
+      // coachmark: null,
+      // flow: null,
     }
   },
-  computed: {
-    type: ({ coachmark }) => {
-      if (coachmark && coachmark.flow && coachmark.flow.getNext(coachmark.name)) return 'next';
+  // methods: {
+  //   handleClick() {
+  //     const coachmark = this.get().coachmark;
+  //     if (!coachmark) {
+  //       console.error('No coachmark specified for action button');
+  //       return;
+  //     }
 
-      return 'close';
-    },
-  },
-  methods: {
-    handleClick() {
-      const coachmark = this.get().coachmark;
-      if (!coachmark) {
-        console.error('No coachmark specified for action button');
-        return;
-      }
+  //     let flow = cache('flow');
+  //     if (coachmark.flow) flow = cache.set('flow', coachmark.flow);
 
-      let flow = cache('flow');
-      if (coachmark.flow) flow = cache.set('flow', coachmark.flow);
+  //     if (flow) {
+  //       const next = flow.getNext(coachmark.name);
+  //       if (next) {
+  //         this.type = 'next';
+  //         return this.fire('next', { next });
+  //       } else cache.remove('flow');
+  //     }
 
-      if (flow) {
-        const next = flow.getNext(coachmark.name);
-        if (next) {
-          this.type = 'next';
-          return this.fire('next', { next });
-        } else cache.remove('flow');
-      }
-
-      this.clear();
-    },
-    clear() {
-      this.fire('clear');
-    },
-  }
+  //     this.clear();
+  //   },
+  //   clear() {
+  //     this.fire('clear');
+  //   },
+  // }
 }
 </script>

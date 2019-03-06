@@ -9,6 +9,14 @@ export function close() {
   this.destroy();
 }
 
+export function show() {
+  this.set({ shown: true });
+}
+
+export function hide() {
+  this.set({ shown: false });
+}
+
 function attachEl() {
   const createPopper = attachEl => {
     if (!this.refs || !this.refs.el) return;
@@ -148,6 +156,7 @@ export function expandButtonArgs(buttons) {
       //   return { text: 'Next', handler() { Onboardist.UI.next(); } };
       case ('ok'):
         return {
+          type: 'close',
           text: 'OK',
           handler() {
             this.close();
