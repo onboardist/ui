@@ -1,7 +1,8 @@
-<svelte:window on:resize="redraw()" on:scroll="redraw()"></svelte:window>
+<svelte:window on:resize="redraw()" on:scroll="redraw()" on:orientationchange="position()"></svelte:window>
 
 <script>
 import LeaderLine from 'leader-line';
+import raf from 'raf';
 
 const COLOR = '#fff';
 
@@ -17,13 +18,17 @@ export default {
   methods: {
     redraw() {
       if (this.line) this.line.remove();
-      this.leaderLine(this.get().from, this.get().to);
+      
+      raf(() => {
+        this.leaderLine(this.get().from, this.get().to);
+      });
     },
     leaderLine(from, to) {
       // console.log(from, to, this)
       if (!from || !to) return;
       if (this.line) {
         try {
+          // NOTE: this fails if we try to remove in the middle of it rendering
           this.line.remove();
         } catch (e) {
           // ...

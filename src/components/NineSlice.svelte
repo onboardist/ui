@@ -1,4 +1,4 @@
-<svelte:window on:resize="redraw()" on:scroll="redraw()"></svelte:window>
+<svelte:window on:resize="redraw()" on:scroll="redraw()" on:orientationchange="redraw()"></svelte:window>
 <div ref:top class="top { shown ? 'shown' : '' }"></div>
 <div ref:right class="right { shown ? 'shown' : '' }"></div>
 <div ref:bottom class="bottom { shown ? 'shown' : '' }"></div>
@@ -7,13 +7,16 @@
 
 <script>
 import isDom from 'is-dom';
+import raf from 'raf';
 
 export default {
   data: () => ({
     shown: false,
   }),
   onstate({ changed, current, previous }) {
-    this.redraw();
+    raf(() => {
+      this.redraw();
+    });
   },
   methods: {
     redraw() {

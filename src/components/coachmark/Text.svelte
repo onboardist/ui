@@ -1,6 +1,6 @@
-<svelte:window on:resize="position()"></svelte:window>
+<svelte:window on:resize="position()" on:scroll="position()" on:orientationchange="position()"></svelte:window>
 <div ref:container class="text-container">
-  <div ref:text class="text">{ text }</div>
+  <div ref:text class="text" style="font-size: {textSize}vmin; line-height: {textSize}vmin;">{ text }</div>
 </div>
 
 <style lang="less">
@@ -17,9 +17,9 @@
 }
 
 .text {
-  font-size: 11vmin;
+  /* font-size: 11vmin; */
   font-family: 'Short Stack', cursive; // TODO: dynamic
-  line-height: 11vmin; // 11vmin looks better sometimes
+  /* line-height: 11vmin; // 11vmin looks better sometimes */
   color: #fefefe;
   text-shadow: 2px 2px #333;
   /* z-index: 2; */
@@ -30,24 +30,22 @@
 
 <script>
 import isDom from 'is-dom';
+import raf from 'raf';
 
 export default {
-  data() {
-    return {
-      text: '',
-      target: null,
+  data: () => ({
+    text: '',
+    target: null,
+    textSize: 11,
+  }),
+  onstate({ changed, current }) {
+    if (changed.target && isDom(current.target)) {
+      raf(() => {
+        this.position();
+      });
     }
   },
-  onstate({ changed, current }) {
-    if (changed.target && isDom(current.target)) this.position();
-  },
   methods: {
-    getElement() {
-      return this.refs.container;
-    },
-    getTextElement() {
-      return this.refs.text;
-    },
     position() {
       const box = chooseRenderBox(this.get().target);
 
@@ -55,6 +53,11 @@ export default {
       this.refs.container.style.left = box.left + 'px';
       this.refs.container.style.width = box.width + 'px';
       this.refs.container.style.height = box.height + 'px';
+
+      const vmin = Math.min(document.body.offsetHeight, document.body.offsetWidth);
+      // Quadratic function to fit vmin size to actual vmin so it looks nice
+      const textSize = Math.max(6, -0.0000163847 * vmin**2 + 0.0102378 * vmin + 7.47434);
+      this.set({ textSize });
     }
   }
 }
@@ -63,10 +66,10 @@ function chooseRenderBox(elm) {
   const [box1, box2] = splitScreen();
 
   // See if the element is in box1 or box2;
-  let elmMiddle = middleOfNode(elm);
-  elmMiddle = { x: Math.floor(elmMiddle[0]), y: Math.floor(elmMiddle[1]) };
+  const elmMiddle = middleOfNode(elm);
+  const flooredElmMiddle = { x: Math.floor(elmMiddle[0]), y: Math.floor(elmMiddle[1]) };
 
-  if (rectContains(elmMiddle, box1)) return box2;
+  if (rectContains(flooredElmMiddle, box1)) return box2;
   else return box1;
 }
 
