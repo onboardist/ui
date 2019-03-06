@@ -27,7 +27,7 @@ export default {
     },
   },
   destroyed() {
-    Onboardist.UI.clear();
+    Onboardist.UI.reset();
   },
 };
 </script>
