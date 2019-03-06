@@ -131,7 +131,7 @@ function elementRect(node, offsetParent) {
 function middleOfNode(node) {
   let rect = node;
   if (node instanceof Node) {
-    rect = elementRect(node);
+    rect = elementRect(node, false);
   }
 
   return [rect.left + (rect.width / 2), rect.top + (rect.height / 2)];

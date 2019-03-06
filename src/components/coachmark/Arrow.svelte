@@ -1,4 +1,4 @@
-<svelte:window on:resize="redraw()"></svelte:window>
+<svelte:window on:resize="redraw()" on:scroll="redraw()"></svelte:window>
 
 <script>
 import LeaderLine from 'leader-line';
@@ -7,7 +7,7 @@ const COLOR = '#fff';
 
 export default {
   data: () => ({
-    line: {},
+    line: null,
     from: null,
     to: null,
   }),
@@ -22,10 +22,19 @@ export default {
     leaderLine(from, to) {
       // console.log(from, to, this)
       if (!from || !to) return;
+      if (this.line) {
+        try {
+          this.line.remove();
+        } catch (e) {
+          // ...
+        }
+      }
+
+      const anchorOpts = {};
   
       this.line = new LeaderLine(
-        LeaderLine.areaAnchor(from),
-        LeaderLine.areaAnchor(to),
+        LeaderLine.areaAnchor(from, anchorOpts),
+        LeaderLine.areaAnchor(to, anchorOpts),
         {
           color: COLOR,
           endPlugColor: COLOR,
@@ -34,14 +43,14 @@ export default {
         },
       );
 
-      this.line.path = 'magnet';
+      this.line.path = 'fluid';
       this.line.position();
 
       // Put filter on lines after they've been drawn
       const lines = document.querySelectorAll('.leader-line-line-path');
       Array.prototype.forEach.call(lines, line => {
         // TODO: I've disabled the chalk roughness for now, until I can find a way to make the text rough as well
-        // line.setAttribute('filter', 'url(#coachmark-chalk)');
+        line.setAttribute('filter', 'url(#coachmark-chalk)');
       });
     }
   },

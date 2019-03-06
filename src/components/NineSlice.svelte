@@ -1,4 +1,4 @@
-<svelte:window on:resize="redraw()"></svelte:window>
+<svelte:window on:resize="redraw()" on:scroll="redraw()"></svelte:window>
 <div ref:top class="top { shown ? 'shown' : '' }"></div>
 <div ref:right class="right { shown ? 'shown' : '' }"></div>
 <div ref:bottom class="bottom { shown ? 'shown' : '' }"></div>
@@ -111,7 +111,7 @@ export default {
   }
 
   .glow {
-    position: absolute;
+    position: fixed;
     z-index: @zindex + 1;
   }
 </style>
