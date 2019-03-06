@@ -8,7 +8,7 @@
   "browser": "dist/onboardist-ui.umd.js",
   "scripts": {
     "prepublish": "npm run build",
-    "postpublish": "npm run docs:deploy",
+    "publish": "npm run docs:deploy",
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
     "dev": "NODE_ENV=development npm-run-all -l -p build:watch test:ci:watch docs:dev livereload",
