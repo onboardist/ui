@@ -23,9 +23,9 @@
 {/if}
 
 <script>
-import { uniquestring } from '../util';
 import Box from './Box.svelte';
-import { close, oncreate, ondestroy, expandButtonArgs } from '../methods';
+import { close, expandButtonArgs, oncreate, ondestroy } from '../methods';
+import { uniquestring } from '../util';
 
 export default {
   oncreate() {

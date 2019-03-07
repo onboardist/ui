@@ -1,5 +1,5 @@
 <svelte:window on:resize="position()" on:scroll="position()" on:orientationchange="position()"></svelte:window>
-<div ref:container class="text-container">
+<div ref:container class="text-container" id={id}>
   <div ref:text class="text" style="font-size: {textSize}vmin; line-height: {textSize}vmin;">{ text }</div>
 </div>
 
@@ -34,6 +34,7 @@ import raf from 'raf';
 
 export default {
   data: () => ({
+    id: null,
     text: '',
     target: null,
     textSize: 11,

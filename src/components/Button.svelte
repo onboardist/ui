@@ -1,3 +1,4 @@
+<!-- NOTE: I don't think this component is being used -->
 <button type="button" on:click="fire('click', event)">
   <slot></slot>
 </button>

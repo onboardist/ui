@@ -50,4 +50,15 @@
     </filter>
 
     <path id="right-arrow" d="M 345.23509 500.5 L 594.16634 251.00371 L 344.26968 1.468574 L 205.81581 1.525764 L 397.12537 194.51019 L 0.49999607 194.58168 L 0.62293607 305.57099 L 399.73581 305.59147 L 206.36939 500.5 L 345.23509 500.5 z "/>
+
+    <filter id="multi-stroke" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.03" numOctaves="1" seed="8" stitchTiles="noStitch" x="0%" y="0%" width="100%" height="100%" result="turbulence3"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence3" scale="015" xChannelSelector="A" yChannelSelector="A" result="displacementMap"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence3" scale="-15" xChannelSelector="A" yChannelSelector="A" x="0%" y="0%" width="100%" height="100%" result="displacementMap1"/>
+      <feMerge x="0%" y="0%" width="100%" height="100%" result="merge">
+            <feMergeNode in="displacementMap"/>
+        <feMergeNode in="displacementMap1"/>
+        <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
   </defs>
