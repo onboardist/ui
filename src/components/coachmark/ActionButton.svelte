@@ -1,14 +1,14 @@
-<div class="action-btn" on:click>
-  {#if type == 'next' }
+<button ref:el class="action-btn" on:click tabindex="0" aria-label={type === 'next' ? 'Next' : 'Close'}>
+  {#if type === 'next'}
     <svg xmlns="http://www.w3.org/2000/svg" class="next-button">
       <g transform="scale(0.065), translate(140, 170)">
         <use xlink:href="#right-arrow"></use>
       </g>
     </svg>
   {:else}
-    { icon }
+    {icon}
   {/if}
-</div>
+</button>
 
 <style lang="less">
 @import 'src/main';
@@ -18,6 +18,7 @@
 @buttonBorderSize: 3px;
 
 .action-btn {
+  background: none;
   z-index: @zindex + 3;
   border-radius: 50%;
   border: @buttonBorderSize solid @color;
@@ -52,6 +53,9 @@ export default {
       // coachmark: null,
       // flow: null,
     }
+  },
+  oncreate() {
+    this.refs.el.focus();
   },
   // methods: {
   //   handleClick() {

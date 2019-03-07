@@ -1,24 +1,25 @@
 <div ref:el class="onboardist-container">
-  <div class="tooltip">
+  <div class="tooltip" role="dialog" aria-label={title || content} aria-describedby="coachmark-tooltip-content-{id}">
     <Box ref:box title={title}>
-      <div slot="content">{@html content}</div>
+      <div slot="content" id="coachmark-tooltip-content-{id}">{@html content}</div>
       <div slot="buttons">
         {#if buttons && buttons.length > 0}
           {#each buttons as button}
-            <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
+            <button type="button" tabindex="0" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
           {/each}
         {/if}
       </div>
     </Box>
     <div class="tooltip-arrow" x-arrow></div>
-  </div>  
+  </div>
 </div>
 {#if backdrop}<Backdrop></Backdrop>{/if}
 
 <script>
 import Backdrop from './Backdrop.svelte';
 import Box from './Box.svelte';
-import { oncreate, ondestroy, close, expandButtonArgs } from '../methods';
+import { close, expandButtonArgs, oncreate, ondestroy } from '../methods';
+import { uniquestring } from '../util';
 
 export default {
   components: { Backdrop, Box },
@@ -26,10 +27,15 @@ export default {
     this.options.modifiers = this.options.modifiers || {};
     if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
 
+    // Focus first button
+    const firstButton = this.refs.el.querySelector('button');
+    if (firstButton) firstButton.focus();
+
     return oncreate.call(this);
   },
   ondestroy,
   data: () => ({
+    id: uniquestring(),
     title: '',
     content: '',
     backdrop: false,
@@ -52,19 +58,19 @@ export default {
   z-index: @zindex;
 
   :global(&[x-placement^="right"]) {
-    margin-left: 30px;
+    margin-left: 10px;
   }
 
   :global(&[x-placement^="left"]) {
-    margin-right: 30px;
+    margin-right: 10px;
   }
 
   :global(&[x-placement^="bottom"]) {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 
   :global(&[x-placement^="top"]) {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 }
 

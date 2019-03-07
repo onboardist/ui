@@ -1,5 +1,11 @@
+<svelte:window on:keydown="keypress(event)"/>
 <NineSlice {target}></NineSlice>
-<div class="onboardist-coachmark">
+<div class="onboardist-coachmark"
+  role="alertdialog"
+  aria-modal="true"
+  aria-label={title || content}
+  aria-describedby={textId}
+>
   {#if buttons}
     {#each buttons as button}
       {#if typeof(button) === 'object'}
@@ -9,7 +15,7 @@
   {:else}
     &nbsp;
   {/if}
-  <Text ref:text text={content} {target}></Text>
+  <Text ref:text id={textId} text={content} {target}></Text>
   <Arrow from={textElement} to={target}></Arrow>
 </div>
 
@@ -21,12 +27,14 @@ import Text from './coachmark/Text.svelte';
 import injectSVG from './coachmark/inject-svg';
 import svg from './coachmark/defs.svg';
 import { close, expandButtonArgs, oncreate, ondestroy, } from '../methods';
+import { uniquestring } from '../util';
 
 export default {
   data: () => ({
     buttons: ['ok'],
     target: null,
     textElement: null,
+    textId: uniquestring(),
   }),
   components: { ActionButton, Arrow, NineSlice, Text },
   oncreate() {
@@ -46,6 +54,9 @@ export default {
       fn.call(this, ...args);
     },
     close,
+    keypress(event) {
+      if (event.key === 'Escape') this.close();
+    },
   },
 };
 </script>
