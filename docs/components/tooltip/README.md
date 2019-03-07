@@ -41,16 +41,6 @@ new Tooltip({ attach: document.querySelector('input.my-input-class') });
     * `'border'`: surround element with a solid colored border -->
 
 <script>
-  const popperArgs = {
-    placement: 'left',
-    modifiers: {
-      offset: {
-        enabled: true,
-        offset: '0,-50%r',
-      },
-    },
-  };
-
   export default {
     props: ['slot-key'],
     data: () => ({
@@ -64,7 +54,7 @@ new Tooltip({ attach: document.querySelector('input.my-input-class') });
             name: 'demo-tip',
             args: {
               attach: '#tooltip-button',
-              placement: 'right',
+              // placement: 'right',
               content: 'This is the content',
               buttons: ['ok'],
               events: {

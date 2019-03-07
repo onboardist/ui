@@ -52,19 +52,19 @@ export default {
   z-index: @zindex;
 
   :global(&[x-placement^="right"]) {
-    margin-left: 30px;
+    margin-left: 10px;
   }
 
   :global(&[x-placement^="left"]) {
-    margin-right: 30px;
+    margin-right: 10px;
   }
 
   :global(&[x-placement^="bottom"]) {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 
   :global(&[x-placement^="top"]) {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 }
 
