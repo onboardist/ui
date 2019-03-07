@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tour: Wait For Element | Onboardist UI</title>
+    <meta name="description" content="Composable UI components for user onboarding">
+    <script src="https://unpkg.com/@onboardist/ui@0.0.13/dist/onboardist-ui.min.js"></script>
+  <undefined></undefined>
+    
+    <link rel="preload" href="/ui/assets/css/0.styles.d073a442.css" as="style"><link rel="preload" href="/ui/assets/js/app.11a21ab1.js" as="script"><link rel="preload" href="/ui/assets/js/2.5e3b1bfa.js" as="script"><link rel="preload" href="/ui/assets/js/8.68c889cd.js" as="script"><link rel="prefetch" href="/ui/assets/js/10.8ec3e9f8.js"><link rel="prefetch" href="/ui/assets/js/11.6671d2ac.js"><link rel="prefetch" href="/ui/assets/js/12.6557d96d.js"><link rel="prefetch" href="/ui/assets/js/13.e532bf9c.js"><link rel="prefetch" href="/ui/assets/js/14.53ecb9bb.js"><link rel="prefetch" href="/ui/assets/js/15.b29d30b6.js"><link rel="prefetch" href="/ui/assets/js/16.f56d03cf.js"><link rel="prefetch" href="/ui/assets/js/17.47b37b2b.js"><link rel="prefetch" href="/ui/assets/js/18.d8e39fd7.js"><link rel="prefetch" href="/ui/assets/js/19.f4086b19.js"><link rel="prefetch" href="/ui/assets/js/20.61af2a11.js"><link rel="prefetch" href="/ui/assets/js/21.63d8be48.js"><link rel="prefetch" href="/ui/assets/js/22.5f8fbb96.js"><link rel="prefetch" href="/ui/assets/js/23.96087fb9.js"><link rel="prefetch" href="/ui/assets/js/24.39188c40.js"><link rel="prefetch" href="/ui/assets/js/25.50ffb654.js"><link rel="prefetch" href="/ui/assets/js/26.84b834cf.js"><link rel="prefetch" href="/ui/assets/js/27.a4fc33fc.js"><link rel="prefetch" href="/ui/assets/js/28.89af200c.js"><link rel="prefetch" href="/ui/assets/js/29.ea31c854.js"><link rel="prefetch" href="/ui/assets/js/3.44bfd57d.js"><link rel="prefetch" href="/ui/assets/js/4.0b55d9ee.js"><link rel="prefetch" href="/ui/assets/js/5.77df0997.js"><link rel="prefetch" href="/ui/assets/js/6.07325279.js"><link rel="prefetch" href="/ui/assets/js/7.4269d485.js"><link rel="prefetch" href="/ui/assets/js/9.0f89fc36.js">
+    <link rel="stylesheet" href="/ui/assets/css/0.styles.d073a442.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/ui/" class="home-link router-link-active"><!----> <span class="site-name">Onboardist UI</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/ui/" class="nav-link">Home</a></div><div class="nav-item"><a href="/ui/guide/" class="nav-link">Guide</a></div> <a href="https://github.com/onboardist/ui" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/ui/" class="nav-link">Home</a></div><div class="nav-item"><a href="/ui/guide/" class="nav-link">Guide</a></div> <a href="https://github.com/onboardist/ui" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ui/guide/" class="sidebar-link">Introduction</a></li><li><a href="/ui/guide/installation/" class="sidebar-link">Installation</a></li><li><a href="/ui/guide/config/" class="sidebar-link">Configuration</a></li><li><a href="/ui/guide/api/" class="sidebar-link">Standard Component API</a></li><li><a href="/ui/guide/events/" class="sidebar-link">Event Handling</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Components</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ui/components/coachmark/" class="sidebar-link">Coachmark</a></li><li><a href="/ui/components/hotspot/" class="sidebar-link">Hotspot</a></li><li><a href="/ui/components/modal/" class="sidebar-link">Modal</a></li><li><a href="/ui/components/tooltip/" class="sidebar-link">Tooltip</a></li><li><a href="/ui/components/tour/" class="sidebar-link">Tour</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Examples</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ui/examples/dom-events/" class="sidebar-link">DOM Events</a></li><li><a href="/ui/examples/onboardist-events/" class="sidebar-link">Onboardist Events</a></li><li><a href="/ui/examples/tours/hide-next-button/" class="sidebar-link">Tour: Hide Next Button</a></li><li><a href="/ui/examples/tours/wait-for-element/" class="active sidebar-link">Tour: Wait For Element</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="tour-wait-for-element"><a href="#tour-wait-for-element" aria-hidden="true" class="header-anchor">#</a> Tour: Wait For Element</h1> <p>Sometimes you need to wait for an element to appear on the page. This example waits for the element
+with selector <code>#foo</code> to be added to the page before the final scenario runs.</p> <div class="example"><button id="tour-button">Start Tour</button> <button id="next-button">Add Element</button></div> <div class="language-js extra-class"><pre class="language-js"><code>document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#next-button'</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  div<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'foo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  div<span class="token punctuation">.</span>innerText <span class="token operator">=</span> <span class="token string">'foo'</span><span class="token punctuation">;</span>
+  document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.example'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>div<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">this</span><span class="token punctuation">.</span>tour <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Onboardist<span class="token punctuation">.</span>UI<span class="token punctuation">.</span>Tour</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// Scenario list</span>
+  scenarios<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// Scenario #1</span>
+    <span class="token punctuation">{</span>
+      components<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        <span class="token comment">// One element</span>
+        component<span class="token punctuation">:</span> <span class="token string">'modal'</span><span class="token punctuation">,</span>
+        title<span class="token punctuation">:</span> <span class="token string">'Getting Started'</span><span class="token punctuation">,</span>
+        content<span class="token punctuation">:</span> <span class="token string">'Take a quick tour of the system'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// Scenario #2</span>
+    <span class="token punctuation">{</span>
+      components<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        component<span class="token punctuation">:</span> <span class="token string">'tooltip'</span><span class="token punctuation">,</span>
+        attach<span class="token punctuation">:</span> <span class="token string">'#next-button'</span><span class="token punctuation">,</span> 
+        content<span class="token punctuation">:</span> <span class="token string">'Click this button to add the target element'</span><span class="token punctuation">,</span>
+        showNext<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        showPrev<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      wait<span class="token punctuation">:</span> <span class="token string">'#foo'</span><span class="token punctuation">,</span>
+      components<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        component<span class="token punctuation">:</span> <span class="token string">'modal'</span><span class="token punctuation">,</span>
+        title<span class="token punctuation">:</span> <span class="token string">'Success'</span><span class="token punctuation">,</span>
+        content<span class="token punctuation">:</span> <span class="token string">'You did it!'</span><span class="token punctuation">,</span>
+        showPrev<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/ui/examples/tours/hide-next-button/" class="prev">
+          Tour: Hide Next Button
+        </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/ui/assets/js/app.11a21ab1.js" defer></script><script src="/ui/assets/js/2.5e3b1bfa.js" defer></script><script src="/ui/assets/js/8.68c889cd.js" defer></script>
+  </body>
+</html>
