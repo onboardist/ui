@@ -1,5 +1,5 @@
 <div ref:el class="onboardist-container">
-  <div class="tooltip">
+  <div class="tooltip" role="tooltip">
     <Box ref:box title={title}>
       <div slot="content">{@html content}</div>
       <div slot="buttons">

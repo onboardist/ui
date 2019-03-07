@@ -1,10 +1,16 @@
-<div ref:el class="oboardist-container modal">
+<svelte:window on:keydown="keypress(event)"/>
+<div ref:el class="oboardist-container modal"
+  role="alertdialog"
+  aria-modal="true"
+  aria-label={title || content}
+  aria-describedby="coachmark-modal-content-{id}"
+>
   <Box ref:box title={title}>
-    <div slot="content">{@html content}</div>
+    <div id="coachmark-modal-content-{id}" slot="content">{@html content}</div>
     <div slot="buttons">
       {#if buttons}
         {#each buttons as button}
-          <button type="button" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
+          <button type="button" tabindex="0" class="onboardist-button" on:click="call(button.handler)">{button.text}</button>
         {/each}
       {:else}
         &nbsp;
@@ -17,6 +23,7 @@
 {/if}
 
 <script>
+import { uniquestring } from '../util';
 import Box from './Box.svelte';
 import { close, oncreate, ondestroy, expandButtonArgs } from '../methods';
 
@@ -24,12 +31,17 @@ export default {
   oncreate() {
     if (this.get().buttons) this.set({ buttons: expandButtonArgs(this.get().buttons) });
 
+    // Focus first button
+    const firstButton = this.refs.el.querySelector('button');
+    if (firstButton) firstButton.focus();
+
     return oncreate.call(this);
   },
   ondestroy,
   components: { Box },
   data() {
     return {
+      id: uniquestring(),
       title: '',
       buttons: ['ok'],
       content: '',
@@ -40,6 +52,9 @@ export default {
     close,
     call(fn, ...args) {
       fn.call(this, ...args);
+    },
+    keypress(event) {
+      if (event.key === 'Escape') this.close();
     },
   },
 };
